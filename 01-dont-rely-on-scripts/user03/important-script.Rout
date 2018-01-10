@@ -18,17 +18,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(dplyr)
-
-Attaching package: ‘dplyr’
-
-The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
 > library(ggplot2)
 > library(magrittr)
 > 
@@ -61,51 +50,11 @@ The following objects are masked from ‘package:base’:
 120835 111279 104662 
 > 
 > to_denver <- filter(Flights, dest == "DEN")
-> 
-> # carrier median arrivial delay
-> median_delay <-
-+   to_denver %>%
-+   group_by(carrier) %>%
-+   summarize(median_delay = median(arr_delay, na.rm = TRUE)) %>%
-+   ungroup()
-> 
-> median_delay %>% filter(carrier == "UA")
-# A tibble: 1 x 2
-  carrier median_delay
-  <fctr>         <dbl>
-1 UA             -5.00
-> 
-> # how many airlines?
-> n_distinct(median_delay$carrier)
-[1] 5
-> 
-> # full names of the carriers
-> left_join(median_delay, Airlines, by = "carrier")
-# A tibble: 5 x 3
-  carrier median_delay name                  
-  <fctr>         <dbl> <fctr>                
-1 B6            -0.500 JetBlue Airways       
-2 DL            -5.00  Delta Air Lines Inc.  
-3 F9             6.00  Frontier Airlines Inc.
-4 UA            -5.00  United Air Lines Inc. 
-5 WN             1.00  Southwest Airlines Co.
-> 
-> # Weather and delays
-> dat <-
-+   left_join(Flights,
-+             Weather,
-+             by = c("year", "month", "day", "origin", "hour"))
->   
-> fit <- lm(arr_delay ~ precip + origin, data = dat, subset = carrier == "UA")
-> 
-> sprintf("The average difference in the arrivial delay from %s to DEN compared to the average arrivial delay between %s and DEN is %f.",
-+         levels(dat$origin)[2],
-+         levels(dat$origin)[1],
-+         coef(fit)[paste0("origin", levels(dat$origin)[2])])
-[1] "The average difference in the arrivial delay from JFK to DEN compared to the average arrivial delay between EWR and DEN is -0.931233."
-> 
-> 
-> 
-> 
-> 
-> 
+Error in filter(Flights, dest == "DEN") : object 'dest' not found
+In addition: Warning messages:
+1: In data.matrix(data) : NAs introduced by coercion
+2: In data.matrix(data) : NAs introduced by coercion
+3: In data.matrix(data) : NAs introduced by coercion
+4: In data.matrix(data) : NAs introduced by coercion
+5: In data.matrix(data) : NAs introduced by coercion
+Execution halted

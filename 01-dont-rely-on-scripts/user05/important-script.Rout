@@ -102,7 +102,7 @@ The following objects are masked from ‘package:base’:
 +         levels(dat$origin)[2],
 +         levels(dat$origin)[1],
 +         coef(fit)[paste0("origin", levels(dat$origin)[2])])
-[1] "The average difference in the arrivial delay from JFK to DEN compared to the average arrivial delay between EWR and DEN is -0.931233."
+[1] "The average difference in the arrivial delay from JFK to DEN compared to the average arrivial delay between EWR and DEN is -2.161613."
 > 
 > 
 > 

@@ -72,7 +72,7 @@ The following objects are masked from ‘package:base’:
 > median_delay %>% filter(carrier == "UA")
 # A tibble: 1 x 2
   carrier median_delay
-  <fctr>         <dbl>
+  <chr>          <dbl>
 1 UA             -5.00
 > 
 > # how many airlines?
@@ -83,7 +83,7 @@ The following objects are masked from ‘package:base’:
 > left_join(median_delay, Airlines, by = "carrier")
 # A tibble: 5 x 3
   carrier median_delay name                  
-  <fctr>         <dbl> <fctr>                
+  <chr>          <dbl> <chr>                 
 1 B6            -0.500 JetBlue Airways       
 2 DL            -5.00  Delta Air Lines Inc.  
 3 F9             6.00  Frontier Airlines Inc.
@@ -102,7 +102,7 @@ The following objects are masked from ‘package:base’:
 +         levels(dat$origin)[2],
 +         levels(dat$origin)[1],
 +         coef(fit)[paste0("origin", levels(dat$origin)[2])])
-[1] "The average difference in the arrivial delay from JFK to DEN compared to the average arrivial delay between EWR and DEN is -0.931233."
+character(0)
 > 
 > 
 > 
