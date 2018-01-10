@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>diff</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="settings" content="number_lines,whole_filler,use_css,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Identifier { color: #008080; }
+.Constant { color: #c00000; }
+.Special { color: #c000c0; }
+.Statement { color: #af5f00; }
+.LineNr { color: #af5f00; }
+.Error { color: #ffffff; background-color: #ff6060; padding-bottom: 1px; }
+.routNormal { color: #00d700; }
+.Folded { color: #0000c0; background-color: #a8a8a8; padding-bottom: 1px; }
+.routNegFloat { color: #ff875f; }
+.DiffChange { color: #ffffff; background-color: #008787; padding-bottom: 1px; }
+.DiffDelete { color: #ff0000; background-color: #870000; padding-bottom: 1px; }
+.DiffText { color: #000000; background-color: #ffaf00; padding-bottom: 1px; }
+.DiffAdd { color: #ffffff; background-color: #005f00; padding-bottom: 1px; }
+-->
+<!--
+table { table-layout: fixed; }
+html, body, table, tbody { width: 100%; margin: 0; padding: 0; }
+th, td { width: 50.0%; }
+td div { overflow: auto; }
+-->
+</style>
+<script type='text/javascript'>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  if (lineNum.indexOf('W') == -1) {
+    lineNum = 'W1'+lineNum;
+  }
+  lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<table border='1' width='100%' id='vimCodeElement'>
+<tr>
+<th>important-script.Rout</th>
+<th>user05/important-script.Rout</th>
+</tr><tr>
+<td valign="top"><div>
+<pre>
+<span id="W1L1" class="Folded">  1 </span><span class="Folded">+-- 99 lines: R version 3.4.3 (2017-11-30) -- &quot;Kite-Eating Tree&quot;-----------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span id="W1L100" class="LineNr">100 </span><span class="Statement">&gt;</span>
+<span id="W1L101" class="LineNr">101 </span><span class="Statement">&gt;</span> <span class="Identifier">message</span><span class="Special">(</span><span class="Identifier">sprintf</span><span class="Special">(</span><span class="Constant">&quot;The average difference in the arrivial delay from %s to DEN compared</span><span class="Special">\n</span><span class="Constant">to the average arrivial delay between %s and DEN is %f.&quot;</span><span class="Special">,</span>
+<span id="W1L102" class="LineNr">102 </span><span class="Statement">+</span>                 <span class="Identifier">levels</span><span class="Special">(</span>dat<span class="Special">$</span>origin<span class="Special">)[</span><span class="Constant">2</span><span class="Special">]</span><span class="Special">,</span>
+<span id="W1L103" class="LineNr">103 </span><span class="Statement">+</span>                 <span class="Identifier">levels</span><span class="Special">(</span>dat<span class="Special">$</span>origin<span class="Special">)[</span><span class="Constant">1</span><span class="Special">]</span><span class="Special">,</span>
+<span id="W1L104" class="LineNr">104 </span><span class="Statement">+</span>                 <span class="Identifier">coef</span><span class="Special">(</span>fit<span class="Special">)[</span><span class="Identifier">paste0</span><span class="Special">(</span><span class="Constant">&quot;origin&quot;</span><span class="Special">,</span> <span class="Identifier">levels</span><span class="Special">(</span>dat<span class="Special">$</span>origin<span class="Special">)[</span><span class="Constant">2</span><span class="Special">])]</span><span class="Error">))</span>
+<span id="W1L105" class="LineNr">105 </span><span class="routNormal">The average difference in the arrivial delay from JFK to DEN compared</span>
+<span id="W1L106" class="LineNr">106 </span><span class="routNormal DiffAdd">to the average arrivial delay between EWR and DEN is </span><span class="routNegFloat DiffAdd">-</span><span class="routNegFloat DiffDelete">0.93123</span><span class="routNegFloat DiffAdd">3</span><span class="routNormal DiffAdd">.</span><span class="DiffAdd">                                                                                                                                                  </span>
+<span id="W1L107" class="LineNr">107 </span><span class="Statement">&gt;</span>
+<span id="W1L108" class="LineNr">108 </span><span class="Statement">&gt;</span>
+<span id="W1L109" class="LineNr">109 </span><span class="Statement">&gt;</span>
+<span id="W1L110" class="LineNr">110 </span><span class="Statement">&gt;</span>
+<span id="W1L111" class="LineNr">111 </span><span class="Statement">&gt;</span>
+<span id="W1L112" class="LineNr">112 </span><span class="Statement">&gt;</span>
+</pre>
+</div></td>
+<td valign="top"><div>
+<pre>
+<span id="W2L1" class="Folded">  1 </span><span class="Folded">+-- 99 lines: R version 3.4.3 (2017-11-30) -- &quot;Kite-Eating Tree&quot;-----------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span id="W2L100" class="LineNr">100 </span><span class="Statement">&gt;</span>
+<span id="W2L101" class="LineNr">101 </span><span class="Statement">&gt;</span> <span class="Identifier">message</span><span class="Special">(</span><span class="Identifier">sprintf</span><span class="Special">(</span><span class="Constant">&quot;The average difference in the arrivial delay from %s to DEN compared</span><span class="Special">\n</span><span class="Constant">to the average arrivial delay between %s and DEN is %f.&quot;</span><span class="Special">,</span>
+<span id="W2L102" class="LineNr">102 </span><span class="Statement">+</span>                 <span class="Identifier">levels</span><span class="Special">(</span>dat<span class="Special">$</span>origin<span class="Special">)[</span><span class="Constant">2</span><span class="Special">]</span><span class="Special">,</span>
+<span id="W2L103" class="LineNr">103 </span><span class="Statement">+</span>                 <span class="Identifier">levels</span><span class="Special">(</span>dat<span class="Special">$</span>origin<span class="Special">)[</span><span class="Constant">1</span><span class="Special">]</span><span class="Special">,</span>
+<span id="W2L104" class="LineNr">104 </span><span class="Statement">+</span>                 <span class="Identifier">coef</span><span class="Special">(</span>fit<span class="Special">)[</span><span class="Identifier">paste0</span><span class="Special">(</span><span class="Constant">&quot;origin&quot;</span><span class="Special">,</span> <span class="Identifier">levels</span><span class="Special">(</span>dat<span class="Special">$</span>origin<span class="Special">)[</span><span class="Constant">2</span><span class="Special">])]</span><span class="Error">))</span>
+<span id="W2L105" class="LineNr">105 </span><span class="routNormal">The average difference in the arrivial delay from JFK to DEN compared</span>
+<span id="W2L106" class="LineNr">106 </span><span class="routNormal DiffAdd">to the average arrivial delay between EWR and DEN is </span><span class="routNegFloat DiffAdd">-</span><span class="routNegFloat DiffDelete">2.16161</span><span class="routNegFloat DiffAdd">3</span><span class="routNormal DiffAdd">.</span><span class="DiffAdd">                                                                                                                                                  </span>
+<span id="W2L107" class="LineNr">107 </span><span class="Statement">&gt;</span>
+<span id="W2L108" class="LineNr">108 </span><span class="Statement">&gt;</span>
+<span id="W2L109" class="LineNr">109 </span><span class="Statement">&gt;</span>
+<span id="W2L110" class="LineNr">110 </span><span class="Statement">&gt;</span>
+<span id="W2L111" class="LineNr">111 </span><span class="Statement">&gt;</span>
+<span id="W2L112" class="LineNr">112 </span><span class="Statement">&gt;</span>
+</pre>
+</div></td>
+</tr>
+</table>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
+

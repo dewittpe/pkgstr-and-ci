@@ -144,3 +144,13 @@ Not going to be a safe space...
 * No other user has the same output!
 
 * Maybe the differences are minor?
+
+* Let's look at the output and then the differences between the "expected" and
+  the output for users 02, 03, 04, and 05.
+
+## Expected Output
+<iframe src="important-script.Rout.html" style="background-color:black"> </iframe>
+
+## Diff between Primary and User05
+
+<iframe src="vs-user05.html"> </iframe>
