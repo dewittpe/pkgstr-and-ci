@@ -1,19 +1,23 @@
 #!/bin/bash
 
+ARGS="--no-timing --no-save"
+
+R CMD BATCH $ARGS important-script.R
+
 cd user01
-R CMD BATCH --no-timing --no-save important-script.R
+R CMD BATCH $ARGS important-script.R
 
 cd ../user02
-R CMD BATCH --no-timing --no-save important-script.R
+R CMD BATCH $ARGS important-script.R
 
 cd ../user03
-R CMD BATCH --no-timing --no-save important-script.R
+R CMD BATCH $ARGS important-script.R
 
 cd ../user04
-R CMD BATCH --no-timing --no-save important-script.R
+R CMD BATCH $ARGS important-script.R
 
 cd ../user05
-R CMD BATCH --no-timing --no-save important-script.R
+R CMD BATCH $ARGS important-script.R
 
 cd ..
 md5sum important-script.Rout \

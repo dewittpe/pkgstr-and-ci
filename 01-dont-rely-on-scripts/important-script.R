@@ -38,10 +38,10 @@ dat <-
   
 fit <- lm(arr_delay ~ precip + origin, data = dat, subset = carrier == "UA")
 
-sprintf("The average difference in the arrivial delay from %s to DEN compared to the average arrivial delay between %s and DEN is %f.",
-        levels(dat$origin)[2],
-        levels(dat$origin)[1],
-        coef(fit)[paste0("origin", levels(dat$origin)[2])])
+message(sprintf("The average difference in the arrivial delay from %s to DEN compared\nto the average arrivial delay between %s and DEN is %f.",
+                levels(dat$origin)[2],
+                levels(dat$origin)[1],
+                coef(fit)[paste0("origin", levels(dat$origin)[2])]))
 
 
 

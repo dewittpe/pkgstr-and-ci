@@ -170,14 +170,65 @@
 
 </article></slide><slide class=""><hgroup><h2>Example</h2></hgroup><article  id="example">
 
+<div style="width: 100%; display: table;">
+<div style="display: table-row">
+<div id="leftcol" style="width: 50%; display: table-cell; vertical-align: top;">
 <ul>
 <li><p>I have copied several of the data sets from the <a href='https://cran.r-project.org/package=nycflights13' title=''>nycflights13</a> package as .csv</p></li>
-<li><p>Generated an <code>imporant-script.R</code> file</p></li>
-<li><p>Let&#39;s look at the file and the output.</p></li>
-<li><p>The output file <code>imporant-script.Rout</code> was generated via:</p></li>
-</ul>
+<li><p>There are five subdirectorys to represent five different users.</p></li>
+<li><p><code>imporant-script.R</code>: a simple data load, explore, simple summary and a simple regression model.</p></li>
+<li><p>The <code>each-user.sh</code> bash script will evaluate <code>imporant-script.R</code> in each user directory.</p></li>
+<li><p>Let&#39;s review some files on the next slide.</p></li>
+</ul></div>
 
-<pre >R CMD BATCH --no-timing imporant-script.R</pre></article></slide>
+<!-- end id="leftcol" -->
+
+<div id="rightcol" style="display: table-cell; vertical-align: top;">
+<iframe src="../01-dont-rely-on-scripts/tree.html">
+
+</iframe></div>
+
+<p><!-- end id="rightcol"--></p></div>
+
+<p><!-- end table-row --></p></div>
+
+</article></slide><slide class=""><hgroup><h2>Example: <code>important-script.R</code></h2></hgroup><article  id="example-important-script.r">
+
+<iframe src="../01-dont-rely-on-scripts/important-script.R">
+
+</iframe>
+
+</article></slide><slide class=""><hgroup><h2>Example: <code>each-user.sh</code></h2></hgroup><article  id="example-each-user.sh">
+
+<div style="height:500px;width:900px;border:1px solid #ccc;overflow:auto;">
+<pre >#!/bin/bash
+
+ARGS=&quot;--no-timing --no-save&quot;
+
+R CMD BATCH $ARGS important-script.R 
+
+cd user01
+R CMD BATCH $ARGS important-script.R 
+
+cd ../user02
+R CMD BATCH $ARGS important-script.R 
+
+cd ../user03
+R CMD BATCH $ARGS important-script.R 
+
+cd ../user04
+R CMD BATCH $ARGS important-script.R 
+
+cd ../user05
+R CMD BATCH $ARGS important-script.R 
+
+cd ..  
+md5sum important-script.Rout \
+       user01/important-script.Rout \
+       user02/important-script.Rout \
+       user03/important-script.Rout \
+       user04/important-script.Rout \
+       user05/important-script.Rout</pre></div></article></slide>
 
 
   <slide class="backdrop"></slide>

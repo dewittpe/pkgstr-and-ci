@@ -70,18 +70,69 @@ Not going to be a safe space...
 
 ## Example
 
+<div style="width: 100%; display: table;">
+ <div style="display: table-row">
+  <div id="leftcol" style="width: 50%; display: table-cell; vertical-align: top;">
+
 * I have copied several of the data sets from the
   [nycflights13](https://cran.r-project.org/package=nycflights13) package as
   .csv
 
-* Generated an `imporant-script.R` file
-
-* Let's look at the file and the output.
-
-* The output file `imporant-script.Rout` was generated via:
+* There are five subdirectorys to represent five different users.
   
-```
-R CMD BATCH --no-timing imporant-script.R
-```
+* `imporant-script.R`: a simple data load, explore, simple
+  summary and a simple regression model.
 
 
+* The `each-user.sh` bash script will evaluate `imporant-script.R` in each user
+  directory.
+
+* Let's review some files on the next slide.
+
+</div> <!-- end id="leftcol" -->
+<div id="rightcol" style="display: table-cell; vertical-align: top;">
+<iframe src="../01-dont-rely-on-scripts/tree.html"></iframe>
+</div> <!-- end id="rightcol"-->
+</div> <!-- end table-row -->
+</div>
+
+## Example: `important-script.R`
+
+<iframe src="../01-dont-rely-on-scripts/important-script.R"></iframe>
+
+## Example: `each-user.sh`
+
+<div style="height:500px;width:900px;border:1px solid #ccc;overflow:auto;">
+
+    #!/bin/bash
+
+    ARGS="--no-timing --no-save"
+
+    R CMD BATCH $ARGS important-script.R 
+
+    cd user01
+    R CMD BATCH $ARGS important-script.R 
+
+    cd ../user02
+    R CMD BATCH $ARGS important-script.R 
+
+    cd ../user03
+    R CMD BATCH $ARGS important-script.R 
+
+    cd ../user04
+    R CMD BATCH $ARGS important-script.R 
+
+    cd ../user05
+    R CMD BATCH $ARGS important-script.R 
+
+    cd ..  
+    md5sum important-script.Rout \
+           user01/important-script.Rout \
+           user02/important-script.Rout \
+           user03/important-script.Rout \
+           user04/important-script.Rout \
+           user05/important-script.Rout
+
+</div>
+
+## Example: Evaluate `important-script.R`
