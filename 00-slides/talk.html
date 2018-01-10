@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your R Scripts Suck</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Your R Scripts Suck',
+                        subtitle: 'Using R Packages and Continous Integration to Build Reproducible Reports',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Peter E. DeWitt, Ph.D.<br><a href="mailto:pdewitt@neptuneinc.org">pdewitt@neptuneinc.org</a>' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <link href="talk_files/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="talk_files/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="talk_files/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="talk_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="talk_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="talk_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="talk_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="talk_files/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="talk_files/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="talk_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+  </style>
+
+  <link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">January 2018</p>
+          </hgroup>
+  </slide>
+
+<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Preface</h2></hgroup><article  id="preface">
+
+<p>Not going to be a safe space&#8230;</p>
+
+</article></slide><slide class=""><hgroup><h2>Adopt these tools because &#8230;</h2></hgroup><article  id="adopt-these-tools-because-...">
+
+<p>
+
+<img src="me.jpeg" width=120 height=120 style="float:left"> Me: The following tools will facilitate high quality reproducible reports&#8230;
+
+</p>
+
+<p>
+
+ 
+
+</p>
+
+<p>
+
+ 
+
+</p>
+
+<p>
+
+<img src="eyeroll.gif" width=120 height=120 align="top" style="float:left"> Audience: &#8230; I do just fine. I make reproducible reports. This [expletive] just wants to complicate things&#8230;
+
+</p>
+
+</article></slide><slide class=""><hgroup><h2>Okay, fine. how about this?</h2></hgroup><article  id="okay-fine.-how-about-this">
+
+<ul>
+<li><p>&quot;Do this, it is good for you.&quot; &#8230; that is as effective as telling my toddler to each vegetables.</p></li>
+<li><p>Instead, I&#39;m going to revisit some of the less pleasant experiences in my career and show how R packages, version control, and CI would have prevented these events from ever taking place.</p></li>
+</ul>
+
+ 
+
+<p style="text-align:right">
+
+<em>&quot;Learn from the mistakes of others.</em>
+
+</p>
+
+<p style="text-align:right">
+
+<em>You can&#39;t live long enough to make them all yourself.&quot;</em>
+
+</p>
+
+<p style="text-align:right">
+
+<em>&#8211; Eleanor Roosevelt</em>
+
+</p>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>01: Do not rely on scripts</h2></hgroup><article  id="do-not-rely-on-scripts">
+
+</article></slide><slide class=""><hgroup><h2>Consider the following</h2></hgroup><article  id="consider-the-following">
+
+<ul>
+<li><p>You&#39;ve done an data analysis project. Wrote <code>imporant-script.R</code>.</p></li>
+<li><p>Your colleague will run the script.</p></li>
+<li><p>Your supervisor, the one that <em>thinks</em> they are a data analyst will run your script.</p></li>
+<li><p>You work is part of a federally funded project and is subject to Freedom Of Information Act (FOIA). Joe Public is a supper sceptic and is looking for any reason to discredit the work.</p></li>
+<li><p>Excrement flows down hill. Where are you on the company organization chart?</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Example</h2></hgroup><article  id="example">
+
+<ul>
+<li><p>I have copied several of the data sets from the <a href='https://cran.r-project.org/package=nycflights13' title=''>nycflights13</a> package as .csv</p></li>
+<li><p>Generated an <code>imporant-script.R</code> file</p></li>
+<li><p>Let&#39;s look at the file and the output.</p></li>
+<li><p>The output file <code>imporant-script.Rout</code> was generated via:</p></li>
+</ul>
+
+<pre >R CMD BATCH --no-timing imporant-script.R</pre></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
