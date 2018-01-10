@@ -91,49 +91,18 @@ Not going to be a safe space...
 
 </div> <!-- end id="leftcol" -->
 <div id="rightcol" style="display: table-cell; vertical-align: top;">
-<iframe src="../01-dont-rely-on-scripts/tree.html"></iframe>
+<iframe src="tree.html"></iframe>
 </div> <!-- end id="rightcol"-->
 </div> <!-- end table-row -->
 </div>
 
 ## Example: `important-script.R`
 
-<iframe src="../01-dont-rely-on-scripts/important-script.R"></iframe>
+<iframe src="important-script.R.html"></iframe>
 
 ## Example: `each-user.sh`
 
-<div style="height:500px;width:900px;border:1px solid #ccc;overflow:auto;">
-
-    #!/bin/bash
-
-    ARGS="--no-timing --no-save"
-
-    R CMD BATCH $ARGS important-script.R 
-
-    cd user01
-    R CMD BATCH $ARGS important-script.R 
-
-    cd ../user02
-    R CMD BATCH $ARGS important-script.R 
-
-    cd ../user03
-    R CMD BATCH $ARGS important-script.R 
-
-    cd ../user04
-    R CMD BATCH $ARGS important-script.R 
-
-    cd ../user05
-    R CMD BATCH $ARGS important-script.R 
-
-    cd ..  
-    md5sum important-script.Rout \
-           user01/important-script.Rout \
-           user02/important-script.Rout \
-           user03/important-script.Rout \
-           user04/important-script.Rout \
-           user05/important-script.Rout
-
-</div>
+<iframe src="each-user.sh.html"> </iframe>
 
 ## Example: Evaluate `important-script.R`
 

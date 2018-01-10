@@ -184,7 +184,7 @@
 <!-- end id="leftcol" -->
 
 <div id="rightcol" style="display: table-cell; vertical-align: top;">
-<iframe src="../01-dont-rely-on-scripts/tree.html">
+<iframe src="tree.html">
 
 </iframe></div>
 
@@ -194,41 +194,15 @@
 
 </article></slide><slide class=""><hgroup><h2>Example: <code>important-script.R</code></h2></hgroup><article  id="example-important-script.r">
 
-<iframe src="../01-dont-rely-on-scripts/important-script.R">
+<iframe src="important-script.R.html">
 
 </iframe>
 
 </article></slide><slide class=""><hgroup><h2>Example: <code>each-user.sh</code></h2></hgroup><article  id="example-each-user.sh">
 
-<div style="height:500px;width:900px;border:1px solid #ccc;overflow:auto;">
-<pre >#!/bin/bash
+<iframe src="each-user.sh.html">
 
-ARGS=&quot;--no-timing --no-save&quot;
-
-R CMD BATCH $ARGS important-script.R 
-
-cd user01
-R CMD BATCH $ARGS important-script.R 
-
-cd ../user02
-R CMD BATCH $ARGS important-script.R 
-
-cd ../user03
-R CMD BATCH $ARGS important-script.R 
-
-cd ../user04
-R CMD BATCH $ARGS important-script.R 
-
-cd ../user05
-R CMD BATCH $ARGS important-script.R 
-
-cd ..  
-md5sum important-script.Rout \
-       user01/important-script.Rout \
-       user02/important-script.Rout \
-       user03/important-script.Rout \
-       user04/important-script.Rout \
-       user05/important-script.Rout</pre></div>
+</iframe>
 
 </article></slide><slide class=""><hgroup><h2>Example: Evaluate <code>important-script.R</code></h2></hgroup><article  id="example-evaluate-important-script.r">
 
@@ -243,7 +217,7 @@ md5sum important-script.Rout \
 
 </article></slide><slide class=""><hgroup><h2>Expected Output</h2></hgroup><article  id="expected-output">
 
-<iframe src="important-script.Rout.html" style="background-color:black">
+<iframe src="important-script.Rout.html">
 
 </iframe>
 

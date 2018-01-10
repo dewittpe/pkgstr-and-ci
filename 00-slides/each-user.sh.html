@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/pkgstr-and-ci/01-dont-rely-on-scripts/each-user.sh.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="bash">
+<meta name="settings" content="number_lines,use_css,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #ffffff; background-color: #000000; }
+body { font-family: monospace; color: #ffffff; background-color: #000000; }
+* { font-size: 1em; }
+.Identifier { color: #008080; }
+.Comment { color: #0000c0; }
+.Constant { color: #c00000; }
+.PreProc { color: #c000c0; }
+.Statement { color: #af5f00; }
+.LineNr { color: #af5f00; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<pre id='vimCodeElement'>
+<span id="L1" class="LineNr"> 1 </span><span class="Comment">#!/bin/bash</span>
+<span id="L2" class="LineNr"> 2 </span>
+<span id="L3" class="LineNr"> 3 </span><span class="Identifier">ARGS</span>=<span class="Statement">&quot;</span><span class="Constant">--no-timing --no-save</span><span class="Statement">&quot;</span>
+<span id="L4" class="LineNr"> 4 </span>
+<span id="L5" class="LineNr"> 5 </span>R CMD BATCH <span class="PreProc">$ARGS</span> important-script.R
+<span id="L6" class="LineNr"> 6 </span>
+<span id="L7" class="LineNr"> 7 </span><span class="Statement">cd</span> user01
+<span id="L8" class="LineNr"> 8 </span>R CMD BATCH <span class="PreProc">$ARGS</span> important-script.R
+<span id="L9" class="LineNr"> 9 </span>
+<span id="L10" class="LineNr">10 </span><span class="Statement">cd</span> ../user02
+<span id="L11" class="LineNr">11 </span>R CMD BATCH <span class="PreProc">$ARGS</span> important-script.R
+<span id="L12" class="LineNr">12 </span>
+<span id="L13" class="LineNr">13 </span><span class="Statement">cd</span> ../user03
+<span id="L14" class="LineNr">14 </span>R CMD BATCH <span class="PreProc">$ARGS</span> important-script.R
+<span id="L15" class="LineNr">15 </span>
+<span id="L16" class="LineNr">16 </span><span class="Statement">cd</span> ../user04
+<span id="L17" class="LineNr">17 </span>R CMD BATCH <span class="PreProc">$ARGS</span> important-script.R
+<span id="L18" class="LineNr">18 </span>
+<span id="L19" class="LineNr">19 </span><span class="Statement">cd</span> ../user05
+<span id="L20" class="LineNr">20 </span>R CMD BATCH <span class="PreProc">$ARGS</span> important-script.R
+<span id="L21" class="LineNr">21 </span>
+<span id="L22" class="LineNr">22 </span><span class="Statement">cd</span> ..
+<span id="L23" class="LineNr">23 </span>md5sum important-script.Rout <span class="Statement">\</span>
+<span id="L24" class="LineNr">24 </span>       user01/important-script.Rout <span class="Statement">\</span>
+<span id="L25" class="LineNr">25 </span>       user02/important-script.Rout <span class="Statement">\</span>
+<span id="L26" class="LineNr">26 </span>       user03/important-script.Rout <span class="Statement">\</span>
+<span id="L27" class="LineNr">27 </span>       user04/important-script.Rout <span class="Statement">\</span>
+<span id="L28" class="LineNr">28 </span>       user05/important-script.Rout
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
