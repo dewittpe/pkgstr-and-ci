@@ -1,0 +1,113 @@
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> library(ggplot2)
+> library(magrittr)
+> 
+> Airlines <- read.csv("airlines.csv")
+> Airports <- read.csv("airports.csv")
+> Flights  <- read.csv("flights.csv")
+> Planes   <- read.csv("planes.csv")
+> Weather  <- read.csv("weather.csv")
+> 
+> head(Airports)
+  faa                           name      lat       lon  alt tz dst
+1 04G              Lansdowne Airport 41.13047 -80.61958 1044 -5   A
+2 06A  Moton Field Municipal Airport 32.46057 -85.68003  264 -6   A
+3 06C            Schaumburg Regional 41.98934 -88.10124  801 -6   A
+4 06N                Randall Airport 41.43191 -74.39156  523 -5   A
+5 09J          Jekyll Island Airport 31.07447 -81.42778   11 -5   A
+6 0A9 Elizabethton Municipal Airport 36.37122 -82.17342 1593 -5   A
+             tzone
+1 America/New_York
+2  America/Chicago
+3  America/Chicago
+4 America/New_York
+5 America/New_York
+6 America/New_York
+> 
+> # Lets look at flights from EWR, JFK, or LGA to Denver (DEN)
+> table(Flights$origin)
+
+   EWR    JFK    LGA 
+120835 111279 104662 
+> 
+> to_denver <- filter(Flights, dest == "DEN")
+> 
+> # carrier median arrivial delay
+> median_delay <-
++   to_denver %>%
++   group_by(carrier) %>%
++   summarize(median_delay = median(arr_delay, na.rm = TRUE)) %>%
++   ungroup()
+> 
+> median_delay %>% filter(carrier == "UA")
+# A tibble: 1 x 2
+  carrier median_delay
+  <fctr>         <dbl>
+1 UA             -5.00
+> 
+> # how many airlines?
+> n_distinct(median_delay$carrier)
+[1] 5
+> 
+> # full names of the carriers
+> left_join(median_delay, Airlines, by = "carrier")
+# A tibble: 5 x 3
+  carrier median_delay name                  
+  <fctr>         <dbl> <fctr>                
+1 B6            -0.500 JetBlue Airways       
+2 DL            -5.00  Delta Air Lines Inc.  
+3 F9             6.00  Frontier Airlines Inc.
+4 UA            -5.00  United Air Lines Inc. 
+5 WN             1.00  Southwest Airlines Co.
+> 
+> # Weather and delays
+> dat <-
++   left_join(Flights,
++             Weather,
++             by = c("year", "month", "day", "origin", "hour"))
+>   
+> fit <- lm(arr_delay ~ precip + origin, data = dat, subset = carrier == "UA")
+> 
+> sprintf("The average difference in the arrivial delay from %s to DEN compared to the average arrivial delay between %s and DEN is %f.",
++         levels(dat$origin)[2],
++         levels(dat$origin)[1],
++         coef(fit)[paste0("origin", levels(dat$origin)[2])])
+[1] "The average difference in the arrivial delay from JFK to DEN compared to the average arrivial delay between EWR and DEN is -0.931233."
+> 
+> 
+> 
+> 
+> 
+> 
