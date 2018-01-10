@@ -135,4 +135,12 @@ Not going to be a safe space...
 
 </div>
 
+## Example: Evaluate `important-script.R`
 
+<img src="01-example-image-01.png">
+
+* My version and user01 have the same output.
+
+* No other user has the same output!
+
+* Maybe the differences are minor?
