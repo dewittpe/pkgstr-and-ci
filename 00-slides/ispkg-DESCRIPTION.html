@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/pkgstr-and-ci/01-dont-rely-on-scripts/ispkg/DESCRIPTION.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="none">
+<meta name="settings" content="number_lines,use_css,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.LineNr { color: #af5f00; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<pre id='vimCodeElement'>
+<span id="L1" class="LineNr"> 1 </span>Package: ispkg
+<span id="L2" class="LineNr"> 2 </span>Title: Important Script Package
+<span id="L3" class="LineNr"> 3 </span>Version: 0.0.1
+<span id="L4" class="LineNr"> 4 </span>Authors@R: person(&quot;Peter&quot;, &quot;DeWitt&quot;, email = &quot;dewittpe@gmail.com&quot;, role = c(&quot;aut&quot;, &quot;cre&quot;))
+<span id="L5" class="LineNr"> 5 </span>Description: A very small package built to show the outline of moving from
+<span id="L6" class="LineNr"> 6 </span>    scripts to packages.
+<span id="L7" class="LineNr"> 7 </span>License: GPL-2
+<span id="L8" class="LineNr"> 8 </span>Encoding: UTF-8
+<span id="L9" class="LineNr"> 9 </span>LazyData: true
+<span id="L10" class="LineNr">10 </span>Imports:
+<span id="L11" class="LineNr">11 </span>Suggests:
+<span id="L12" class="LineNr">12 </span>    dplyr,
+<span id="L13" class="LineNr">13 </span>    ggplot2,
+<span id="L14" class="LineNr">14 </span>    knitr,
+<span id="L15" class="LineNr">15 </span>    magrittr
+<span id="L16" class="LineNr">16 </span>RoxygenNote: 6.0.1.9000
+<span id="L17" class="LineNr">17 </span>VignetteBuilder: knitr
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

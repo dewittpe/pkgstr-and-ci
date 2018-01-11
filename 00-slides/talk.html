@@ -129,24 +129,18 @@
 
 </p>
 
-</article></slide><slide class=""><hgroup><h2>Okay, fine. how about this?</h2></hgroup><article  id="okay-fine.-how-about-this">
+</article></slide><slide class=""><hgroup><h2>Okay, fine. How about this?</h2></hgroup><article  id="okay-fine.-how-about-this">
 
 <ul>
 <li><p>&quot;Do this, it is good for you.&quot; &#8230; that is as effective as telling my toddler to each vegetables.</p></li>
 <li><p>Instead, I&#39;m going to revisit some of the less pleasant experiences in my career and show how R packages, version control, and CI would have prevented these events from ever taking place.</p></li>
 </ul>
 
- 
+<br> <br> <br> <br>
 
 <p style="text-align:right">
 
-<em>&quot;Learn from the mistakes of others.</em>
-
-</p>
-
-<p style="text-align:right">
-
-<em>You can&#39;t live long enough to make them all yourself.&quot;</em>
+<em>&quot;Learn from the mistakes of others.</em> <br> <em>You can&#39;t live long enough to make them all yourself.&quot;</em>
 
 </p>
 
@@ -272,7 +266,6 @@
 <li>in Linux? OSX? Windows? Command line? GUI? RStudio Desktop? RStudio Server? NppToR? Emacs Speaks Statistics (ESS)? (neo)Vim? Nvim-R?</li>
 </ul></li>
 <li><p>Do the people you work with and for know how to evaluate <code>R --vanilla</code></p></li>
-<li><p>What if you are user02, user03, user04, or user05 and your supervisor or Joe Public is user01?</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>The .Rprofile files</h2></hgroup><article  id="the-.rprofile-files">
@@ -281,23 +274,22 @@
 
 </iframe>
 
+</article></slide><slide class=""><hgroup><h2>What if</h2></hgroup><article  id="what-if">
+
+<ul>
+<li><p>What if you are user02, user03, user04, or user05 and your supervisor or Joe Public is user01?</p></li>
+<li><p>What if one of the data files isn&#39;t included in the email?</p></li>
+<li><p>What if someone moves a data file?</p></li>
+<li><p>What if some careless Winblows dev forgets that real operating systems are case sensitive?</p></li>
+<li><p>What if someone fat fingers the file and changes something, saves the file, and breaks it?</p></li>
+<li><p>What if your script requires dplyr 0.7.0 or newer and the end user has version 0.5.0 installed?</p></li>
+</ul>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>01.1: The simplest R Package</h2></hgroup><article  id="the-simplest-r-package">
 
 <p style="text-align:right">
 
-<em>&quot;We love the R build process.</em>
-
-</p>
-
-<p style="text-align:right">
-
-<em>It is robust, cross-platform, reliable, and rather predicatable.</em>
-
-</p>
-
-<p style="text-align:right">
-
-<em>It. Just. Works.&quot;</em>
+<em>&quot;We love the R build process.<br> It is robust, cross-platform, reliable,<br>and rather predicatable. <br> It. Just. Works.&quot;</em>
 
 </p>
 
@@ -305,7 +297,31 @@
 
 <em>&#8211; Dirk Eddelbuettel</em>
 
-</p></article></slide>
+</p>
+
+</article></slide><slide class=""><hgroup><h2>An R Package for just <code>important-script.R</code></h2></hgroup><article  id="an-r-package-for-just-important-script.r">
+
+<div style="width: 100%; display: table;">
+<div style="display: table-row">
+<div id="leftcol" style="width: 30%; display: table-cell; vertical-align: top;">
+<iframe src="ispkg-tree.html">
+
+</iframe></div>
+
+<!-- end id="leftcol" -->
+
+<div id="rightcol" style="display: table-cell; vertical-align: top;">
+<p>DESCRIPTION <br> <iframe src="ispkg-DESCRIPTION.html" style="height:200px"></iframe> <br> Vignette <br> <iframe src="ispkg-vignette.html" style="height:240px"></iframe></p></div>
+
+<p><!-- end id="rightcol"--></p></div>
+
+<p><!-- end table-row --></p></div>
+
+</article></slide><slide class=""><hgroup><h2>Build and Check</h2></hgroup><article  id="build-and-check">
+
+<p><img src="ispkg-r-cmd-build.png"></p>
+
+<p><code>R CMD check</code> <iframe src="ispkg-checklog.html" style="height:240px"></iframe></p></article></slide>
 
 
   <slide class="backdrop"></slide>

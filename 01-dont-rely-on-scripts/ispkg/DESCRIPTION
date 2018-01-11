@@ -11,6 +11,7 @@ Imports:
 Suggests:
     dplyr,
     ggplot2,
+    knitr,
     magrittr
 RoxygenNote: 6.0.1.9000
 VignetteBuilder: knitr

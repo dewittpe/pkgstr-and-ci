@@ -36,7 +36,7 @@ Not going to be a safe space...
   just wants to complicate things...
 </p>
 
-## Okay, fine. how about this?
+## Okay, fine. How about this?
 
 * "Do this, it is good for you."  ... that is as effective as telling my toddler
   to each vegetables.
@@ -45,9 +45,9 @@ Not going to be a safe space...
   career and show how R packages, version control, and CI would have prevented
   these events from ever taking place.
 
-&nbsp;
-<p style="text-align:right"> *"Learn from the mistakes of others.* </p>
-<p style="text-align:right"> *You can't live long enough to make them all yourself."* </p> 
+<br> <br> <br> <br>
+<p style="text-align:right"> *"Learn from the mistakes of others.* <br>
+*You can't live long enough to make them all yourself."* </p> 
 <p style="text-align:right"> *-- Eleanor Roosevelt* </p>
 
 
@@ -158,18 +158,59 @@ Not going to be a safe space...
 
   * Do the people you work with and for know how to evaluate `R --vanilla`
 
-  * What if you are user02, user03, user04, or user05 and your supervisor or Joe
-    Public is user01?
-
 ## The .Rprofile files
 <iframe src="rprofiles.html"> </iframe>
 
+## What if
+
+* What if you are user02, user03, user04, or user05 and your supervisor or Joe
+  Public is user01?
+
+* What if one of the data files isn't included in the email?
+
+* What if someone moves a data file?
+
+* What if some careless Winblows dev forgets that real operating systems are
+  case sensitive?
+
+* What if someone fat fingers the file and changes something, saves the file,
+  and breaks it?
+
+* What if your script requires dplyr 0.7.0 or newer and the end user
+  has version 0.5.0 installed?
 
 # 01.1: The simplest R Package
 
-<p style="text-align:right"> *"We love the R build process.* </p>
-<p style="text-align:right"> *It is robust, cross-platform, reliable, and rather predicatable.* </p>
-<p style="text-align:right"> *It. Just. Works."* </p> 
-<p style="text-align:right"> *-- Dirk Eddelbuettel* </p>
+<p style="text-align:right">
+*"We love the R build process.<br>
+It is robust, cross-platform, reliable,<br>and rather predicatable. <br>
+It. Just. Works."*
+</p>
+<p style="text-align:right">
+*-- Dirk Eddelbuettel*
+</p>
 
+## An R Package for just `important-script.R`
+<div style="width: 100%; display: table;">
+<div style="display: table-row">
+<div id="leftcol" style="width: 30%; display: table-cell; vertical-align: top;">
+<iframe src="ispkg-tree.html"></iframe>
+</div> <!-- end id="leftcol" -->
+<div id="rightcol" style="display: table-cell; vertical-align: top;">
+DESCRIPTION
+<br>
+<iframe src="ispkg-DESCRIPTION.html" style="height:200px"></iframe>
+<br>
+Vignette
+<br>
+<iframe src="ispkg-vignette.html" style="height:240px"></iframe>
+</div> <!-- end id="rightcol"-->
+</div> <!-- end table-row -->
+</div>
+
+## Build and Check
+<img src="ispkg-r-cmd-build.png">
+
+`R CMD check`
+<iframe src="ispkg-checklog.html" style="height:240px"></iframe>
 
