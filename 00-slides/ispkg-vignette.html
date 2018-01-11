@@ -1,117 +1,170 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>~/pkgstr-and-ci/01-dont-rely-on-scripts/ispkg/vignettes/important-script.Rmd.html</title>
-<meta name="Generator" content="Vim/8.0">
-<meta name="plugin-version" content="vim7.4_v2">
-<meta name="syntax" content="rmd">
-<meta name="settings" content="number_lines,use_css,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
-<meta name="colorscheme" content="none">
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Peter DeWitt" />
+
+<meta name="date" content="2018-01-11" />
+
+<title>Important Script</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-<!--
-pre { font-family: monospace; color: #000000; background-color: #ffffff; }
-body { font-family: monospace; color: #000000; background-color: #ffffff; }
-* { font-size: 1em; }
-.Identifier { color: #008080; }
-.Comment { color: #0000c0; }
-.Constant { color: #c00000; }
-.Statement { color: #af5f00; }
-.LineNr { color: #af5f00; }
-.PreProc { color: #c000c0; }
-.Special { color: #c000c0; }
--->
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<script type='text/javascript'>
-<!--
 
-/* function to open any folds containing a jumped-to line before jumping to it */
-function JumpToLine()
-{
-  var lineNum;
-  lineNum = window.location.hash;
-  lineNum = lineNum.substr(1); /* strip off '#' */
 
-  if (lineNum.indexOf('L') == -1) {
-    lineNum = 'L'+lineNum;
-  }
-  lineElem = document.getElementById(lineNum);
-  /* Always jump to new location even if the line was hidden inside a fold, or
-   * we corrected the raw number to a line ID.
-   */
-  if (lineElem) {
-    lineElem.scrollIntoView(true);
-  }
-  return true;
-}
-if ('onhashchange' in window) {
-  window.onhashchange = JumpToLine;
-}
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
 
--->
-</script>
 </head>
-<body onload='JumpToLine();'>
-<pre id='vimCodeElement'>
-<span id="L1" class="LineNr"> 1 </span>---
-<span id="L2" class="LineNr"> 2 </span><span class="Identifier">title</span><span class="Special">:</span> <span class="Constant">&quot;</span><span class="Constant">Important Script</span><span class="Constant">&quot;</span>
-<span id="L3" class="LineNr"> 3 </span><span class="Identifier">author</span><span class="Special">:</span> <span class="Constant">&quot;</span><span class="Constant">Peter DeWitt</span><span class="Constant">&quot;</span>
-<span id="L4" class="LineNr"> 4 </span><span class="Identifier">date</span><span class="Special">:</span> <span class="Constant">&quot;</span><span class="Special">`r </span>Sys.Date<span class="Special">()</span><span class="Special">`</span><span class="Constant">&quot;</span>
-<span id="L5" class="LineNr"> 5 </span><span class="Identifier">output</span><span class="Special">:</span> rmarkdown::html_vignette
-<span id="L6" class="LineNr"> 6 </span><span class="Identifier">vignette</span><span class="Special">:</span> &gt;
-<span id="L7" class="LineNr"> 7 </span>  %\VignetteIndexEntry<span class="Special">{</span>summary-statistics<span class="Special">}</span>
-<span id="L8" class="LineNr"> 8 </span>  %\VignetteEngine<span class="Special">{</span><span class="Identifier">knitr</span><span class="Special">:</span>:rmarkdown<span class="Special">}</span>
-<span id="L9" class="LineNr"> 9 </span>  %\VignetteEncoding<span class="Special">{</span>UTF-8<span class="Special">}</span>
-<span id="L10" class="LineNr">10 </span>---
-<span id="L11" class="LineNr">11 </span>
-<span id="L12" class="LineNr">12 </span><span class="Special">```{r}</span>
-<span id="L13" class="LineNr">13 </span><span class="PreProc">library</span><span class="Special">(</span>dplyr<span class="Special">)</span>
-<span id="L14" class="LineNr">14 </span><span class="PreProc">library</span><span class="Special">(</span>ggplot2<span class="Special">)</span>
-<span id="L15" class="LineNr">15 </span><span class="PreProc">library</span><span class="Special">(</span>magrittr<span class="Special">)</span>
-<span id="L16" class="LineNr">16 </span>
-<span id="L17" class="LineNr">17 </span>Airlines <span class="Statement">&lt;-</span> read.csv<span class="Special">(</span><span class="Identifier">system</span>.<span class="Identifier">file</span><span class="Special">(</span><span class="Constant">&quot;extdata&quot;</span><span class="Special">,</span> <span class="Constant">&quot;airlines.csv&quot;</span><span class="Special">,</span> package <span class="Statement">=</span> <span class="Constant">&quot;ispkg&quot;</span><span class="Special">))</span>
-<span id="L18" class="LineNr">18 </span>Airports <span class="Statement">&lt;-</span> read.csv<span class="Special">(</span><span class="Identifier">system</span>.<span class="Identifier">file</span><span class="Special">(</span><span class="Constant">&quot;extdata&quot;</span><span class="Special">,</span> <span class="Constant">&quot;airports.csv&quot;</span><span class="Special">,</span> package <span class="Statement">=</span> <span class="Constant">&quot;ispkg&quot;</span><span class="Special">))</span>
-<span id="L19" class="LineNr">19 </span>Flights  <span class="Statement">&lt;-</span> read.csv<span class="Special">(</span><span class="Identifier">system</span>.<span class="Identifier">file</span><span class="Special">(</span><span class="Constant">&quot;extdata&quot;</span><span class="Special">,</span> <span class="Constant">&quot;flights.csv&quot;</span><span class="Special">,</span> package <span class="Statement">=</span> <span class="Constant">&quot;ispkg&quot;</span><span class="Special">))</span>
-<span id="L20" class="LineNr">20 </span>Planes   <span class="Statement">&lt;-</span> read.csv<span class="Special">(</span><span class="Identifier">system</span>.<span class="Identifier">file</span><span class="Special">(</span><span class="Constant">&quot;extdata&quot;</span><span class="Special">,</span> <span class="Constant">&quot;planes.csv&quot;</span><span class="Special">,</span> package <span class="Statement">=</span> <span class="Constant">&quot;ispkg&quot;</span><span class="Special">))</span>
-<span id="L21" class="LineNr">21 </span>Weather  <span class="Statement">&lt;-</span> read.csv<span class="Special">(</span><span class="Identifier">system</span>.<span class="Identifier">file</span><span class="Special">(</span><span class="Constant">&quot;extdata&quot;</span><span class="Special">,</span> <span class="Constant">&quot;weather.csv&quot;</span><span class="Special">,</span> package <span class="Statement">=</span> <span class="Constant">&quot;ispkg&quot;</span><span class="Special">))</span>
-<span id="L22" class="LineNr">22 </span>
-<span id="L23" class="LineNr">23 </span><span class="Identifier">head</span><span class="Special">(</span>Airports<span class="Special">)</span>
-<span id="L24" class="LineNr">24 </span>
-<span id="L25" class="LineNr">25 </span><span class="Comment"># Lets look at flights from EWR, JFK, or LGA to Denver (DEN)</span>
-<span id="L26" class="LineNr">26 </span><span class="Identifier">table</span><span class="Special">(</span>Flights<span class="Special">$</span>origin<span class="Special">)</span>
-<span id="L27" class="LineNr">27 </span>
-<span id="L28" class="LineNr">28 </span>to_denver <span class="Statement">&lt;-</span> <span class="Identifier">filter</span><span class="Special">(</span>Flights<span class="Special">,</span> dest <span class="Statement">==</span> <span class="Constant">&quot;DEN&quot;</span><span class="Special">)</span>
-<span id="L29" class="LineNr">29 </span>
-<span id="L30" class="LineNr">30 </span><span class="Comment"># carrier median arrivial delay</span>
-<span id="L31" class="LineNr">31 </span><span class="Identifier">median</span>_delay <span class="Statement">&lt;-</span>
-<span id="L32" class="LineNr">32 </span>  to_denver <span class="Statement">%&gt;%</span>
-<span id="L33" class="LineNr">33 </span>  group_<span class="Identifier">by</span><span class="Special">(</span>carrier<span class="Special">)</span> <span class="Statement">%&gt;%</span>
-<span id="L34" class="LineNr">34 </span>  summarize<span class="Special">(</span><span class="Identifier">median</span>_delay <span class="Statement">=</span> <span class="Identifier">median</span><span class="Special">(</span>arr_delay<span class="Special">,</span> na.<span class="Identifier">rm</span> <span class="Statement">=</span> <span class="Constant">TRUE</span><span class="Special">))</span> <span class="Statement">%&gt;%</span>
-<span id="L35" class="LineNr">35 </span>  ungroup<span class="Special">()</span>
-<span id="L36" class="LineNr">36 </span>
-<span id="L37" class="LineNr">37 </span><span class="Identifier">median</span>_delay <span class="Statement">%&gt;%</span> <span class="Identifier">filter</span><span class="Special">(</span>carrier <span class="Statement">==</span> <span class="Constant">&quot;UA&quot;</span><span class="Special">)</span>
-<span id="L38" class="LineNr">38 </span>
-<span id="L39" class="LineNr">39 </span><span class="Comment"># how many airlines?</span>
-<span id="L40" class="LineNr">40 </span>n_distinct<span class="Special">(</span><span class="Identifier">median</span>_delay<span class="Special">$</span>carrier<span class="Special">)</span>
-<span id="L41" class="LineNr">41 </span>
-<span id="L42" class="LineNr">42 </span><span class="Comment"># full names of the carriers</span>
-<span id="L43" class="LineNr">43 </span>left_join<span class="Special">(</span><span class="Identifier">median</span>_delay<span class="Special">,</span> Airlines<span class="Special">,</span> <span class="Identifier">by</span> <span class="Statement">=</span> <span class="Constant">&quot;carrier&quot;</span><span class="Special">)</span>
-<span id="L44" class="LineNr">44 </span>
-<span id="L45" class="LineNr">45 </span><span class="Comment"># Weather and delays</span>
-<span id="L46" class="LineNr">46 </span>dat <span class="Statement">&lt;-</span>
-<span id="L47" class="LineNr">47 </span>  left_join<span class="Special">(</span>Flights<span class="Special">,</span>
-<span id="L48" class="LineNr">48 </span>            Weather<span class="Special">,</span>
-<span id="L49" class="LineNr">49 </span>            <span class="Identifier">by</span> <span class="Statement">=</span> <span class="Identifier">c</span><span class="Special">(</span><span class="Constant">&quot;year&quot;</span><span class="Special">,</span> <span class="Constant">&quot;month&quot;</span><span class="Special">,</span> <span class="Constant">&quot;day&quot;</span><span class="Special">,</span> <span class="Constant">&quot;origin&quot;</span><span class="Special">,</span> <span class="Constant">&quot;hour&quot;</span><span class="Special">))</span>
-<span id="L50" class="LineNr">50 </span>
-<span id="L51" class="LineNr">51 </span>fit <span class="Statement">&lt;-</span> <span class="Identifier">lm</span><span class="Special">(</span>arr_delay <span class="Statement">~</span> precip <span class="Statement">+</span> origin<span class="Special">,</span> <span class="Identifier">data</span> <span class="Statement">=</span> dat<span class="Special">,</span> <span class="Identifier">subset</span> <span class="Statement">=</span> carrier <span class="Statement">==</span> <span class="Constant">&quot;UA&quot;</span><span class="Special">)</span>
-<span id="L52" class="LineNr">52 </span>
-<span id="L53" class="LineNr">53 </span><span class="Identifier">message</span><span class="Special">(</span><span class="Identifier">sprintf</span><span class="Special">(</span><span class="Constant">&quot;The average difference in the arrivial delay from %s to DEN compared</span><span class="Special">\n</span><span class="Constant">to the average arrivial delay between %s and DEN is %f.&quot;</span><span class="Special">,</span>
-<span id="L54" class="LineNr">54 </span>                <span class="Identifier">levels</span><span class="Special">(</span>dat<span class="Special">$</span>origin<span class="Special">)[</span><span class="Constant">2</span><span class="Special">]</span><span class="Special">,</span>
-<span id="L55" class="LineNr">55 </span>                <span class="Identifier">levels</span><span class="Special">(</span>dat<span class="Special">$</span>origin<span class="Special">)[</span><span class="Constant">1</span><span class="Special">]</span><span class="Special">,</span>
-<span id="L56" class="LineNr">56 </span>                <span class="Identifier">coef</span><span class="Special">(</span>fit<span class="Special">)[</span><span class="Identifier">paste0</span><span class="Special">(</span><span class="Constant">&quot;origin&quot;</span><span class="Special">,</span> <span class="Identifier">levels</span><span class="Special">(</span>dat<span class="Special">$</span>origin<span class="Special">)[</span><span class="Constant">2</span><span class="Special">])]))</span>
-<span id="L57" class="LineNr">57 </span><span class="Special">```</span>
-</pre>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Important Script</h1>
+<h4 class="author"><em>Peter DeWitt</em></h4>
+<h4 class="date"><em>2018-01-11</em></h4>
+
+
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(magrittr)
+
+Airlines &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;airlines.csv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;ispkg&quot;</span>))
+Airports &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;airports.csv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;ispkg&quot;</span>))
+Flights  &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;flights.csv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;ispkg&quot;</span>))
+Planes   &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;planes.csv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;ispkg&quot;</span>))
+Weather  &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;weather.csv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;ispkg&quot;</span>))
+
+<span class="kw">head</span>(Airports)</code></pre></div>
+<pre><code>##   faa                           name      lat       lon  alt tz dst
+## 1 04G              Lansdowne Airport 41.13047 -80.61958 1044 -5   A
+## 2 06A  Moton Field Municipal Airport 32.46057 -85.68003  264 -6   A
+## 3 06C            Schaumburg Regional 41.98934 -88.10124  801 -6   A
+## 4 06N                Randall Airport 41.43191 -74.39156  523 -5   A
+## 5 09J          Jekyll Island Airport 31.07447 -81.42778   11 -5   A
+## 6 0A9 Elizabethton Municipal Airport 36.37122 -82.17342 1593 -5   A
+##              tzone
+## 1 America/New_York
+## 2  America/Chicago
+## 3  America/Chicago
+## 4 America/New_York
+## 5 America/New_York
+## 6 America/New_York</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Lets look at flights from EWR, JFK, or LGA to Denver (DEN)</span>
+<span class="kw">table</span>(Flights<span class="op">$</span>origin)</code></pre></div>
+<pre><code>## 
+##    EWR    JFK    LGA 
+## 120835 111279 104662</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">to_denver &lt;-<span class="st"> </span><span class="kw">filter</span>(Flights, dest <span class="op">==</span><span class="st"> &quot;DEN&quot;</span>)
+
+<span class="co"># carrier median arrivial delay</span>
+median_delay &lt;-
+<span class="st">  </span>to_denver <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(carrier) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">median_delay =</span> <span class="kw">median</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>()
+
+median_delay <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(carrier <span class="op">==</span><span class="st"> &quot;UA&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##   carrier median_delay
+##   &lt;fctr&gt;         &lt;dbl&gt;
+## 1 UA             -5.00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># how many airlines?</span>
+<span class="kw">n_distinct</span>(median_delay<span class="op">$</span>carrier)</code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># full names of the carriers</span>
+<span class="kw">left_join</span>(median_delay, Airlines, <span class="dt">by =</span> <span class="st">&quot;carrier&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 5 x 3
+##   carrier median_delay name                  
+##   &lt;fctr&gt;         &lt;dbl&gt; &lt;fctr&gt;                
+## 1 B6            -0.500 JetBlue Airways       
+## 2 DL            -5.00  Delta Air Lines Inc.  
+## 3 F9             6.00  Frontier Airlines Inc.
+## 4 UA            -5.00  United Air Lines Inc. 
+## 5 WN             1.00  Southwest Airlines Co.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Weather and delays</span>
+dat &lt;-
+<span class="st">  </span><span class="kw">left_join</span>(Flights,
+            Weather,
+            <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;origin&quot;</span>, <span class="st">&quot;hour&quot;</span>))
+  
+fit &lt;-<span class="st"> </span><span class="kw">lm</span>(arr_delay <span class="op">~</span><span class="st"> </span>precip <span class="op">+</span><span class="st"> </span>origin, <span class="dt">data =</span> dat, <span class="dt">subset =</span> carrier <span class="op">==</span><span class="st"> &quot;UA&quot;</span>)
+
+<span class="kw">message</span>(<span class="kw">sprintf</span>(<span class="st">&quot;The average difference in the arrivial delay from %s to DEN compared</span><span class="ch">\n</span><span class="st">to the average arrivial delay between %s and DEN is %f.&quot;</span>,
+                <span class="kw">levels</span>(dat<span class="op">$</span>origin)[<span class="dv">2</span>],
+                <span class="kw">levels</span>(dat<span class="op">$</span>origin)[<span class="dv">1</span>],
+                <span class="kw">coef</span>(fit)[<span class="kw">paste0</span>(<span class="st">&quot;origin&quot;</span>, <span class="kw">levels</span>(dat<span class="op">$</span>origin)[<span class="dv">2</span>])]))</code></pre></div>
+<pre><code>## The average difference in the arrivial delay from JFK to DEN compared
+## to the average arrivial delay between EWR and DEN is -0.931233.</code></pre>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
 </body>
 </html>
-<!-- vim: set foldmethod=manual : -->

@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>diff</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="settings" content="number_lines,whole_filler,use_css,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.LineNr { color: #af5f00; }
+.Folded { color: #0000c0; background-color: #a8a8a8; padding-bottom: 1px; }
+.DiffChange { color: #ffffff; background-color: #008787; padding-bottom: 1px; }
+.DiffDelete { color: #ff0000; background-color: #870000; padding-bottom: 1px; }
+.DiffText { color: #000000; background-color: #ffaf00; padding-bottom: 1px; }
+.DiffAdd { color: #ffffff; background-color: #005f00; padding-bottom: 1px; }
+-->
+<!--
+table { table-layout: fixed; }
+html, body, table, tbody { width: 100%; margin: 0; padding: 0; }
+th, td { width: 16.7%; }
+td div { overflow: auto; }
+-->
+</style>
+<script type='text/javascript'>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  if (lineNum.indexOf('W') == -1) {
+    lineNum = 'W1'+lineNum;
+  }
+  lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<table border='1' width='100%' id='vimCodeElement'>
+<tr>
+<th>MD5-00</th>
+<th>MD5-01</th>
+<th>MD5-02</th>
+<th>MD5-03</th>
+<th>MD5-04</th>
+<th>MD5-05</th>
+</tr><tr>
+<td valign="top"><div>
+<pre>
+<span id="W1L1" class="LineNr"> 1 </span><span class="DiffDelete">45dcd9e2d2be34a845b0ad50471bbaa9</span><span class="DiffAdd"> *DESCRIPTION                                                                                                                                                                     </span>
+<span id="W1L2" class="LineNr"> 2 </span>dc21c19f0d6968ee25d441b2cf46017d *NAMESPACE
+<span id="W1L3" class="LineNr"> 3 </span>9f78a2edbeec4b580453dcc8d6d310a9 *build/vignette.rds
+<span id="W1L4" class="LineNr"> 4 </span>7bd9348b96c9a3bc13d201ee93359bff *inst/doc/important-script.R
+<span id="W1L5" class="LineNr"> 5 </span>e3bf4e018e8ea011e729edcac1b11767 *inst/doc/important-script.Rmd
+<span id="W1L6" class="LineNr"> 6 </span>22dfcb4a456df1c6f92f9b18bb3469bd *inst/doc/important-script.html
+<span id="W1L7" class="LineNr"> 7 </span>374bee54639a61db9ca77639a98786c9 *inst/extdata/airlines.csv
+<span id="W1L8" class="Folded"> 8 </span><span class="Folded">+--  5 lines: 765ad864cf8a1106100781510a1b91f8 *inst/extdata/airports.csv--------------------------------------------------------------------------------------------------------------------------------------------</span>
+</pre>
+</div></td>
+<td valign="top"><div>
+<pre>
+<span id="W2L1" class="LineNr"> 1 </span><span class="DiffDelete">4657170e8907b464927613bdd391ae9f</span><span class="DiffAdd"> *DESCRIPTION                                                                                                                                                                     </span>
+<span id="W2L2" class="LineNr"> 2 </span>dc21c19f0d6968ee25d441b2cf46017d *NAMESPACE
+<span id="W2L3" class="LineNr"> 3 </span>9f78a2edbeec4b580453dcc8d6d310a9 *build/vignette.rds
+<span id="W2L4" class="LineNr"> 4 </span>7bd9348b96c9a3bc13d201ee93359bff *inst/doc/important-script.R
+<span id="W2L5" class="LineNr"> 5 </span>e3bf4e018e8ea011e729edcac1b11767 *inst/doc/important-script.Rmd
+<span id="W2L6" class="LineNr"> 6 </span>22dfcb4a456df1c6f92f9b18bb3469bd *inst/doc/important-script.html
+<span id="W2L7" class="LineNr"> 7 </span>374bee54639a61db9ca77639a98786c9 *inst/extdata/airlines.csv
+<span id="W2L8" class="Folded"> 8 </span><span class="Folded">+--  5 lines: 765ad864cf8a1106100781510a1b91f8 *inst/extdata/airports.csv--------------------------------------------------------------------------------------------------------------------------------------------</span>
+</pre>
+</div></td>
+<td valign="top"><div>
+<pre>
+<span id="W3L1" class="LineNr"> 1 </span><span class="DiffDelete">c78cea64fe7efcd13d47c59128b8cff9</span><span class="DiffAdd"> *DESCRIPTION                                                                                                                                                                     </span>
+<span id="W3L2" class="LineNr"> 2 </span>dc21c19f0d6968ee25d441b2cf46017d *NAMESPACE
+<span id="W3L3" class="LineNr"> 3 </span>9f78a2edbeec4b580453dcc8d6d310a9 *build/vignette.rds
+<span id="W3L4" class="LineNr"> 4 </span>7bd9348b96c9a3bc13d201ee93359bff *inst/doc/important-script.R
+<span id="W3L5" class="LineNr"> 5 </span>e3bf4e018e8ea011e729edcac1b11767 *inst/doc/important-script.Rmd
+<span id="W3L6" class="LineNr"> 6 </span>22dfcb4a456df1c6f92f9b18bb3469bd *inst/doc/important-script.html
+<span id="W3L7" class="LineNr"> 7 </span>374bee54639a61db9ca77639a98786c9 *inst/extdata/airlines.csv
+<span id="W3L8" class="Folded"> 8 </span><span class="Folded">+--  5 lines: 765ad864cf8a1106100781510a1b91f8 *inst/extdata/airports.csv--------------------------------------------------------------------------------------------------------------------------------------------</span>
+</pre>
+</div></td>
+<td valign="top"><div>
+<pre>
+<span id="W4L1" class="LineNr"> 1 </span><span class="DiffDelete">be0eab45778e7fbd03203ba8ac05f4bf</span><span class="DiffAdd"> *DESCRIPTION                                                                                                                                                                     </span>
+<span id="W4L2" class="LineNr"> 2 </span>dc21c19f0d6968ee25d441b2cf46017d *NAMESPACE
+<span id="W4L3" class="LineNr"> 3 </span>9f78a2edbeec4b580453dcc8d6d310a9 *build/vignette.rds
+<span id="W4L4" class="LineNr"> 4 </span>7bd9348b96c9a3bc13d201ee93359bff *inst/doc/important-script.R
+<span id="W4L5" class="LineNr"> 5 </span>e3bf4e018e8ea011e729edcac1b11767 *inst/doc/important-script.Rmd
+<span id="W4L6" class="LineNr"> 6 </span>22dfcb4a456df1c6f92f9b18bb3469bd *inst/doc/important-script.html
+<span id="W4L7" class="LineNr"> 7 </span>374bee54639a61db9ca77639a98786c9 *inst/extdata/airlines.csv
+<span id="W4L8" class="Folded"> 8 </span><span class="Folded">+--  5 lines: 765ad864cf8a1106100781510a1b91f8 *inst/extdata/airports.csv--------------------------------------------------------------------------------------------------------------------------------------------</span>
+</pre>
+</div></td>
+<td valign="top"><div>
+<pre>
+<span id="W5L1" class="LineNr"> 1 </span><span class="DiffDelete">27e87d44aa9bcf6ef3bfcf55308d9d79</span><span class="DiffAdd"> *DESCRIPTION                                                                                                                                                                     </span>
+<span id="W5L2" class="LineNr"> 2 </span>dc21c19f0d6968ee25d441b2cf46017d *NAMESPACE
+<span id="W5L3" class="LineNr"> 3 </span>9f78a2edbeec4b580453dcc8d6d310a9 *build/vignette.rds
+<span id="W5L4" class="LineNr"> 4 </span>7bd9348b96c9a3bc13d201ee93359bff *inst/doc/important-script.R
+<span id="W5L5" class="LineNr"> 5 </span>e3bf4e018e8ea011e729edcac1b11767 *inst/doc/important-script.Rmd
+<span id="W5L6" class="LineNr"> 6 </span>22dfcb4a456df1c6f92f9b18bb3469bd *inst/doc/important-script.html
+<span id="W5L7" class="LineNr"> 7 </span>374bee54639a61db9ca77639a98786c9 *inst/extdata/airlines.csv
+<span id="W5L8" class="Folded"> 8 </span><span class="Folded">+--  5 lines: 765ad864cf8a1106100781510a1b91f8 *inst/extdata/airports.csv--------------------------------------------------------------------------------------------------------------------------------------------</span>
+</pre>
+</div></td>
+<td valign="top"><div>
+<pre>
+<span id="W6L1" class="LineNr"> 1 </span><span class="DiffDelete">e476ec9fd736a71e675241a4fd420fda</span><span class="DiffAdd"> *DESCRIPTION                                                                                                                                                                     </span>
+<span id="W6L2" class="LineNr"> 2 </span>dc21c19f0d6968ee25d441b2cf46017d *NAMESPACE
+<span id="W6L3" class="LineNr"> 3 </span>9f78a2edbeec4b580453dcc8d6d310a9 *build/vignette.rds
+<span id="W6L4" class="LineNr"> 4 </span>7bd9348b96c9a3bc13d201ee93359bff *inst/doc/important-script.R
+<span id="W6L5" class="LineNr"> 5 </span>e3bf4e018e8ea011e729edcac1b11767 *inst/doc/important-script.Rmd
+<span id="W6L6" class="LineNr"> 6 </span>22dfcb4a456df1c6f92f9b18bb3469bd *inst/doc/important-script.html
+<span id="W6L7" class="LineNr"> 7 </span>374bee54639a61db9ca77639a98786c9 *inst/extdata/airlines.csv
+<span id="W6L8" class="Folded"> 8 </span><span class="Folded">+--  5 lines: 765ad864cf8a1106100781510a1b91f8 *inst/extdata/airports.csv--------------------------------------------------------------------------------------------------------------------------------------------</span>
+</pre>
+</div></td>
+</tr>
+</table>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
+

@@ -214,3 +214,17 @@ Vignette
 `R CMD check`
 <iframe src="ispkg-checklog.html" style="height:240px"></iframe>
 
+## Other Users 
+<iframe src="each-user-pkgbuild.sh.html" style="height:240px"></iframe>
+
+<img src="each-user-pkgbuild-md5.png">
+
+The MD5 sums are different becuase the `DESCRIPTION` files are different.
+
+## Other Users
+<iframe src="ispkg-md5-diff.html" style="height:240px"></iframe>
+<iframe src="ispkg-built-description.html" style="height:240px"></iframe>
+
+## The Vignette
+<iframe src="ispkg-vignette.html"></iframe>
+
