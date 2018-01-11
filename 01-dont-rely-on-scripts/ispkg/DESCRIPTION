@@ -1,0 +1,16 @@
+Package: ispkg
+Title: Important Script Package
+Version: 0.0.1
+Authors@R: person("Peter", "DeWitt", email = "dewittpe@gmail.com", role = c("aut", "cre"))
+Description: A very small package built to show the outline of moving from
+    scripts to packages.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+Imports:
+Suggests:
+    dplyr,
+    ggplot2,
+    magrittr
+RoxygenNote: 6.0.1.9000
+VignetteBuilder: knitr

@@ -120,6 +120,56 @@ Not going to be a safe space...
 ## Expected Output
 <iframe src="important-script.Rout.html"> </iframe>
 
-## Diff between Primary and User05
+## Diff between Primary and User01
+<iframe src="vs-user01.html"> </iframe>
 
+## Diff between Primary and User02 
+<iframe src="vs-user02.html"> </iframe>
+
+## Diff between Primary and User03 
+<iframe src="vs-user03.html"> </iframe>
+
+## Diff between Primary and User04 
+<iframe src="vs-user04.html"> </iframe>
+
+## Diff between Primary and User05 
 <iframe src="vs-user05.html"> </iframe>
+
+## Why?!?!
+
+* First, Running the scripts with `--vanilla` gives the same result
+
+<img src="everything-is-okay-vanilla.png">
+
+## Why?!?!
+
+* Why, then, are the outputs different for the five users when
+  `important-script.R` is evaluated?
+
+  * Each user has their own `.Rprofile` (see next slide) in the working directory (or home directory)
+
+  * Read `help(".First")`
+
+* Questions for you:
+
+  * Do you know how to run `R --vanilla`? 
+    * in Linux? OSX? Windows?  Command line?  GUI? RStudio Desktop? RStudio Server?
+      NppToR? Emacs Speaks Statistics (ESS)? (neo)Vim? Nvim-R?
+
+  * Do the people you work with and for know how to evaluate `R --vanilla`
+
+  * What if you are user02, user03, user04, or user05 and your supervisor or Joe
+    Public is user01?
+
+## The .Rprofile files
+<iframe src="rprofiles.html"> </iframe>
+
+
+# 01.1: The simplest R Package
+
+<p style="text-align:right"> *"We love the R build process.* </p>
+<p style="text-align:right"> *It is robust, cross-platform, reliable, and rather predicatable.* </p>
+<p style="text-align:right"> *It. Just. Works."* </p> 
+<p style="text-align:right"> *-- Dirk Eddelbuettel* </p>
+
+

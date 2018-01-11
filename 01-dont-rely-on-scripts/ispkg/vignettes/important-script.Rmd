@@ -1,0 +1,57 @@
+---
+title: "Important Script"
+author: "Peter DeWitt"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{summary-statistics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(magrittr)
+
+Airlines <- read.csv(system.file("extdata", "airlines.csv", package = "ispkg"))
+Airports <- read.csv(system.file("extdata", "airports.csv", package = "ispkg"))
+Flights  <- read.csv(system.file("extdata", "flights.csv", package = "ispkg"))
+Planes   <- read.csv(system.file("extdata", "planes.csv", package = "ispkg"))
+Weather  <- read.csv(system.file("extdata", "weather.csv", package = "ispkg"))
+
+head(Airports)
+
+# Lets look at flights from EWR, JFK, or LGA to Denver (DEN)
+table(Flights$origin)
+
+to_denver <- filter(Flights, dest == "DEN")
+
+# carrier median arrivial delay
+median_delay <-
+  to_denver %>%
+  group_by(carrier) %>%
+  summarize(median_delay = median(arr_delay, na.rm = TRUE)) %>%
+  ungroup()
+
+median_delay %>% filter(carrier == "UA")
+
+# how many airlines?
+n_distinct(median_delay$carrier)
+
+# full names of the carriers
+left_join(median_delay, Airlines, by = "carrier")
+
+# Weather and delays
+dat <-
+  left_join(Flights,
+            Weather,
+            by = c("year", "month", "day", "origin", "hour"))
+  
+fit <- lm(arr_delay ~ precip + origin, data = dat, subset = carrier == "UA")
+
+message(sprintf("The average difference in the arrivial delay from %s to DEN compared\nto the average arrivial delay between %s and DEN is %f.",
+                levels(dat$origin)[2],
+                levels(dat$origin)[1],
+                coef(fit)[paste0("origin", levels(dat$origin)[2])]))
+```
