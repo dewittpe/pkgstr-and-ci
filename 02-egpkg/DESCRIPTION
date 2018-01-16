@@ -1,0 +1,9 @@
+Package: egpkg
+Title: Example R package for finding BMI
+Version: 0.0.0.9000
+Authors@R: person("Peter", "DeWitt", email = "pdewitt@neptuneinc.org", role = c("aut", "cre"))
+Description: Used to set up examples of R packages, testing, and CI.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1.9000
