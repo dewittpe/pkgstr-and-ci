@@ -691,6 +691,7 @@ x &lt;- 2</pre>
 <ul>
 <li><p>Start with a package with one function: <code>bmi</code></p></li>
 <li><p>This package will be extended to illustrate solutions to two other professional experiences.</p></li>
+<li><p>Skeleton for the package via <code>devtools::create()</code></p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>The Example Package</h2></hgroup><article  id="the-example-package">
@@ -710,6 +711,18 @@ x &lt;- 2</pre>
 <p><!-- end id="rightcol"--></p></div>
 
 <p><!-- end table-row --></p></div>
+
+</article></slide><slide class=""><hgroup><h2>The Example Package: document, build, check</h2></hgroup><article  id="the-example-package-document-build-check">
+
+<ul>
+<li>roxygen comments used to generate the man file via <code>devtools::document()</code></li>
+<li>Build via <code>R CMD build</code> or <code>devtools::build()</code></li>
+<li>Check via <code>R CMD check</code> or <code>devtools::check()</code></li>
+</ul>
+
+<iframe src="egpkg-html/check-00.html" style="height:350px">
+
+</iframe>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Final Notes</h2></hgroup><article  id="final-notes">
 

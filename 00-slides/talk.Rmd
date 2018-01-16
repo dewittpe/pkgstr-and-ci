@@ -658,8 +658,10 @@ R/bmi.R
 
 ## The Example Package: document, build, check
 * roxygen comments used to generate the man file via `devtools::document()`
-* Build via `R CMD build`
-* Check via `R CMD check`
+* Build via `R CMD build` or `devtools::build()`
+* Check via `R CMD check` or `devtools::check()`
+
+<iframe src="egpkg-html/check-00.html" style="height:350px"></iframe>
 
 
 

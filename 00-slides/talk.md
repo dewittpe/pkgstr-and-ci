@@ -636,6 +636,8 @@ x <- 2
 * This package will be extended to illustrate solutions to two other
   professional experiences.
 
+* Skeleton for the package via `devtools::create()`
+
 ## The Example Package
 
 <div style="width: 100%; display: table;">
@@ -655,6 +657,13 @@ R/bmi.R
 </div> <!-- end id="rightcol"-->
 </div> <!-- end table-row -->
 </div>
+
+## The Example Package: document, build, check
+* roxygen comments used to generate the man file via `devtools::document()`
+* Build via `R CMD build` or `devtools::build()`
+* Check via `R CMD check` or `devtools::check()`
+
+<iframe src="egpkg-html/check-00.html" style="height:350px"></iframe>
 
 
 
