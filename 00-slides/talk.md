@@ -638,10 +638,32 @@ x <- 2
 
 ## The Example Package
 
+<div style="width: 100%; display: table;">
+ <div style="display: table-row">
+  <div id="leftcol" style="width: 30%; display: table-cell; vertical-align: top;">
+Directory Tree
+<iframe src="egpkg-html/tree-00.html" style="height:200px"></iframe>
+
+</div> <!-- end id="leftcol" -->
+<div id="rightcol" style="display: table-cell; vertical-align: top;">
+
+DESCRIPTION
+<iframe src="egpkg-html/DESCRIPTION-00.html" style="height:150px"></iframe>
+
+R/bmi.R
+<iframe src="egpkg-html/bmi.R-00.html" style="height:250px"></iframe>
+</div> <!-- end id="rightcol"-->
+</div> <!-- end table-row -->
+</div>
 
 
 
 # Final Notes
+
+## Use Makefiles
+
+* The build process can be customized.  To insure that all developers,
+  regardless of IDE, have the same build process, use (a) makefile(s).
 
 ## Things are changing
 
