@@ -663,6 +663,40 @@ R/bmi.R
 
 <iframe src="egpkg-html/check-00.html" style="height:350px"></iframe>
 
+## The Example Package: Edit the bmi function
+<iframe src="egpkg-html/bmi.R-01.html" style="height:350px"></iframe>
+
+* Assume that this is the only edit made.
+
+* `R CMD build` will work
+
+* Results from `R CMD check` are:
+
+## The Example Package: check after bmi edit
+
+* Man files were not updated.  (A warning)
+* The example fails!  (An error)
+
+<iframe src="egpkg-html/check-01.html" style="height:350px"></iframe>
+
+* If there was CI, then these errors would be reported to the developer.
+
+## The Example Package: Update the bmi documentation
+* Edits to documentation
+<iframe src="egpkg-html/bmi.R-02.html" style="height:200px"></iframe>
+* `devtools::document()`
+* `R CMD build`
+* `R CMD check`
+
+```
+Status: OK
+```
+
+## The Example Package: Update the bmi documentation
+<iframe src="egpkg-html/bmi-man-02.html"></iframe>
+
+
+
 
 
 # Final Notes

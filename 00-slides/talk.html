@@ -724,6 +724,50 @@ x &lt;- 2</pre>
 
 </iframe>
 
+</article></slide><slide class=""><hgroup><h2>The Example Package: Edit the bmi function</h2></hgroup><article  id="the-example-package-edit-the-bmi-function">
+
+<iframe src="egpkg-html/bmi.R-01.html" style="height:350px">
+
+</iframe>
+
+<ul>
+<li><p>Assume that this is the only edit made.</p></li>
+<li><p><code>R CMD build</code> will work</p></li>
+<li><p>Results from <code>R CMD check</code> are:</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>The Example Package: check after bmi edit</h2></hgroup><article  id="the-example-package-check-after-bmi-edit">
+
+<ul>
+<li>Man files were not updated. (A warning)</li>
+<li>The example fails! (An error)</li>
+</ul>
+
+<iframe src="egpkg-html/check-01.html" style="height:350px">
+
+</iframe>
+
+<ul>
+<li>If there was CI, then these errors would be reported to the developer.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>The Example Package: Update the bmi documentation</h2></hgroup><article  id="the-example-package-update-the-bmi-documentation">
+
+<ul>
+<li>Edits to documentation <iframe src="egpkg-html/bmi.R-02.html" style="height:200px"></iframe></li>
+<li><code>devtools::document()</code></li>
+<li><code>R CMD build</code></li>
+<li><code>R CMD check</code></li>
+</ul>
+
+<pre >Status: OK</pre>
+
+</article></slide><slide class=""><hgroup><h2>The Example Package: Update the bmi documentation</h2></hgroup><article  id="the-example-package-update-the-bmi-documentation-1">
+
+<iframe src="egpkg-html/bmi-man-02.html">
+
+</iframe>
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Final Notes</h2></hgroup><article  id="final-notes">
 
 </article></slide><slide class=""><hgroup><h2>Use Makefiles</h2></hgroup><article  id="use-makefiles">

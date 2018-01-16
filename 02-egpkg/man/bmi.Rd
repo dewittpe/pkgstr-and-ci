@@ -4,12 +4,18 @@
 \alias{bmi}
 \title{Body Mass Index}
 \usage{
-bmi(height, weight)
+bmi(height, weight, hunits, wunits)
 }
 \arguments{
-\item{height}{height in inches}
+\item{height}{height of the subject(s)}
 
-\item{weight}{weight in lbs}
+\item{weight}{weight of the subject(s)}
+
+\item{hunits}{a character string for the measurement unit of height, see
+details.}
+
+\item{wunits}{a character string for the measurement unit of weight, see
+details.}
 }
 \value{
 a numeric vector of bmi
@@ -17,8 +23,24 @@ a numeric vector of bmi
 \description{
 Given weight and height, return the body mass index
 }
+\details{
+The units supported for height are:
+\describe{
+\item{"in"}{for inches}
+\item{"cm"}{for centemeters}
+\item{"feet"}{for feet, a decimal number, e.g., 5.5 for five and one half
+feet, or five foot six inches.}
+\item{"m"}{for meters}
+}
+
+The units supported for weight are:
+\describe{
+\item{"lbs"}{for pounds}
+\item{"kg"}{for kilograms}
+}
+}
 \examples{
 # The bmi of a six foot one inch tall, three hundred pound individual is
-bmi(height = 6 * 12 + 1, 300)
+bmi(height = 6 * 12 + 1, weight = 300, hunits = "in", wunits = "lbs")
 
 }
