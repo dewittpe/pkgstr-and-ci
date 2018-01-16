@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Your R Scripts Suck</title>
+  <title>Using R Packages, Version Control, and Continous Integration to Build Reproducible Reports</title>
 
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,8 +20,8 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'Your R Scripts Suck',
-                        subtitle: 'Using R Packages and Continous Integration to Build Reproducible Reports',
+                title: 'Using R Packages, Version Control, and Continous Integration to Build Reproducible Reports',
+                        subtitle: 'Don’t do this because it’s best practice, do this because it protects you from taking the blame for other peoples errors.',
                 useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -101,8 +101,6 @@
 
 <slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Preface</h2></hgroup><article  id="preface">
 
-<p>Not going to be a safe space&#8230;</p>
-
 </article></slide><slide class=""><hgroup><h2>Adopt these tools because &#8230;</h2></hgroup><article  id="adopt-these-tools-because-...">
 
 <p>
@@ -158,8 +156,8 @@
 <li><p>You&#39;ve done an data analysis project. Wrote <code>imporant-script.R</code>.</p></li>
 <li><p>Your colleague will run the script.</p></li>
 <li><p>Your supervisor, the one that <em>thinks</em> they are a data analyst will run your script.</p></li>
-<li><p>You work is part of a federally funded project and is subject to Freedom Of Information Act (FOIA). Joe Public is a supper sceptic and is looking for any reason to discredit the work.</p></li>
-<li><p>Excrement flows down hill. Where are you on the company organization chart?</p></li>
+<li><p>You work is part of a federally funded project and is subject to Freedom Of Information Act (FOIA). Joe Public is a sceptic and is looking for any reason to discredit the work.</p></li>
+<li><p>Excrement flows downhill. Where are you on the company organization chart?</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Example</h2></hgroup><article  id="example">
@@ -169,7 +167,7 @@
 <div id="leftcol" style="width: 50%; display: table-cell; vertical-align: top;">
 <ul>
 <li><p>I have copied several of the data sets from the <a href='https://cran.r-project.org/package=nycflights13' title=''>nycflights13</a> package as .csv</p></li>
-<li><p>There are five subdirectorys to represent five different users.</p></li>
+<li><p>There are five subdirectories to represent five different users.</p></li>
 <li><p><code>imporant-script.R</code>: a simple data load, explore, simple summary and a simple regression model.</p></li>
 <li><p>The <code>each-user.sh</code> bash script will evaluate <code>imporant-script.R</code> in each user directory.</p></li>
 <li><p>Let&#39;s review some files on the next slide.</p></li>
@@ -285,7 +283,7 @@
 <li><p>What if your script requires dplyr 0.7.0 or newer and the end user has version 0.5.0 installed?</p></li>
 </ul>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>01.1: The simplest R Package</h2></hgroup><article  id="the-simplest-r-package">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>The simplest R Package</h2></hgroup><article  id="the-simplest-r-package">
 
 <p style="text-align:right">
 
@@ -311,7 +309,7 @@
 <!-- end id="leftcol" -->
 
 <div id="rightcol" style="display: table-cell; vertical-align: top;">
-<p>DESCRIPTION <br> <iframe src="ispkg-DESCRIPTION.html" style="height:200px"></iframe> <br> Vignette <br> <iframe src="ispkg-vignette.html" style="height:240px"></iframe></p></div>
+<p>DESCRIPTION <br> <iframe src="ispkg-DESCRIPTION.html" style="height:200px"></iframe> <br> Vignette <br> <iframe src="ispkg-important-script.Rmd.html" style="height:240px"></iframe></p></div>
 
 <p><!-- end id="rightcol"--></p></div>
 
@@ -331,7 +329,7 @@
 
 <p><img src="each-user-pkgbuild-md5.png"></p>
 
-<p>The MD5 sums are different becuase the <code>DESCRIPTION</code> files are different.</p>
+<p>The MD5 sums are different because the <code>DESCRIPTION</code> files are different.</p>
 
 </article></slide><slide class=""><hgroup><h2>Other Users</h2></hgroup><article  id="other-users-1">
 
@@ -347,7 +345,385 @@
 
 <iframe src="ispkg-vignette.html">
 
-</iframe></article></slide>
+</iframe>
+
+</article></slide><slide class=""><hgroup><h2>R Package is better because&#8230;</h2></hgroup><article  id="r-package-is-better-because...">
+
+<ul>
+<li><p>The source file (<code>.tar.gz</code>) is the standard (best) method for sending code and results.</p></li>
+<li><p>The <code>&lt;pkgname&gt;_&lt;version&gt;.tar.gz</code> is the result. The result form the script is the result the end user generates.</p></li>
+<li><p>All users were able to build the same package with the same command.</p></li>
+<li><p>When building with <code>--md5</code> you provide a tool to let others know that they have received the correct file, and/or (re)built the package correctly.</p></li>
+<li><p>Re-evaluating the vignette, after installing the package:</p></li>
+<li><p><code>system.file</code> eliminates (most) issues with end user moving files.</p></li>
+<li><p>In an interactive session, the <code>.Rprofile</code> or other workspace issues can/will affect the results. However, if you are generating a report, the reproduction <strong>is not</strong> for interactive evaluation of the vignette, reproduction <strong>is</strong> <code>R CMD build</code>.</p></li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Story 1: Why version control</h2></hgroup><article  id="story-1-why-version-control">
+
+<p>Version control shows who made changes and when those changes were made.</p>
+
+</article></slide><slide class=""><hgroup><h2>Why use version control?</h2></hgroup><article  id="why-use-version-control">
+
+<p style="font-size:60px">
+
+<code>git log</code> <br> <code>svn log</code>
+
+</p>
+
+<p>and</p>
+
+<p style="font-size:60px">
+
+<code>git blame</code> <br> <code>svn blame</code>
+
+</p>
+
+</article></slide><slide class=""><hgroup><h2>The story</h2></hgroup><article  id="the-story">
+
+<p>This is a simple, day-to-day working experience. Nothing bad, but a good example for why version control is important.</p>
+
+<ul>
+<li><p>Colleague 1: Hey, Peter, do you have a minute?</p></li>
+<li><p>Me: Yeah, what can I help you with?</p></li>
+<li><p>Colleague 1: I&#39;m looking over the report you wrote (five months ago) and the value reported is 1.67 but when I source your code I get 1.92.</p></li>
+<li><p>Me: That&#39;s not good. Let me see what you&#39;re looking at.</p></li>
+</ul>
+
+<p>The value in question was a default value used to reproduce and extend the work of a published paper.</p>
+
+<p>I had structured my work as an R package. Vignettes for the documentation and writing an analysis script. The project that I was contributing too was housed in a subversion repository.</p>
+
+</article></slide><slide class=""><hgroup><h2>Check the log</h2></hgroup><article  id="check-the-log">
+
+<p>(Names of files, people, and specific details have been modified)</p>
+
+<p>The value in question was defined in the package file <code>R/published.R</code></p>
+
+<pre >dewittpe@PrecisionM4500 [~/work/AGD/analysis/rpkg/]
+$ svn log R/published.R
+
+------------------------------------------------------------------------
+r1255 | ctwo | 2017-09-11 20:37:29 -0600 (Mon, 11 Sep 2017) | 2 lines
+
+Colleague 2 edits to code:
+
+------------------------------------------------------------------------
+r1241 | pdewitt | 2017-08-23 13:08:06 -0600 (Wed, 23 Aug 2017) | 1 line
+
+added source code for R package used for [specific outcome] development.
+------------------------------------------------------------------------</pre>
+
+</article></slide><slide class=""><hgroup><h2>Look at the blame</h2></hgroup><article  id="look-at-the-blame">
+
+<pre >dewittpe@PrecisionM4500 [~/work/AGD/analysis/rpkg/]
+$ svn blame R/published.R
+   1241    pdewitt #&#39; Default Values for [Published Results]
+   1241    pdewitt #&#39;
+   1241    pdewitt #&#39; @return A list with the gamma and sigma gamma values.
+   1241    pdewitt #&#39;
+   1241    pdewitt #&#39; @seealso \code{vignette(&quot;distributions&quot;, package = &quot;rpkg&quot;)}
+   1241    pdewitt #&#39;
+   1241    pdewitt published_defaults &lt;- function() {
+   1255       ctwo   betas   &lt;- c(0.0296, 1.92, 0.23, 1.83)
+   1255       ctwo   betacis &lt;- matrix(c(0.0113, 1.30, 0.026, 0.30, 0.0272, 2.61, 3.95, 2.37), ncol = 2)
+   1241    pdewitt
+   1241    pdewitt   gammas              &lt;- betas
+   1241    pdewitt   gammas[c(1, 3)]     &lt;- log10(betas[c(1, 3)])
+   1241    pdewitt   gammacis            &lt;- betacis
+   1241    pdewitt   gammacis[c(1, 3), ] &lt;- log10(betacis[c(1, 3), ])
+   1241    pdewitt
+   1255       ctwo   sigmagammas &lt;- (gammas - gammacis[, 1]) / stats::qnorm(0.975) #okay if symmetric
+   1241    pdewitt
+   1241    pdewitt   list(gammas = gammas, sigma_gammas = sigmagammas)
+   1241    pdewitt }</pre>
+
+</article></slide><slide class=""><hgroup><h2>Look at the diff</h2></hgroup><article  id="look-at-the-diff">
+
+<pre >dewittpe@PrecisionM4500 [~/work/AGD/analysis/rpkg/]
+$ svn diff -r 1241 R/published.R@1255
+Index: R/published.R
+===================================================================
+--- R/published.R  (revision 1241)
++++ R/published.R  (working copy)
+@@ -8,8 +8,8 @@
+ published_defaults &lt;- function() {
+-  betas   &lt;- c(0.0169, 1.67, 0.32, 1.83)
+-  betacis &lt;- matrix(c(0.0108, 1.35, 0.026, 0.30, 0.0264, 2.61, 3.95, 2.37), ncol = 2)
++  betas   &lt;- c(0.0296, 1.92, 0.32, 1.83)
++  betacis &lt;- matrix(c(0.0113, 1.30, 0.026, 0.30, 0.0272, 2.61, 3.95, 2.37), ncol = 2)
+
+-  sigmagammas &lt;- (gammas - gammacis[, 1]) / stats::qnorm(0.975)
++  sigmagammas &lt;- (gammas - gammacis[, 1]) / stats::qnorm(0.975) #okay if symmetric
+
+   list(gammas = gammas, sigma_gammas = sigmagammas)
+ }</pre>
+
+</article></slide><slide class=""><hgroup><h2>Version Control</h2></hgroup><article  id="version-control">
+
+<ul>
+<li><p>Issue: reported value was different from the value someone would get if running the code.</p></li>
+<li><p>Initial person responsible for resolving issue: Me</p></li>
+<li><p>Person responsible for discrepancy: Colleague 2 &lt;- This is only known thanks to version control.</p></li>
+<li><p>What if there was no VC?</p>
+
+<ul>
+<li><p>Say the code was shared via email, stored on a network drive? Dropbox? Google Docs? (The latter two have some form of VC but subversion of git would be preferable.)</p></li>
+<li><p>Who would held responsible for resolving the issue?</p></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Story 2: resource-functions.R</h2></hgroup><article  id="story-2-resource-functions.r">
+
+<p>This story provides an example for why we should use R packages and VC and CI.</p>
+
+<p>R packages can improve documentation. <code>R CMD check</code> will verify some basics for documentation, such as function parameters, and that examples evaluate without error.</p>
+
+<p>VC: show who made changes and when those changes were made.</p>
+
+<p>CI: Automatic builds to testing</p>
+
+</article></slide><slide class=""><hgroup><h2>The Story</h2></hgroup><article  id="the-story-1">
+
+<p>Supervisor is primary author and primary analyst for a research project. By decree:</p>
+
+<ol>
+<li><p>All development will be in R scripts. No packages.</p>
+
+<ul>
+<li><p>Supervisor has never built an R package.</p></li>
+<li><p>standard &quot;I don&#39;t have time to learn that.&quot; excuse for not using a package.</p></li>
+</ul></li>
+<li><p>Collaboration via git.</p></li>
+<li><p>Manuscript authored via .Rmd.</p></li>
+</ol>
+
+</article></slide><slide class=""><hgroup><h2>The Story, continued&#8230;</h2></hgroup><article  id="the-story-continued...">
+
+<p>I am tasked with building a <code>resource-functions.R</code> script that will provide tools for performing the data analysis.</p>
+
+<p>This script must provide functions which are generic enough to work with three different data sets, each set with multiple responses and unique sets of explanatory variables. Support cross validation, two different regression methods, implement model selection searches with a dynamic, user specified, model selection criterion.</p>
+
+<p>Each call to the primary function will report multiple summary tables, which need to be customizable, and several model searching results/diagnostics, and the results from the selected models.</p>
+
+<p>The <code>resource-functions.R</code> script must be fully documented, including examples.</p>
+
+</article></slide><slide class=""><hgroup><h2>The Story, continued&#8230;</h2></hgroup><article  id="the-story-continued...-1">
+
+<p>I know that there is a <code>setup.R</code> script that is called when the analysis/manuscript with the form:</p>
+
+<pre class = 'prettyprint lang-r'>source(&#39;Rscripts/load-data.R&#39;)
+source(&#39;Rscripts/clean-data.R&#39;)
+source(&#39;Rscripts/resource-functions.R&#39;)
+source(&#39;Rscripts/analysis.R&#39;)
+
+library(rmarkdown)
+render(&quot;manuscript.Rmd&quot;)</pre>
+
+<p>Because <code>resource-functions.R</code> is being sourced I know that the examples <em>must</em> be commented out. The functions provide tools for cross validation. Running the examples every time the file is sourced, which occurs dozens of times a day, will require to much computation time and will be unacceptable.</p>
+
+</article></slide><slide class=""><hgroup><h2>The Story, continued&#8230;</h2></hgroup><article  id="the-story-continued...-2">
+
+<!--
+I make the choice to not use roxygen style documentation.  Such documentation
+would be extremely helpful for package development, but, as only a script is
+permissible, and supervisor has no experience with roxygen I choose not to use
+that syntax.
+-->
+
+<p>While it would improve this story, I don&#39;t believe it would be proper to show the file.</p>
+
+<p>I committed and pushed the <code>resource-functions.R</code> script to the project repository.</p>
+
+<p>A few days latter&#8230;</p>
+
+</article></slide><slide class=""><hgroup><h2>A pair of emails</h2></hgroup><article  id="a-pair-of-emails">
+
+<p style="font-size:80%">
+
+Peter- <br> <code>resource-functions.R</code> is too dense, and it is impeding my workflow. The comments are not helpful or consistently accurate. &#8230; I just tried to run [workhorse function] according to the comment immediately above it, and it won&#39;t run. It&#39;s ridiculous that extracting alphas is buried that deep. &#8230; <br> <br> Write simpler, longer code. Break things into pieces. Do not nest functions for any project with me. We are not writing software, we are doing research. <br> <br> If you can&#39;t do this, I need to know. <br> <br> -[Supervisor]
+
+</p>
+
+<p><strong>Two hours later:</strong></p>
+
+<p style="font-size:80%">
+
+Peter- <br> The email earlier this afternoon should not have been sent, I apologize. I was frustrated and broke one of my own rules about electronic communication. We can discuss further in person. <br> Thanks, <br> -[Supervisor]
+
+</p>
+
+</article></slide><slide class=""><hgroup><h2>Four Notes (1 &amp; 2 of 4)</h2></hgroup><article  id="four-notes-1-2-of-4">
+
+<ul>
+<li><p>&quot;If you can&#39;t do this, I need to know.&quot;</p>
+
+<ul>
+<li>Translation: Do me a favor and resign so I don&#39;t have to fire you.</li>
+</ul></li>
+</ul>
+
+<p><br></p>
+
+<ul>
+<li><p>&quot;We are not writing software, we are doing research.&quot;</p>
+
+<ul>
+<li><p>Software definition from Dictionary.com: &quot;the programs used to direct the operation of a computer, as well as documentation giving instructions on how to use them.&quot;</p></li>
+<li><p>We are writing software. An R script is a set of instructions for the computer to turn data into a report.</p></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Four Notes (3 of 4)</h2></hgroup><article  id="four-notes-3-of-4">
+
+<ul>
+<li><p>&quot;Write simpler, longer code. Break things into pieces. Do not nest functions for any project with me.&quot;</p>
+
+<ul>
+<li><p>These are contradictory instructions.</p></li>
+<li><p>Don&#39;t use functions like <code>mapply</code>, <code>Map</code>, or <code>Reduce</code>.</p>
+
+<ul>
+<li><p>These function are in the <code>base</code> package</p></li>
+<li><p>[Supervisor] had never seen them before.</p></li>
+<li><p><strong>write using only the vocabulary of supervisor</strong></p></li>
+</ul></li>
+<li><p>Note: Showed that one <code>mapply</code> call, 7 lines, 23 &quot;words&quot;, would need to be replaced by more than 100 lines of code (no nesting) and, more importantly, a change to a funcitonal argument my way: one edit, other way, multiple edits.</p></li>
+<li><p>Stored this example as a gist/snippet for reference latter.</p></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Four Notes (4 of 4)</h2></hgroup><article  id="four-notes-4-of-4">
+
+<ul>
+<li><p>&quot;The comments are not helpful or consistently accurate. &#8230; I just tried to run [workhorse function] according to the comment immediately above it, and it won&#39;t run.&quot;</p>
+
+<ul>
+<li><p>The example not running was the impetus for the email. All the other stuff was spill over form the frustration pot boiling over.</p></li>
+<li><p>The documentation is not helpful, not accurate, and the examples don&#39;t run.</p></li>
+</ul></li>
+<li><p><strong>There are automated testes for all of these issues built into the <code>R CMD   build</code> and the <code>R CMD check</code>. This email, and the issues spurring the email could have been prevent.</strong></p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>What Happened?</h2></hgroup><article  id="what-happened">
+
+<ul>
+<li><p><code>git log</code> found the commit (sha abf342d) for my initial submission of the <code>resource-functions.R</code> script.</p></li>
+<li><p><code>git checkout abf342d</code> and showed that</p>
+
+<ol>
+<li>The examples run.</li>
+</ol></li>
+<li><p><code>git checkout master</code></p>
+
+<ol>
+<li><p>The examples fail.</p></li>
+<li><p>The &quot;not accurate&quot; documentation was partially due some functional arguments missing documentation and default values not matching between documentation and the function call.</p></li>
+</ol></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>What Happened?</h2></hgroup><article  id="what-happened-1">
+
+<ul>
+<li><p><code>git blame</code></p>
+
+<ol>
+<li><p>Supervisor had changed the default value for a function&#39;s arguments without updating the documentation.</p></li>
+<li><p>An edit to the body of a function resulted in the example failing. No edtis to the example had been made.</p></li>
+</ol></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Other Issues</h2></hgroup><article  id="other-issues">
+
+<ul>
+<li><p>Running <code>setup.R</code> in an interactive session.</p></li>
+<li><p>My build process was to always run <code>setup.R</code> from a clean R session.</p></li>
+<li><p>Several times I would <code>fetch</code> changes that would not run. Primary reason, development work polutes your workspace. Code might work in your current interactive session but not in a new session.</p></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>x + 2
+x &lt;- 2</pre>
+
+</article></slide><slide class=""><hgroup><h2>Quick Updates</h2></hgroup><article  id="quick-updates">
+
+<ul>
+<li><p>Tense, but constructive, discussion in person.</p></li>
+<li><p>Extended documentation further. Build several stand alone scripts for examples.</p></li>
+<li><p>This particular project did yield three publications, including a top tier journal.</p></li>
+<li><p>[Supervisor] along with my former department chair tried valiantly to hire me as lead data scientist for a new group they were co-heads of.</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>R Package, VC, and CI would have helped?</h2></hgroup><article  id="r-package-vc-and-ci-would-have-helped">
+
+<ul>
+<li><p>Already showed why VC was important:</p></li>
+<li><p>Why An R Package:</p>
+
+<ul>
+<li><p><code>R CMD build</code> and <code>R CMD check</code> to build the package, check that the documentation is consistent (as least in structure) and that the examples run (at least they don&#39;t error)</p></li>
+<li><p>Use <a href='https://cran.r-project.org/package=testthat' title=''>testthat</a> to build custom tests to run during <code>R CMD check</code>.</p></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>R Package, VC, and CI would have helped?</h2></hgroup><article  id="r-package-vc-and-ci-would-have-helped-1">
+
+<ul>
+<li><p>Why is CI important:</p>
+
+<ul>
+<li><p>The automated build process would have shown that my initial commit 1. built, 2. examples would run to completion, and 3. passed any specified tests.</p></li>
+<li><p>Automated tests will catch errors when</p>
+
+<ul>
+<li><p>the dev fails to run local tests, or,</p></li>
+<li><p>when local tests pass due to a local setting, but fail in a clean environment.</p></li>
+</ul></li>
+<li><p>The CI application can notify the developer that their code fails.</p>
+
+<ul>
+<li>No need for a personal interaction.</li>
+</ul></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>A Simple Example</h2></hgroup><article  id="a-simple-example">
+
+<ul>
+<li><p>Start with a package with one function: <code>bmi</code></p></li>
+<li><p>This package will be extended to illustrate solutions to two other professional experiences.</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>The Example Package</h2></hgroup><article  id="the-example-package">
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Final Notes</h2></hgroup><article  id="final-notes">
+
+</article></slide><slide class=""><hgroup><h2>Things are changing</h2></hgroup><article  id="things-are-changing">
+
+<ul>
+<li><p>1/3 of my PhD dissertation was method dissemination.</p>
+
+<ul>
+<li><p>Wrote and publish two R packages.</p></li>
+<li><p>Thought: Too easy, I know how to do this, was going to do it anyways just to support Aims 1 and 2 of my disserations.</p></li>
+<li><p>Advisor: John Hopkins biostats is requiring all PhD students to write and publish their methods via R packages, or similar architype.</p></li>
+</ul></li>
+<li><p>Observations form UCD</p>
+
+<ul>
+<li><p>2010-2011 academic year:</p>
+
+<ul>
+<li><p>I, one other student, and one faculty member used Sweave (knitr initial release was January 2012). All incoming students had SAS experence or no statistical software experience.</p></li>
+<li><p>SAS was primary language used in course work.</p></li>
+</ul></li>
+<li><p>2016-2017: Majority of the incoming master students (also youngest incoming class) had R experience, and were using knitr</p>
+
+<ul>
+<li>Some courses <strong>require</strong> assignments to be authored in .Rmd files, use git, and R.</li>
+</ul></li>
+</ul></li>
+<li><p>Are you staying up to date with the next generation of graduate students?</p></li>
+</ul></article></slide>
 
 
   <slide class="backdrop"></slide>
