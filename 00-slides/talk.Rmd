@@ -16,6 +16,11 @@ output:
 
 # Preface
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+
 ## Adopt these tools because ...
 
 <p>
@@ -697,6 +702,66 @@ Status: OK
 
 
 
+# Story 2: Testing
+
+## The Story
+This story took place about ten years ago. I am working as a Siebel CRM software
+developer.
+
+One thing I built was the client vital statistics input page.
+
+* Requirements:
+    - Client height to be entered in inches
+    - Client weight to be entered in pounds
+    - Page will automatically report BMI
+
+* Several months later a tester was given this script:
+
+  "Verify that a six foot one inch tall, three hundred pound client has a BMI of
+  35.6"
+
+* and then....
+
+## The Story
+
+* I'm sitting in the developer bullpen.  Tester come running down form the
+  testing office and, apparently, had some choice words for me Hindi, delivered
+  loudly and very publicly.
+
+* Translation: I'm so incompetent that I can write a function to calculate BMI.
+
+```{r}
+bmi <- function(height, weight) {
+  weight / height ** 2 * 703
+}
+
+# Expected input
+bmi(73, 300)
+
+# Tester's input  (tester had very little experience with English measurements)
+bmi(6.1, 300)
+```
+
+## Issues
+
+* The software requirements where met.
+
+* Software requirements might not have been sufficient.
+
+    - Setting up tests for acceptable height ranges were added
+
+* Despite the web page interface labeling the input box with "inches" and "lbs"
+  humans don't always read everything.
+
+* The tester was testing TWO things
+
+    1. Does a 73 inch tall, 300 lbs person have a BMI of 35.6?
+    2. Is the human inputing the data capable of translating between
+       feet-and-inches to just inches
+
+* We can automate 1.
+
+## Use [testthat](https://cran.r-project.org/package=testthat)
 
 
 # Final Notes
@@ -716,7 +781,7 @@ Status: OK
       to support Aims 1 and 2 of my disserations.
 
     - Advisor: John Hopkins biostats is requiring all PhD students to write and
-      publish their methods via R packages, or similar architype.  
+      publish their methods via R packages, or similar architype.
 
 * Observations form UCD
 

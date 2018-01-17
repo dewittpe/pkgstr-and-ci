@@ -768,6 +768,71 @@ x &lt;- 2</pre>
 
 </iframe>
 
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Story 2: Testing</h2></hgroup><article  id="story-2-testing">
+
+</article></slide><slide class=""><hgroup><h2>The Story</h2></hgroup><article  id="the-story-2">
+
+<p>This story took place about ten years ago. I am working as a Siebel CRM software developer.</p>
+
+<p>One thing I built was the client vital statistics input page.</p>
+
+<ul>
+<li>Requirements:
+
+<ul>
+<li>Client height to be entered in inches</li>
+<li>Client weight to be entered in pounds</li>
+<li>Page will automatically report BMI</li>
+</ul></li>
+<li>Several months later a tester was given this script:</li>
+</ul>
+
+<p>&quot;Verify that a six foot one inch tall, three hundred pound client has a BMI of 35.6&quot;</p>
+
+<ul>
+<li>and then&#8230;.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>The Story</h2></hgroup><article  id="the-story-3">
+
+<ul>
+<li><p>I&#39;m sitting in the developer bullpen. Tester come running down form the testing office and, apparently, had some choice words for me Hindi, delivered loudly and very publicly.</p></li>
+<li><p>Translation: I&#39;m so incompetent that I can write a function to calculate BMI.</p></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>bmi &lt;- function(height, weight) {
+  weight / height ** 2 * 703
+}
+
+# Expected input
+bmi(73, 300)
+## [1] 39.57591
+
+# Tester&#39;s input  (tester had very little experience with English measurements)
+bmi(6.1, 300)
+## [1] 5667.831</pre>
+
+</article></slide><slide class=""><hgroup><h2>Issues</h2></hgroup><article  id="issues">
+
+<ul>
+<li><p>The software requirements where met.</p></li>
+<li><p>Software requirements might not have been sufficient.</p>
+
+<ul>
+<li>Setting up tests for acceptable height ranges were added</li>
+</ul></li>
+<li><p>Despite the web page interface labeling the input box with &quot;inches&quot; and &quot;lbs&quot; humans don&#39;t always read everything.</p></li>
+<li><p>The tester was testing TWO things</p>
+
+<ol>
+<li>Does a 73 inch tall, 300 lbs person have a BMI of 35.6?</li>
+<li>Is the human inputing the data capable of translating between feet-and-inches to just inches</li>
+</ol></li>
+<li><p>We can automate 1.</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Use <a href='https://cran.r-project.org/package=testthat' title=''>testthat</a></h2></hgroup><article  id="use-testthat">
+
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Final Notes</h2></hgroup><article  id="final-notes">
 
 </article></slide><slide class=""><hgroup><h2>Use Makefiles</h2></hgroup><article  id="use-makefiles">
