@@ -718,7 +718,7 @@ One thing I built was the client vital statistics input page.
 * Several months later a tester was given this script:
 
   "Verify that a six foot one inch tall, three hundred pound client has a BMI of
-  35.6"
+  39.6"
 
 * and then....
 
@@ -755,14 +755,89 @@ bmi(6.1, 300)
 
 * The tester was testing TWO things
 
-    1. Does a 73 inch tall, 300 lbs person have a BMI of 35.6?
+    1. Does a 73 inch tall, 300 lbs person have a BMI of 39.6?
     2. Is the human inputing the data capable of translating between
-       feet-and-inches to just inches
+       feet-and-inches to just inches?
 
 * We can automate 1.
+* We can't account for all PEBKAC errors.
 
 ## Use [testthat](https://cran.r-project.org/package=testthat)
 
+* Use `devtools::use_testthat()` to set up the directory structure.
+
+<div style="width: 100%; display: table;">
+<div style="display: table-row">
+<div id="leftcol" style="width: 40%; display: table-cell; vertical-align: top;">
+<iframe src="egpkg-html/tree-testthat.html"></iframe>
+</div> <!-- end id="leftcol" -->
+<div id="rightcol" style="display: table-cell; vertical-align: top;">
+`test_bmi.R`
+<iframe src="egpkg-html/test_bmi.R.html" style="height:100px"></iframe>
+Check
+<iframe src="egpkg-html/testthat-check-00.html" style="height:300px"></iframe>
+</div> <!-- end id="rightcol"-->
+</div> <!-- end table-row -->
+</div>
+
+# Story 3
+
+## The Story
+
+This is a story that may not match up well with R package development, at least
+I hope not, but I hope it shows why version control, testing, and CI are
+critically important.
+
+* During my time as a Siebel developer.
+
+* Monday morning: Arrive at the client site.  Informed that there is a critical
+  feature that must be built and pushed to production before start of business
+  Tuesday.
+
+* I'm not the only dev with critical feature development to do.
+
+* Supervisor drops by and asks for a "nice-to-have" feature added.  I tell him
+  "No, not now.  I need to take for this critical feature.  That's a
+  nice-to-have, I'll look at it Wednesday."  Supervisor walks away.
+
+* I build the critical feature.  **There will be no system test. Local test
+  only.  System test will be done in production.**
+
+* I gather my immediate supervisor, the development lead, the project manager,
+  and general manager to witness my local tests and verify the system is
+  working.
+
+* I push my changes to production per management ("I was just following orders")
+
+* Other devs push their changes.
+
+* **System goes down**  The customer management system for the entire nation
+  goes down.
+
+* Developers and tests work to find the offending code.  It was found in the
+  Inventory Business Object  -- My subsystem.
+
+* I'm now tasked with fixing this error.
+
+* Problem: the nice-to-have feature my supervisor wanted was in production.  It
+  had a critical error that caused the system to fail.  I didn't build it.  My
+  supervisor built it and pushed to production after okaying the work I had
+  done.
+
+* There was no meaningful version control.  No way to show who had made the
+  error, nor to revert the system.  (Backups were available for catastrophic
+  errors.)
+
+* There was no system test.
+
+* There was no CI/build test: such a test could have prevented the change from
+  going into production.
+
+* I was held responsible for someone else's error.  This event was cited as the
+  primary reason for not receiving a change in title, associate- to
+  full-consultant.  This promotion came with no salary or benefit increase, just
+  a title.  But would delay the possibility of salary/benefit increase for
+  at least two-years.
 
 # Final Notes
 
@@ -770,6 +845,8 @@ bmi(6.1, 300)
 
 * The build process can be customized.  To insure that all developers,
   regardless of IDE, have the same build process, use (a) makefile(s).
+
+* Window users will need Rtools installed.
 
 ## Things are changing
 
@@ -783,6 +860,7 @@ bmi(6.1, 300)
     - Advisor: John Hopkins biostats is requiring all PhD students to write and
       publish their methods via R packages, or similar architype.
 
+## Things are changing
 * Observations form UCD
 
     - 2010-2011 academic year:
@@ -800,3 +878,28 @@ bmi(6.1, 300)
           git, and R.
 
 * Are you staying up to date with the next generation of graduate students?
+
+
+## My Suggested Workflow
+
+* Simple analysis, major research project, or even a thesis/dissertation: Build
+  R packages!
+
+    - Data packages: great way to curate collected and/or generated data.  
+    - 
+
+
+## Thanks
+
+* Must read resources:
+
+    - "R Packages" by Hadley Wickham, http://r-pkgs.had.co.nz/r.html
+    - "Advanced R" by Hadley Wickham, http://adv-r.had.co.nz/
+
+* Must have tools:
+    - devtools, testthat
+
+* I'm working on a wrapper, `qwraps2::create_pkg` which uses `devtools::create`
+  to build a package skeleton with more of the default files and structure I
+  prefer.
+    - Development version on github.com/dewittpe/qwraps2

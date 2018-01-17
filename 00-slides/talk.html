@@ -787,7 +787,7 @@ x &lt;- 2</pre>
 <li>Several months later a tester was given this script:</li>
 </ul>
 
-<p>&quot;Verify that a six foot one inch tall, three hundred pound client has a BMI of 35.6&quot;</p>
+<p>&quot;Verify that a six foot one inch tall, three hundred pound client has a BMI of 39.6&quot;</p>
 
 <ul>
 <li>and then&#8230;.</li>
@@ -825,13 +825,36 @@ bmi(6.1, 300)
 <li><p>The tester was testing TWO things</p>
 
 <ol>
-<li>Does a 73 inch tall, 300 lbs person have a BMI of 35.6?</li>
-<li>Is the human inputing the data capable of translating between feet-and-inches to just inches</li>
+<li>Does a 73 inch tall, 300 lbs person have a BMI of 39.6?</li>
+<li>Is the human inputing the data capable of translating between feet-and-inches to just inches?</li>
 </ol></li>
-<li><p>We can automate 1.</p></li>
+<li>We can automate 1.</li>
+<li><p>We can&#39;t account for all PEBKAC errors.</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Use <a href='https://cran.r-project.org/package=testthat' title=''>testthat</a></h2></hgroup><article  id="use-testthat">
+
+<ul>
+<li>Use <code>devtools::use_testthat()</code> to set up the directory structure.</li>
+</ul>
+
+<div style="width: 100%; display: table;">
+<div style="display: table-row">
+<div id="leftcol" style="width: 40%; display: table-cell; vertical-align: top;">
+<iframe src="egpkg-html/tree-testthat.html">
+
+</iframe></div>
+
+<!-- end id="leftcol" -->
+
+<div id="rightcol" style="display: table-cell; vertical-align: top;">
+<p><code>test_bmi.R</code> <iframe src="egpkg-html/test_bmi.R.html" style="height:100px"></iframe> Check <iframe src="egpkg-html/testthat-check-00.html" style="height:300px"></iframe></p></div>
+
+<p><!-- end id="rightcol"--></p></div>
+
+<p><!-- end table-row --></p></div>
+
+</article></slide><slide class=""><hgroup><h2>Check</h2></hgroup><article  id="check">
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Final Notes</h2></hgroup><article  id="final-notes">
 
@@ -851,6 +874,11 @@ bmi(6.1, 300)
 <li><p>Thought: Too easy, I know how to do this, was going to do it anyways just to support Aims 1 and 2 of my disserations.</p></li>
 <li><p>Advisor: John Hopkins biostats is requiring all PhD students to write and publish their methods via R packages, or similar architype.</p></li>
 </ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Things are changing</h2></hgroup><article  id="things-are-changing-1">
+
+<ul>
 <li><p>Observations form UCD</p>
 
 <ul>

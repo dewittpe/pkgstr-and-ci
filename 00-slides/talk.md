@@ -718,7 +718,7 @@ One thing I built was the client vital statistics input page.
 * Several months later a tester was given this script:
 
   "Verify that a six foot one inch tall, three hundred pound client has a BMI of
-  35.6"
+  39.6"
 
 * and then....
 
@@ -758,13 +758,32 @@ bmi(6.1, 300)
 
 * The tester was testing TWO things
 
-    1. Does a 73 inch tall, 300 lbs person have a BMI of 35.6?
+    1. Does a 73 inch tall, 300 lbs person have a BMI of 39.6?
     2. Is the human inputing the data capable of translating between
-       feet-and-inches to just inches
+       feet-and-inches to just inches?
 
 * We can automate 1.
+* We can't account for all PEBKAC errors.
 
 ## Use [testthat](https://cran.r-project.org/package=testthat)
+
+* Use `devtools::use_testthat()` to set up the directory structure.
+
+<div style="width: 100%; display: table;">
+<div style="display: table-row">
+<div id="leftcol" style="width: 40%; display: table-cell; vertical-align: top;">
+<iframe src="egpkg-html/tree-testthat.html"></iframe>
+</div> <!-- end id="leftcol" -->
+<div id="rightcol" style="display: table-cell; vertical-align: top;">
+`test_bmi.R` 
+<iframe src="egpkg-html/test_bmi.R.html" style="height:100px"></iframe>
+Check
+<iframe src="egpkg-html/testthat-check-00.html" style="height:300px"></iframe>
+</div> <!-- end id="rightcol"-->
+</div> <!-- end table-row -->
+</div>
+
+## Check
 
 
 # Final Notes
@@ -786,6 +805,7 @@ bmi(6.1, 300)
     - Advisor: John Hopkins biostats is requiring all PhD students to write and
       publish their methods via R packages, or similar architype.
 
+## Things are changing
 * Observations form UCD
 
     - 2010-2011 academic year:
