@@ -874,8 +874,13 @@ critically important.
 
 3. Use CI.  Customizable for any project.
 
-4. Simple analysis, major research project, or even a thesis/dissertation: Build
-   R packages!
+
+**These suggests are for any project.**
+
+## Suggestions
+
+* Simple analysis, major research project, or even a thesis/dissertation: Build
+  R packages!
 
     - Data packages: great way to curate collected and/or generated data.  
 
@@ -883,21 +888,20 @@ critically important.
 
     - It is okay to break one package into multiple packages.
 
-## Use Makefiles
 
-* The build process can be customized.  To insure that all developers,
+* Use makefiles.  The build process can be customized.  To insure that all developers,
   regardless of IDE, have the same build process, use (a) makefile(s).
 
-* Window users will need Rtools installed.
+* Window users will need Cygwin and/or Rtools installed.
 
 ## Things are changing
 
-* 1/3 of my PhD dissertation was method dissemination.
+* Aim 3 of my PhD dissertation was method dissemination.
 
     - Wrote and publish two R packages.
 
     - Thought: Too easy, I know how to do this, was going to do it anyways just
-      to support Aims 1 and 2 of my disserations.
+      to support Aims 1 and 2.
 
     - Advisor: John Hopkins biostats is requiring all PhD students to write and
       publish their methods via R packages, or similar architype.
@@ -908,8 +912,8 @@ critically important.
     - 2010-2011 academic year:
 
         - I, one other student, and one faculty member used Sweave (knitr
-          initial release was January 2012).  All incoming students had SAS
-          experence or no statistical software experience.
+          initial release was January 2012).  All incoming students had either
+          SAS experence or no statistical software experience.
 
         - SAS was primary language used in course work.
 
