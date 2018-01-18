@@ -18,7 +18,6 @@ output:
 
 
 
-
 ## Adopt these tools because ...
 
 <p>
@@ -155,10 +154,10 @@ output:
 * Questions for you:
 
   * Do you know how to run `R --vanilla`?
-    * in Linux? OSX? Windows?  Command line?  GUI? RStudio Desktop? RStudio Server?
+    * On Linux? OSX? Windows?  Command line?  GUI? RStudio Desktop? RStudio Server?
       NppToR? Emacs Speaks Statistics (ESS)? (neo)Vim? Nvim-R?
 
-  * Do the people you work with and for know how to evaluate `R --vanilla`
+  * Do the people you work with and for know how to evaluate in `R --vanilla`?
 
 ## The .Rprofile files
 <iframe src="rprofiles.html"> </iframe>
@@ -775,7 +774,7 @@ bmi(6.1, 300)
 <iframe src="egpkg-html/tree-testthat.html"></iframe>
 </div> <!-- end id="leftcol" -->
 <div id="rightcol" style="display: table-cell; vertical-align: top;">
-`test_bmi.R` 
+`test_bmi.R`
 <iframe src="egpkg-html/test_bmi.R.html" style="height:100px"></iframe>
 Check
 <iframe src="egpkg-html/testthat-check-00.html" style="height:300px"></iframe>
@@ -783,15 +782,113 @@ Check
 </div> <!-- end table-row -->
 </div>
 
-## Check
+# Story 3
+
+## The Story
+
+This is a story that may not match up well with R package development, at least
+I hope not, but I hope it shows why version control, testing, and CI are
+critically important.
+
+* During my time as a Siebel developer.
+
+* Monday morning: Arrive at the client site.  Informed that there is a critical
+  feature that must be built and pushed to production before start of business
+  Tuesday.
+
+* I'm not the only dev with critical feature development to do.
+
+* Supervisor drops by and asks for a "nice-to-have" feature added.  I tell him
+  "No, not now.  I need to take for this critical feature.  That's a
+  nice-to-have, I'll look at it Wednesday."  Supervisor walks away.
+
+* I build the critical feature.  **There will be no system test. Local test
+  only.  System test will be done in production.**
+
+* I gather my immediate supervisor, the development lead, the project manager,
+  and general manager to witness my local tests and verify the system is
+  working.
+
+* I push my changes to production per management ("I was just following orders")
+
+* Other devs push their changes.
+
+* **System goes down**  The customer management system for the entire nation
+  goes down.
+
+* Developers and tests work to find the offending code.  It was found in the
+  Inventory Business Object  -- My subsystem.
+
+* I'm now tasked with fixing this error.
+
+* Problem: the nice-to-have feature my supervisor wanted was in production.  It
+  had a critical error that caused the system to fail.  I didn't build it.  My
+  supervisor built it and pushed to production after okaying the work I had
+  done.
+
+* There was no meaningful version control.  No way to show who had made the
+  error, nor to revert the system.  (Backups were available for catastrophic
+  errors.)
+
+* There was no system test.
+
+* There was no CI/build test: such a test could have prevented the change from
+  going into production.
+
+* I was held responsible for someone else's error.  This event was cited as the
+  primary reason for not receiving a change in title, associate- to
+  full-consultant.  This promotion came with no salary or benefit increase, just
+  a title.  But would delay the possibility of salary/benefit increase for
+  at least two-years.
+
+## Adding CI to Your Package:
+
+* github: look at travisci and use `devtools::use_travis()`
+
+    - Read http://r-pkgs.had.co.nz/check.html#travis
+
+<iframe src="egpkg-html/travis.yml.html"> </iframe>
+
+## Adding CI to Your Package:
+* gitlab: has docker and several tools set up for pipelines.
+
+<iframe src="egpkg-html/gitlab-ci.yml.html"> </iframe>
+
+
 
 
 # Final Notes
+
+## Suggestions
+
+1. Use CV, even it is just you.  (Check EOA for and be careful about where you
+   keep your data)
+
+2. Control who can contribute changes with or without human interaction:
+   
+     - Git: Limit the number of people who have push access to the master
+       branch.  Fork and merge requests for/from others.
+
+     - SVN: you are the trunk maintainer, have contributions via reintegrating
+       branches or having patches sent from others.
+
+3. Use CI.  Customizable for any project.
+
+4. Simple analysis, major research project, or even a thesis/dissertation: Build
+   R packages!
+
+    - Data packages: great way to curate collected and/or generated data.  
+
+    - It is okay to build multiple packages.  
+
+    - It is okay to break one package into multiple packages.
 
 ## Use Makefiles
 
 * The build process can be customized.  To insure that all developers,
   regardless of IDE, have the same build process, use (a) makefile(s).
+
+* Window users will need Rtools installed.
 
 ## Things are changing
 
@@ -823,3 +920,19 @@ Check
           git, and R.
 
 * Are you staying up to date with the next generation of graduate students?
+
+## Thanks
+
+* Must read resources:
+
+    - "R Packages" by Hadley Wickham, http://r-pkgs.had.co.nz/r.html
+    - "Advanced R" by Hadley Wickham, http://adv-r.had.co.nz/
+
+* Must have tools:
+    - devtools, testthat
+
+* I'm working on a wrapper, `qwraps2::create_pkg` which uses `devtools::create`
+  to build a package skeleton with more of the default files and structure I
+  prefer.
+
+    - Development version on github.com/dewittpe/qwraps2

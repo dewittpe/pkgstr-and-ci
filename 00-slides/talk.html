@@ -261,9 +261,9 @@
 <li>Do you know how to run <code>R --vanilla</code>?
 
 <ul>
-<li>in Linux? OSX? Windows? Command line? GUI? RStudio Desktop? RStudio Server? NppToR? Emacs Speaks Statistics (ESS)? (neo)Vim? Nvim-R?</li>
+<li>On Linux? OSX? Windows? Command line? GUI? RStudio Desktop? RStudio Server? NppToR? Emacs Speaks Statistics (ESS)? (neo)Vim? Nvim-R?</li>
 </ul></li>
-<li><p>Do the people you work with and for know how to evaluate <code>R --vanilla</code></p></li>
+<li><p>Do the people you work with and for know how to evaluate in <code>R --vanilla</code>?</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>The .Rprofile files</h2></hgroup><article  id="the-.rprofile-files">
@@ -854,14 +854,82 @@ bmi(6.1, 300)
 
 <p><!-- end table-row --></p></div>
 
-</article></slide><slide class=""><hgroup><h2>Check</h2></hgroup><article  id="check">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Story 3</h2></hgroup><article  id="story-3">
+
+</article></slide><slide class=""><hgroup><h2>The Story</h2></hgroup><article  id="the-story-4">
+
+<p>This is a story that may not match up well with R package development, at least I hope not, but I hope it shows why version control, testing, and CI are critically important.</p>
+
+<ul>
+<li><p>During my time as a Siebel developer.</p></li>
+<li><p>Monday morning: Arrive at the client site. Informed that there is a critical feature that must be built and pushed to production before start of business Tuesday.</p></li>
+<li><p>I&#39;m not the only dev with critical feature development to do.</p></li>
+<li><p>Supervisor drops by and asks for a &quot;nice-to-have&quot; feature added. I tell him &quot;No, not now. I need to take for this critical feature. That&#39;s a nice-to-have, I&#39;ll look at it Wednesday.&quot; Supervisor walks away.</p></li>
+<li><p>I build the critical feature. <strong>There will be no system test. Local test only. System test will be done in production.</strong></p></li>
+<li><p>I gather my immediate supervisor, the development lead, the project manager, and general manager to witness my local tests and verify the system is working.</p></li>
+<li><p>I push my changes to production per management (&quot;I was just following orders&quot;)</p></li>
+<li><p>Other devs push their changes.</p></li>
+<li><p><strong>System goes down</strong> The customer management system for the entire nation goes down.</p></li>
+<li><p>Developers and tests work to find the offending code. It was found in the Inventory Business Object &#8211; My subsystem.</p></li>
+<li><p>I&#39;m now tasked with fixing this error.</p></li>
+<li><p>Problem: the nice-to-have feature my supervisor wanted was in production. It had a critical error that caused the system to fail. I didn&#39;t build it. My supervisor built it and pushed to production after okaying the work I had done.</p></li>
+<li><p>There was no meaningful version control. No way to show who had made the error, nor to revert the system. (Backups were available for catastrophic errors.)</p></li>
+<li><p>There was no system test.</p></li>
+<li><p>There was no CI/build test: such a test could have prevented the change from going into production.</p></li>
+<li><p>I was held responsible for someone else&#39;s error. This event was cited as the primary reason for not receiving a change in title, associate- to full-consultant. This promotion came with no salary or benefit increase, just a title. But would delay the possibility of salary/benefit increase for at least two-years.</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Adding CI to Your Package:</h2></hgroup><article  id="adding-ci-to-your-package">
+
+<ul>
+<li><p>github: look at travisci and use <code>devtools::use_travis()</code></p>
+
+<ul>
+<li>Read <a href='http://r-pkgs.had.co.nz/check.html#travis' title=''>http://r-pkgs.had.co.nz/check.html#travis</a></li>
+</ul></li>
+</ul>
+
+<iframe src="egpkg-html/travis.yml.html">
+
+</iframe>
+
+</article></slide><slide class=""><hgroup><h2>Adding CI to Your Package:</h2></hgroup><article  id="adding-ci-to-your-package-1">
+
+<ul>
+<li>gitlab: has docker and several tools set up for pipelines.</li>
+</ul>
+
+<iframe src="egpkg-html/gitlab-ci.yml.html">
+
+</iframe>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Final Notes</h2></hgroup><article  id="final-notes">
+
+</article></slide><slide class=""><hgroup><h2>Suggestions</h2></hgroup><article  id="suggestions">
+
+<ol>
+<li><p>Use CV, even it is just you. (Check EOA for and be careful about where you keep your data)</p></li>
+<li><p>Control who can contribute changes with or without human interaction:</p>
+
+<ul>
+<li><p>Git: Limit the number of people who have push access to the master branch. Fork and merge requests for/from others.</p></li>
+<li><p>SVN: you are the trunk maintainer, have contributions via reintegrating branches or having patches sent from others.</p></li>
+</ul></li>
+<li><p>Use CI. Customizable for any project.</p></li>
+<li><p>Simple analysis, major research project, or even a thesis/dissertation: Build R packages!</p>
+
+<ul>
+<li><p>Data packages: great way to curate collected and/or generated data.</p></li>
+<li><p>It is okay to build multiple packages.</p></li>
+<li><p>It is okay to break one package into multiple packages.</p></li>
+</ul></li>
+</ol>
 
 </article></slide><slide class=""><hgroup><h2>Use Makefiles</h2></hgroup><article  id="use-makefiles">
 
 <ul>
-<li>The build process can be customized. To insure that all developers, regardless of IDE, have the same build process, use (a) makefile(s).</li>
+<li><p>The build process can be customized. To insure that all developers, regardless of IDE, have the same build process, use (a) makefile(s).</p></li>
+<li><p>Window users will need Rtools installed.</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Things are changing</h2></hgroup><article  id="things-are-changing">
@@ -895,6 +963,27 @@ bmi(6.1, 300)
 </ul></li>
 </ul></li>
 <li><p>Are you staying up to date with the next generation of graduate students?</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Thanks</h2></hgroup><article  id="thanks">
+
+<ul>
+<li><p>Must read resources:</p>
+
+<ul>
+<li>&quot;R Packages&quot; by Hadley Wickham, <a href='http://r-pkgs.had.co.nz/r.html' title=''>http://r-pkgs.had.co.nz/r.html</a></li>
+<li>&quot;Advanced R&quot; by Hadley Wickham, <a href='http://adv-r.had.co.nz/' title=''>http://adv-r.had.co.nz/</a></li>
+</ul></li>
+<li>Must have tools:
+
+<ul>
+<li>devtools, testthat</li>
+</ul></li>
+<li><p>I&#39;m working on a wrapper, <code>qwraps2::create_pkg</code> which uses <code>devtools::create</code> to build a package skeleton with more of the default files and structure I prefer.</p>
+
+<ul>
+<li>Development version on github.com/dewittpe/qwraps2</li>
+</ul></li>
 </ul></article></slide>
 
 
