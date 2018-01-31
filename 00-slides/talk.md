@@ -1,5 +1,5 @@
 ---
-title: "Using R Packages, Version Control, and Continous Integration to Build Reproducible Reports"
+title: "Using R Packages, Version Control, and Continuous Integration to Build Reproducible Reports"
 subtitle: "Improving Product Quality and Developer Accountability"
 author:
   "Peter E. DeWitt, Ph.D.<br><pdewitt@neptuneinc.org>"
@@ -60,7 +60,7 @@ output:
 
 ## Consider the following
 
-* You've done an data analysis project.  Wrote `imporant-script.R`.
+* You've done an data analysis project.  Wrote `important-script.R`.
 
 * Your colleague will run the script.
 
@@ -68,7 +68,7 @@ output:
   script.
 
 * You work is part of a federally funded project and is subject to Freedom Of
-  Information Act (FOIA).  Joe Public is a sceptic and is looking for any
+  Information Act (FOIA).  Joe Public is a skeptic and is looking for any
   reason to discredit the work.
 
 * Excrement flows downhill.  Where are you on the company organization chart?
@@ -85,10 +85,10 @@ output:
 
 * There are five subdirectories to represent five different users.
 
-* `imporant-script.R`: a simple data load, explore, simple
+* `important-script.R`: a simple data load, explore, simple
   summary and a simple regression model.
 
-* The `each-user.sh` bash script will evaluate `imporant-script.R` in each user
+* The `each-user.sh` bash script will evaluate `important-script.R` in each user
   directory.
 
 * Let's review some files on the next slide.
@@ -188,7 +188,7 @@ output:
 
 <p style="text-align:right">
 *"We love the R build process.<br>
-It is robust, cross-platform, reliable,<br>and rather predicatable. <br>
+It is robust, cross-platform, reliable,<br>and rather predictable. <br>
 It. Just. Works."*
 </p>
 <p style="text-align:right">
@@ -563,7 +563,7 @@ Thanks,
        without updating the documentation.
 
     2. An edit to the body of a function resulted in the example failing.  No
-       edtis to the example had been made.
+       edits to the example had been made.
 
 ## Other Issues
 * Running `setup.R` in an interactive session.
@@ -571,7 +571,7 @@ Thanks,
   * My build process was to always run `setup.R` from a clean R session.
 
   * Several times I would `fetch` changes that would not run. Primary reason,
-    development work polutes your workspace.  Code might work in your current
+    development work pollutes your workspace.  Code might work in your current
     interactive session but not in a new session.
 
 
@@ -753,7 +753,7 @@ bmi(6.1, 300)
 * The tester was testing TWO things
 
     1. Does a 73 inch tall, 300 lbs person have a BMI of 39.6?
-    2. Is the human inputing the data capable of translating between
+    2. Is the human inputting the data capable of translating between
        feet-and-inches to just inches?
 
 * We can automate 1.
@@ -901,7 +901,7 @@ critically important.
       to support Aims 1 and 2.
 
     - Advisor: John Hopkins biostats is requiring all PhD students to write and
-      publish their methods via R packages, or similar architype.
+      publish their methods via R packages, or similar archetype.
 
 ## Things are changing
 * Observations form UCD
@@ -910,7 +910,7 @@ critically important.
 
         - I, one other student, and one faculty member used Sweave (knitr
           initial release was January 2012).  All incoming students had either
-          SAS experence or no statistical software experience.
+          SAS experience or no statistical software experience.
 
         - SAS was primary language used in course work.
 
@@ -936,4 +936,4 @@ critically important.
   to build a package skeleton with more of the default files and structure I
   prefer.
 
-    - Development version on github.com/dewittpe/qwraps2
+    - Development version on https://github.com/dewittpe/qwraps2

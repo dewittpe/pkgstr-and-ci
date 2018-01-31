@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Using R Packages, Version Control, and Continous Integration to Build Reproducible Reports</title>
+  <title>Using R Packages, Version Control, and Continuous Integration to Build Reproducible Reports</title>
 
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,7 +20,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'Using R Packages, Version Control, and Continous Integration to Build Reproducible Reports',
+                title: 'Using R Packages, Version Control, and Continuous Integration to Build Reproducible Reports',
                         subtitle: 'Improving Product Quality and Developer Accountability',
                 useBuilds: true,
         usePrettify: true,
@@ -158,10 +158,10 @@
 </article></slide><slide class=""><hgroup><h2>Consider the following</h2></hgroup><article  id="consider-the-following">
 
 <ul>
-<li><p>You&#39;ve done an data analysis project. Wrote <code>imporant-script.R</code>.</p></li>
+<li><p>You&#39;ve done an data analysis project. Wrote <code>important-script.R</code>.</p></li>
 <li><p>Your colleague will run the script.</p></li>
 <li><p>A supervisor, the one who <em>thinks</em> they are a data analyst, will run your script.</p></li>
-<li><p>You work is part of a federally funded project and is subject to Freedom Of Information Act (FOIA). Joe Public is a sceptic and is looking for any reason to discredit the work.</p></li>
+<li><p>You work is part of a federally funded project and is subject to Freedom Of Information Act (FOIA). Joe Public is a skeptic and is looking for any reason to discredit the work.</p></li>
 <li><p>Excrement flows downhill. Where are you on the company organization chart?</p></li>
 </ul>
 
@@ -173,8 +173,8 @@
 <ul>
 <li><p>I have copied several of the data sets from the <a href='https://cran.r-project.org/package=nycflights13' title=''>nycflights13</a> package as .csv</p></li>
 <li><p>There are five subdirectories to represent five different users.</p></li>
-<li><p><code>imporant-script.R</code>: a simple data load, explore, simple summary and a simple regression model.</p></li>
-<li><p>The <code>each-user.sh</code> bash script will evaluate <code>imporant-script.R</code> in each user directory.</p></li>
+<li><p><code>important-script.R</code>: a simple data load, explore, simple summary and a simple regression model.</p></li>
+<li><p>The <code>each-user.sh</code> bash script will evaluate <code>important-script.R</code> in each user directory.</p></li>
 <li><p>Let&#39;s review some files on the next slide.</p></li>
 </ul></div>
 
@@ -296,7 +296,7 @@
 
 <p style="text-align:right">
 
-<em>&quot;We love the R build process.<br> It is robust, cross-platform, reliable,<br>and rather predicatable. <br> It. Just. Works.&quot;</em>
+<em>&quot;We love the R build process.<br> It is robust, cross-platform, reliable,<br>and rather predictable. <br> It. Just. Works.&quot;</em>
 
 </p>
 
@@ -640,7 +640,7 @@ Peter- <br> The email earlier this afternoon should not have been sent, I apolog
 
 <ol>
 <li><p>Supervisor had changed the default value for a function&#39;s arguments without updating the documentation.</p></li>
-<li><p>An edit to the body of a function resulted in the example failing. No edtis to the example had been made.</p></li>
+<li><p>An edit to the body of a function resulted in the example failing. No edits to the example had been made.</p></li>
 </ol></li>
 </ul>
 
@@ -649,7 +649,7 @@ Peter- <br> The email earlier this afternoon should not have been sent, I apolog
 <ul>
 <li><p>Running <code>setup.R</code> in an interactive session.</p></li>
 <li><p>My build process was to always run <code>setup.R</code> from a clean R session.</p></li>
-<li><p>Several times I would <code>fetch</code> changes that would not run. Primary reason, development work polutes your workspace. Code might work in your current interactive session but not in a new session.</p></li>
+<li><p>Several times I would <code>fetch</code> changes that would not run. Primary reason, development work pollutes your workspace. Code might work in your current interactive session but not in a new session.</p></li>
 </ul>
 
 <pre class = 'prettyprint lang-r'>x + 2
@@ -837,7 +837,7 @@ bmi(6.1, 300)
 
 <ol>
 <li>Does a 73 inch tall, 300 lbs person have a BMI of 39.6?</li>
-<li>Is the human inputing the data capable of translating between feet-and-inches to just inches?</li>
+<li>Is the human inputting the data capable of translating between feet-and-inches to just inches?</li>
 </ol></li>
 <li>We can automate 1.</li>
 <li><p>We can&#39;t account for all PEBKAC errors.</p></li>
@@ -958,7 +958,7 @@ bmi(6.1, 300)
 <ul>
 <li><p>Wrote and publish two R packages.</p></li>
 <li><p>Thought: Too easy, I know how to do this, was going to do it anyways just to support Aims 1 and 2.</p></li>
-<li><p>Advisor: John Hopkins biostats is requiring all PhD students to write and publish their methods via R packages, or similar architype.</p></li>
+<li><p>Advisor: John Hopkins biostats is requiring all PhD students to write and publish their methods via R packages, or similar archetype.</p></li>
 </ul></li>
 </ul>
 
@@ -971,7 +971,7 @@ bmi(6.1, 300)
 <li><p>2010-2011 academic year:</p>
 
 <ul>
-<li><p>I, one other student, and one faculty member used Sweave (knitr initial release was January 2012). All incoming students had either SAS experence or no statistical software experience.</p></li>
+<li><p>I, one other student, and one faculty member used Sweave (knitr initial release was January 2012). All incoming students had either SAS experience or no statistical software experience.</p></li>
 <li><p>SAS was primary language used in course work.</p></li>
 </ul></li>
 <li><p>2016-2017: Majority of the incoming master students (also youngest incoming class) had R experience, and were using knitr</p>
@@ -1000,7 +1000,7 @@ bmi(6.1, 300)
 <li><p>I&#39;m working on a wrapper, <code>qwraps2::create_pkg</code> which uses <code>devtools::create</code> to build a package skeleton with more of the default files and structure I prefer.</p>
 
 <ul>
-<li>Development version on github.com/dewittpe/qwraps2</li>
+<li>Development version on <a href='https://github.com/dewittpe/qwraps2' title=''>https://github.com/dewittpe/qwraps2</a></li>
 </ul></li>
 </ul></article></slide>
 
