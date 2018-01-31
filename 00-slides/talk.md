@@ -234,6 +234,21 @@ Time stamp for when the package was built is different from build to build.
 ## The Vignette
 <iframe src="ispkg-vignette.html"></iframe>
 
+## Moving from important-script.R to a R Package
+
+* At a minimum:
+
+    * `important-script.R` &rarr; `vignettes/important-script.Rmd`
+
+    * Note needed packages in the Suggests section of the `DESCRIPTION` file.
+
+* Additional:
+
+    * helper functions written in the R directory
+    * tests
+    * examples
+    * ...
+
 ## R Package is better because...
 
 * The source file (`.tar.gz`) is the standard (best) method for sending
@@ -282,12 +297,20 @@ example for why version control is important.
 
 * Me: That's not good.  Let me see what you're looking at.
 
-The value in question was a default value used to reproduce and extend the work
-of a published paper.
+## The Issue
 
-I had structured my work as an R package.  Vignettes for the documentation and
-writing an analysis script.  The project that I was contributing to was housed
-in a subversion repository.
+* The value in question was a default value used to reproduce and extend the
+  work of a published paper.
+
+* I had structured my work as an R package.  Vignettes for the documentation and
+  writing an analysis script.  
+  
+* The report, however, was a standalone document.
+  
+    * Report: 1.67
+    * `source("R/published.R")`: 1.92
+  
+* The project that I was contributing to was housed in a subversion repository.
 
 ## Check the log
 
@@ -372,7 +395,7 @@ Index: R/published.R
 * Issue: reported value was different from the value someone would get if
   running the code.
 
-* Initial person responsible for resolving issue: Me
+* Initial person responsible for resolving issue: Me, author of report and code.
 
 * Person responsible for discrepancy: Colleague 2
 
@@ -381,7 +404,7 @@ Index: R/published.R
 * What if there was no VC?
 
     - Say the code was shared via email, stored on a network drive? Dropbox?
-      Google Docs?  (The latter two have some form of VC but subversion of git
+      Google Docs?  (The latter two have some form of VC but subversion or git
       would be preferable.)
 
     - Who would held responsible for resolving the issue?
@@ -407,7 +430,7 @@ decree:
 
     - Supervisor has never built an R package.
 
-    - standard "I don't have time to learn that." excuse for not using a package.
+    - Standard "I don't have time to learn that" excuse for not using a package.
 
 2. Collaboration via git.
 
@@ -536,7 +559,7 @@ Thanks,
 * **There are automated tests for all of these issues built into the `R CMD
   build` and the `R CMD check`.**
 
-* This email, and the issues spurring the email could have been prevent.
+* This email, and the issues spurring the email, could have been prevent.
 
 ## What Happened?
 
@@ -545,25 +568,25 @@ Thanks,
 
 * `git checkout abf342d` and showed that
 
-    1. The examples run.
+    * The examples run.
 
 * `git checkout master`
 
-    1. The examples fail.
+    * The examples fail.
 
-    2. The "not accurate" documentation was partially due some functional
-       arguments missing documentation and default values not matching between
-       documentation and the function call.
+    * The "not accurate" documentation was partially due some functional
+      arguments missing documentation and default values not matching between
+      documentation and the function call.
 
 ## What Happened?
 
 * `git blame`
 
-    1. Supervisor had changed the default value for a function's arguments
+    1. [Supervisor] had changed the default value for a function's arguments
        without updating the documentation.
 
-    2. An edit to the body of a function resulted in the example failing.  No
-       edits to the example had been made.
+    2. [Supervisor] An edit to the body of a function resulted in the example
+       failing.  No edits to the example had been made.
 
 ## Other Issues
 * Running `setup.R` in an interactive session.
@@ -585,7 +608,9 @@ x <- 2
 * Tense, but constructive, discussion in person.
 
 * Extended documentation further.  Build several stand alone scripts for
-  examples.
+  examples.  
+  
+    - **This still required manual checking of the examples when resource-functions.R was updated.**
 
 * This particular project did yield three publications, including a top tier
   journal.
@@ -611,9 +636,11 @@ x <- 2
 
 * Why is CI important:
 
-    - The automated build process would have shown that my initial commit 1.
-      built, 2. examples would run to completion, and 3. passed any
-      specified tests.
+    - The automated build process would have shown that my initial commit 
+      
+        1. built,
+        2. examples would run to completion, and
+        3. passed any specified tests.
 
     - Automated tests will catch errors when
 
@@ -624,9 +651,7 @@ x <- 2
 
     - The CI application can notify the developer that their code fails.
 
-        - No need for a personal interaction.
-
-## A Simple Example
+## A Simple Example: Build and Check a Package
 
 * Start with a package with one function: `bmi`
 
@@ -856,7 +881,7 @@ critically important.
 
 ## Suggestions
 
-1. Use CV, even it is just you.
+1. Use VC, even it is just you.
 
      - Can be completely local or used in tandem with repository hosts.
      - Check EOA for and be careful about where you keep your data.
@@ -902,6 +927,14 @@ critically important.
 
     - Advisor: John Hopkins biostats is requiring all PhD students to write and
       publish their methods via R packages, or similar archetype.
+
+* Side note: a competing method for my Aim 1 was not evaluated.
+
+    - Method was published but no software released to support manuscript.
+    - Recieved `method.R` script from authors
+
+        - Script failed, system specific file paths, depended scripts that had
+          long been lost.  Package version issues that were not documented, ...
 
 ## Things are changing
 * Observations form UCD

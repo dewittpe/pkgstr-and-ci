@@ -358,6 +358,25 @@
 
 </iframe>
 
+</article></slide><slide class=""><hgroup><h2>Moving from important-script.R to a R Package</h2></hgroup><article  id="moving-from-important-script.r-to-a-r-package">
+
+<ul>
+<li><p>At a minimum:</p>
+
+<ul>
+<li><p><code>important-script.R</code> → <code>vignettes/important-script.Rmd</code></p></li>
+<li><p>Note needed packages in the Suggests section of the <code>DESCRIPTION</code> file.</p></li>
+</ul></li>
+<li><p>Additional:</p>
+
+<ul>
+<li>helper functions written in the R directory</li>
+<li>tests</li>
+<li>examples</li>
+<li>&#8230;</li>
+</ul></li>
+</ul>
+
 </article></slide><slide class=""><hgroup><h2>R Package is better because&#8230;</h2></hgroup><article  id="r-package-is-better-because...">
 
 <ul>
@@ -404,9 +423,19 @@
 <li><p>Me: That&#39;s not good. Let me see what you&#39;re looking at.</p></li>
 </ul>
 
-<p>The value in question was a default value used to reproduce and extend the work of a published paper.</p>
+</article></slide><slide class=""><hgroup><h2>The Issue</h2></hgroup><article  id="the-issue">
 
-<p>I had structured my work as an R package. Vignettes for the documentation and writing an analysis script. The project that I was contributing to was housed in a subversion repository.</p>
+<ul>
+<li><p>The value in question was a default value used to reproduce and extend the work of a published paper.</p></li>
+<li><p>I had structured my work as an R package. Vignettes for the documentation and writing an analysis script.</p></li>
+<li><p>The report, however, was a standalone document.</p>
+
+<ul>
+<li>Report: 1.67</li>
+<li><code>source(&quot;R/published.R&quot;)</code>: 1.92</li>
+</ul></li>
+<li><p>The project that I was contributing to was housed in a subversion repository.</p></li>
+</ul>
 
 </article></slide><slide class=""><hgroup><h2>Check the log</h2></hgroup><article  id="check-the-log">
 
@@ -488,7 +517,7 @@ Index: R/published.R
 
 <ul>
 <li><p>Issue: reported value was different from the value someone would get if running the code.</p></li>
-<li><p>Initial person responsible for resolving issue: Me</p></li>
+<li><p>Initial person responsible for resolving issue: Me, author of report and code.</p></li>
 <li><p>Person responsible for discrepancy: Colleague 2</p>
 
 <ul>
@@ -497,7 +526,7 @@ Index: R/published.R
 <li><p>What if there was no VC?</p>
 
 <ul>
-<li><p>Say the code was shared via email, stored on a network drive? Dropbox? Google Docs? (The latter two have some form of VC but subversion of git would be preferable.)</p></li>
+<li><p>Say the code was shared via email, stored on a network drive? Dropbox? Google Docs? (The latter two have some form of VC but subversion or git would be preferable.)</p></li>
 <li><p>Who would held responsible for resolving the issue?</p></li>
 </ul></li>
 </ul>
@@ -521,7 +550,7 @@ Index: R/published.R
 
 <ul>
 <li><p>Supervisor has never built an R package.</p></li>
-<li><p>standard &quot;I don&#39;t have time to learn that.&quot; excuse for not using a package.</p></li>
+<li><p>Standard &quot;I don&#39;t have time to learn that&quot; excuse for not using a package.</p></li>
 </ul></li>
 <li><p>Collaboration via git.</p></li>
 <li><p>Manuscript authored via .Rmd.</p></li>
@@ -613,7 +642,7 @@ Peter- <br> The email earlier this afternoon should not have been sent, I apolog
 <li><p>The documentation is not helpful, not accurate, and the examples don&#39;t run.</p></li>
 </ul></li>
 <li><p><strong>There are automated tests for all of these issues built into the <code>R CMD   build</code> and the <code>R CMD check</code>.</strong></p></li>
-<li><p>This email, and the issues spurring the email could have been prevent.</p></li>
+<li><p>This email, and the issues spurring the email, could have been prevent.</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>What Happened?</h2></hgroup><article  id="what-happened">
@@ -622,15 +651,15 @@ Peter- <br> The email earlier this afternoon should not have been sent, I apolog
 <li><p><code>git log</code> found the commit (sha abf342d) for my initial submission of the <code>resource-functions.R</code> script.</p></li>
 <li><p><code>git checkout abf342d</code> and showed that</p>
 
-<ol>
+<ul>
 <li>The examples run.</li>
-</ol></li>
+</ul></li>
 <li><p><code>git checkout master</code></p>
 
-<ol>
+<ul>
 <li><p>The examples fail.</p></li>
 <li><p>The &quot;not accurate&quot; documentation was partially due some functional arguments missing documentation and default values not matching between documentation and the function call.</p></li>
-</ol></li>
+</ul></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>What Happened?</h2></hgroup><article  id="what-happened-1">
@@ -639,8 +668,8 @@ Peter- <br> The email earlier this afternoon should not have been sent, I apolog
 <li><p><code>git blame</code></p>
 
 <ol>
-<li><p>Supervisor had changed the default value for a function&#39;s arguments without updating the documentation.</p></li>
-<li><p>An edit to the body of a function resulted in the example failing. No edits to the example had been made.</p></li>
+<li><p>[Supervisor] had changed the default value for a function&#39;s arguments without updating the documentation.</p></li>
+<li><p>[Supervisor] An edit to the body of a function resulted in the example failing. No edits to the example had been made.</p></li>
 </ol></li>
 </ul>
 
@@ -659,7 +688,11 @@ x &lt;- 2</pre>
 
 <ul>
 <li><p>Tense, but constructive, discussion in person.</p></li>
-<li><p>Extended documentation further. Build several stand alone scripts for examples.</p></li>
+<li><p>Extended documentation further. Build several stand alone scripts for examples.</p>
+
+<ul>
+<li><strong>This still required manual checking of the examples when resource-functions.R was updated.</strong></li>
+</ul></li>
 <li><p>This particular project did yield three publications, including a top tier journal.</p></li>
 <li><p>[Supervisor] along with my former department chair tried valiantly to hire me as lead data scientist for a new group they were co-heads of.</p></li>
 </ul>
@@ -682,22 +715,24 @@ x &lt;- 2</pre>
 <li><p>Why is CI important:</p>
 
 <ul>
-<li><p>The automated build process would have shown that my initial commit 1. built, 2. examples would run to completion, and 3. passed any specified tests.</p></li>
+<li><p>The automated build process would have shown that my initial commit</p>
+
+<ol>
+<li>built,</li>
+<li>examples would run to completion, and</li>
+<li>passed any specified tests.</li>
+</ol></li>
 <li><p>Automated tests will catch errors when</p>
 
 <ul>
 <li><p>the dev fails to run local tests, or,</p></li>
 <li><p>when local tests pass due to a local setting, but fail in a clean environment.</p></li>
 </ul></li>
-<li><p>The CI application can notify the developer that their code fails.</p>
-
-<ul>
-<li>No need for a personal interaction.</li>
-</ul></li>
+<li><p>The CI application can notify the developer that their code fails.</p></li>
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>A Simple Example</h2></hgroup><article  id="a-simple-example">
+</article></slide><slide class=""><hgroup><h2>A Simple Example: Build and Check a Package</h2></hgroup><article  id="a-simple-example-build-and-check-a-package">
 
 <ul>
 <li><p>Start with a package with one function: <code>bmi</code></p></li>
@@ -919,7 +954,7 @@ bmi(6.1, 300)
 </article></slide><slide class=""><hgroup><h2>Suggestions</h2></hgroup><article  id="suggestions">
 
 <ol>
-<li><p>Use CV, even it is just you.</p>
+<li><p>Use VC, even it is just you.</p>
 
 <ul>
 <li>Can be completely local or used in tandem with repository hosts.</li>
@@ -959,6 +994,16 @@ bmi(6.1, 300)
 <li><p>Wrote and publish two R packages.</p></li>
 <li><p>Thought: Too easy, I know how to do this, was going to do it anyways just to support Aims 1 and 2.</p></li>
 <li><p>Advisor: John Hopkins biostats is requiring all PhD students to write and publish their methods via R packages, or similar archetype.</p></li>
+</ul></li>
+<li><p>Side note: a competing method for my Aim 1 was not evaluated.</p>
+
+<ul>
+<li>Method was published but no software released to support manuscript.</li>
+<li><p>Recieved <code>method.R</code> script from authors</p>
+
+<ul>
+<li>Script failed, system specific file paths, depended scripts that had long been lost. Package version issues that were not documented, &#8230;</li>
+</ul></li>
 </ul></li>
 </ul>
 
