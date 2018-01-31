@@ -21,7 +21,7 @@
       // Slide settings
       settings: {
                 title: 'Using R Packages, Version Control, and Continous Integration to Build Reproducible Reports',
-                        subtitle: 'Don’t do this because it’s best practice, do this because it protects you from taking the blame for other peoples errors.',
+                        subtitle: 'Improving Product Quality and Developer Accountability',
                 useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -95,7 +95,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">January 2018</p>
+            <p style="margin-top: 6px; margin-left: -2px;">February 2018</p>
           </hgroup>
   </slide>
 
@@ -105,9 +105,11 @@
 
 <p>
 
-<img src="me.jpeg" width=120 height=120 style="float:left"> Me: The following tools will facilitate high quality reproducible reports&#8230;
+<img src="me.jpeg" width=200 height=200 style="float:left"> Me: The following tools will facilitate high quality reproducible reports&#8230;
 
 </p>
+
+<br>
 
 <p>
 
@@ -115,15 +117,11 @@
 
 </p>
 
-<p>
-
- 
-
-</p>
+<p><br></p>
 
 <p>
 
-<img src="eyeroll.gif" width=120 height=120 align="top" style="float:left"> Audience: &#8230; I do just fine. I make reproducible reports. This [expletive] just wants to complicate things&#8230;
+<img src="eyeroll.gif" width=200 height=200 align="top" style="float:left"> Audience: &#8230; I do just fine. I make reproducible reports. This [expletive] just wants to complicate things&#8230;
 
 </p>
 
@@ -131,10 +129,15 @@
 
 <ul>
 <li><p>&quot;Do this, it is good for you.&quot; &#8230; that is as effective as telling my toddler to each vegetables.</p></li>
-<li><p>Instead, I&#39;m going to revisit some of the less pleasant experiences in my career and show how R packages, version control, and CI would have prevented these events from ever taking place.</p></li>
+<li><p>Instead:</p>
+
+<ul>
+<li><p>Show that sending a generic R script <strong>is not</strong> going to generate reproducible results.</p></li>
+<li><p>Revisit some of the less pleasant experiences in my career and show how R packages, version control, and CI would have prevented these events from ever taking place.</p></li>
+</ul></li>
 </ul>
 
-<br> <br> <br> <br>
+<br> <br>
 
 <p style="text-align:right">
 
@@ -148,14 +151,16 @@
 
 </p>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>01: Do not rely on scripts</h2></hgroup><article  id="do-not-rely-on-scripts">
+<!-- ....................................................................... -->
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Do not rely on scripts</h2></hgroup><article  id="do-not-rely-on-scripts">
 
 </article></slide><slide class=""><hgroup><h2>Consider the following</h2></hgroup><article  id="consider-the-following">
 
 <ul>
 <li><p>You&#39;ve done an data analysis project. Wrote <code>imporant-script.R</code>.</p></li>
 <li><p>Your colleague will run the script.</p></li>
-<li><p>Your supervisor, the one that <em>thinks</em> they are a data analyst will run your script.</p></li>
+<li><p>A supervisor, the one who <em>thinks</em> they are a data analyst, will run your script.</p></li>
 <li><p>You work is part of a federally funded project and is subject to Freedom Of Information Act (FOIA). Joe Public is a sceptic and is looking for any reason to discredit the work.</p></li>
 <li><p>Excrement flows downhill. Where are you on the company organization chart?</p></li>
 </ul>
@@ -204,7 +209,7 @@
 <li><p>My version and user01 have the same output.</p></li>
 <li><p>No other user has the same output!</p></li>
 <li><p>Maybe the differences are minor?</p></li>
-<li><p>Let&#39;s look at the output and then the differences between the &quot;expected&quot; and the output for users 02, 03, 04, and 05.</p></li>
+<li><p>Let&#39;s look at the differences in the outputs.</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>Expected Output</h2></hgroup><article  id="expected-output">
@@ -254,16 +259,16 @@
 </article></slide><slide class=""><hgroup><h2>Why?!?!</h2></hgroup><article  id="why-1">
 
 <ul>
-<li><p>Why, then, are the outputs different for the five users when <code>important-script.R</code> is evaluated?</p></li>
+<li><p>Why are the outputs different for the five users when <code>important-script.R</code> is evaluated?</p></li>
 <li><p>Each user has their own <code>.Rprofile</code> (see next slide) in the working directory (or home directory)</p></li>
-<li><p>Read <code>help(&quot;.First&quot;)</code></p></li>
+<li><p>Read <code>help(&quot;Startup&quot;)</code></p></li>
 <li><p>Questions for you:</p></li>
 <li>Do you know how to run <code>R --vanilla</code>?
 
 <ul>
 <li>On Linux? OSX? Windows? Command line? GUI? RStudio Desktop? RStudio Server? NppToR? Emacs Speaks Statistics (ESS)? (neo)Vim? Nvim-R?</li>
 </ul></li>
-<li><p>Do the people you work with and for know how to evaluate in <code>R --vanilla</code>?</p></li>
+<li><p>Can you reasonably expect others to evaluate the script via <code>R --vanilla</code>?</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>The .Rprofile files</h2></hgroup><article  id="the-.rprofile-files">
@@ -278,9 +283,13 @@
 <li><p>What if you are user02, user03, user04, or user05 and your supervisor or Joe Public is user01?</p></li>
 <li><p>What if one of the data files isn&#39;t included in the email?</p></li>
 <li><p>What if someone moves a data file?</p></li>
-<li><p>What if some careless Winblows dev forgets that real operating systems are case sensitive?</p></li>
+<li><p>What if a Windows dev forgets that other operating systems are case sensitive?</p></li>
 <li><p>What if someone fat fingers the file and changes something, saves the file, and breaks it?</p></li>
-<li><p>What if your script requires dplyr 0.7.0 or newer and the end user has version 0.5.0 installed?</p></li>
+<li><p>What if your script requires dplyr 0.7.0 or newer and the end user has version 0.5.0 installed?</p>
+
+<ul>
+<li>To this point I had a collaborative project work with dplyr 0.4.3 but fail with 0.5.0.</li>
+</ul></li>
 </ul>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>The simplest R Package</h2></hgroup><article  id="the-simplest-r-package">
@@ -309,7 +318,7 @@
 <!-- end id="leftcol" -->
 
 <div id="rightcol" style="display: table-cell; vertical-align: top;">
-<p>DESCRIPTION <br> <iframe src="ispkg-DESCRIPTION.html" style="height:200px"></iframe> <br> Vignette <br> <iframe src="ispkg-important-script.Rmd.html" style="height:240px"></iframe></p></div>
+<p>DESCRIPTION <br> <iframe src="ispkg-DESCRIPTION.html" style="height:200px"></iframe> <br> vignettes/important-script.Rmd <br> <iframe src="ispkg-important-script.Rmd.html" style="height:240px"></iframe></p></div>
 
 <p><!-- end id="rightcol"--></p></div>
 
@@ -341,6 +350,8 @@
 
 </iframe>
 
+<p>Time stamp for when the package was built is different from build to build.</p>
+
 </article></slide><slide class=""><hgroup><h2>The Vignette</h2></hgroup><article  id="the-vignette">
 
 <iframe src="ispkg-vignette.html">
@@ -351,12 +362,15 @@
 
 <ul>
 <li><p>The source file (<code>.tar.gz</code>) is the standard (best) method for sending code and results.</p></li>
-<li><p>The <code>&lt;pkgname&gt;_&lt;version&gt;.tar.gz</code> is the result. The result form the script is the result the end user generates.</p></li>
 <li><p>All users were able to build the same package with the same command.</p></li>
+<li><p>The <code>&lt;pkgname&gt;_&lt;version&gt;.tar.gz</code> is the target reproducible result.</p></li>
 <li><p>When building with <code>--md5</code> you provide a tool to let others know that they have received the correct file, and/or (re)built the package correctly.</p></li>
-<li><p>Re-evaluating the vignette, after installing the package:</p></li>
+<li><p>Re-evaluating the vignette, after installing the package:</p>
+
+<ul>
 <li><p><code>system.file</code> eliminates (most) issues with end user moving files.</p></li>
-<li><p>In an interactive session, the <code>.Rprofile</code> or other workspace issues can/will affect the results. However, if you are generating a report, the reproduction <strong>is not</strong> for interactive evaluation of the vignette, reproduction <strong>is</strong> <code>R CMD build</code>.</p></li>
+<li><p>In an interactive session, the <code>.Rprofile</code> or other workspace issues can/will affect the results.</p></li>
+</ul></li>
 </ul>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Story 1: Why version control</h2></hgroup><article  id="story-1-why-version-control">
@@ -392,7 +406,7 @@
 
 <p>The value in question was a default value used to reproduce and extend the work of a published paper.</p>
 
-<p>I had structured my work as an R package. Vignettes for the documentation and writing an analysis script. The project that I was contributing too was housed in a subversion repository.</p>
+<p>I had structured my work as an R package. Vignettes for the documentation and writing an analysis script. The project that I was contributing to was housed in a subversion repository.</p>
 
 </article></slide><slide class=""><hgroup><h2>Check the log</h2></hgroup><article  id="check-the-log">
 
@@ -459,12 +473,27 @@ Index: R/published.R
    list(gammas = gammas, sigma_gammas = sigmagammas)
  }</pre>
 
+</article></slide><slide class=""><hgroup><h2>(Step Back to R Packages)</h2></hgroup><article  id="step-back-to-r-packages">
+
+<ul>
+<li><p>Updated code, but the report document was not updated.</p></li>
+<li><p>Primary report was not a vignette.</p>
+
+<ul>
+<li>If it had been, the possibility of the discrepancy between code and report would have been mitigated.</li>
+</ul></li>
+</ul>
+
 </article></slide><slide class=""><hgroup><h2>Version Control</h2></hgroup><article  id="version-control">
 
 <ul>
 <li><p>Issue: reported value was different from the value someone would get if running the code.</p></li>
 <li><p>Initial person responsible for resolving issue: Me</p></li>
-<li><p>Person responsible for discrepancy: Colleague 2 &lt;- This is only known thanks to version control.</p></li>
+<li><p>Person responsible for discrepancy: Colleague 2</p>
+
+<ul>
+<li>This is only known thanks to version control.</li>
+</ul></li>
 <li><p>What if there was no VC?</p>
 
 <ul>
@@ -553,7 +582,7 @@ Peter- <br> The email earlier this afternoon should not have been sent, I apolog
 
 </p>
 
-</article></slide><slide class=""><hgroup><h2>Four Notes (1 &amp; 2 of 4)</h2></hgroup><article  id="four-notes-1-2-of-4">
+</article></slide><slide class=""><hgroup><h2>Four Notes:</h2></hgroup><article  id="four-notes">
 
 <ul>
 <li><p>&quot;If you can&#39;t do this, I need to know.&quot;</p>
@@ -561,39 +590,20 @@ Peter- <br> The email earlier this afternoon should not have been sent, I apolog
 <ul>
 <li>Translation: Do me a favor and resign so I don&#39;t have to fire you.</li>
 </ul></li>
-</ul>
-
-<p><br></p>
-
-<ul>
 <li><p>&quot;We are not writing software, we are doing research.&quot;</p>
 
 <ul>
 <li><p>Software definition from Dictionary.com: &quot;the programs used to direct the operation of a computer, as well as documentation giving instructions on how to use them.&quot;</p></li>
 <li><p>We are writing software. An R script is a set of instructions for the computer to turn data into a report.</p></li>
 </ul></li>
-</ul>
-
-</article></slide><slide class=""><hgroup><h2>Four Notes (3 of 4)</h2></hgroup><article  id="four-notes-3-of-4">
-
-<ul>
 <li><p>&quot;Write simpler, longer code. Break things into pieces. Do not nest functions for any project with me.&quot;</p>
 
 <ul>
-<li><p>These are contradictory instructions.</p></li>
-<li><p>Don&#39;t use functions like <code>mapply</code>, <code>Map</code>, or <code>Reduce</code>.</p>
-
-<ul>
-<li><p>These function are in the <code>base</code> package</p></li>
-<li><p>[Supervisor] had never seen them before.</p></li>
-<li><p><strong>write using only the vocabulary of supervisor</strong></p></li>
-</ul></li>
-<li><p>Note: Showed that one <code>mapply</code> call, 7 lines, 23 &quot;words&quot;, would need to be replaced by more than 100 lines of code (no nesting) and, more importantly, a change to a funcitonal argument my way: one edit, other way, multiple edits.</p></li>
-<li><p>Stored this example as a gist/snippet for reference latter.</p></li>
+<li>These are contradictory instructions.</li>
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Four Notes (4 of 4)</h2></hgroup><article  id="four-notes-4-of-4">
+</article></slide><slide class=""><hgroup><h2>Four Notes:</h2></hgroup><article  id="four-notes-1">
 
 <ul>
 <li><p>&quot;The comments are not helpful or consistently accurate. &#8230; I just tried to run [workhorse function] according to the comment immediately above it, and it won&#39;t run.&quot;</p>
@@ -602,7 +612,8 @@ Peter- <br> The email earlier this afternoon should not have been sent, I apolog
 <li><p>The example not running was the impetus for the email. All the other stuff was spill over form the frustration pot boiling over.</p></li>
 <li><p>The documentation is not helpful, not accurate, and the examples don&#39;t run.</p></li>
 </ul></li>
-<li><p><strong>There are automated testes for all of these issues built into the <code>R CMD   build</code> and the <code>R CMD check</code>. This email, and the issues spurring the email could have been prevent.</strong></p></li>
+<li><p><strong>There are automated tests for all of these issues built into the <code>R CMD   build</code> and the <code>R CMD check</code>.</strong></p></li>
+<li><p>This email, and the issues spurring the email could have been prevent.</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>What Happened?</h2></hgroup><article  id="what-happened">
@@ -706,7 +717,7 @@ x &lt;- 2</pre>
 <div id="rightcol" style="display: table-cell; vertical-align: top;">
 <p>DESCRIPTION <iframe src="egpkg-html/DESCRIPTION-00.html" style="height:150px"></iframe></p>
 
-<p>R/bmi.R <iframe src="egpkg-html/bmi.R-00.html" style="height:250px"></iframe></p></div>
+<p>R/bmi.R <iframe src="egpkg-html/bmi.R-00.html" style="height:275px"></iframe></p></div>
 
 <p><!-- end id="rightcol"--></p></div>
 
@@ -764,7 +775,7 @@ x &lt;- 2</pre>
 
 </article></slide><slide class=""><hgroup><h2>The Example Package: Update the bmi documentation</h2></hgroup><article  id="the-example-package-update-the-bmi-documentation-1">
 
-<iframe src="egpkg-html/bmi-man-02.html">
+<iframe src="egpkg-html/bmi-man-02.html" style="height:400px">
 
 </iframe>
 
@@ -841,7 +852,7 @@ bmi(6.1, 300)
 <div style="width: 100%; display: table;">
 <div style="display: table-row">
 <div id="leftcol" style="width: 40%; display: table-cell; vertical-align: top;">
-<iframe src="egpkg-html/tree-testthat.html">
+<iframe src="egpkg-html/tree-testthat.html" style="height:300px">
 
 </iframe></div>
 
@@ -889,7 +900,7 @@ bmi(6.1, 300)
 </ul></li>
 </ul>
 
-<iframe src="egpkg-html/travis.yml.html">
+<iframe src="egpkg-html/travis.yml.html" style="height:300px">
 
 </iframe>
 
@@ -899,7 +910,7 @@ bmi(6.1, 300)
 <li>gitlab: has docker and several tools set up for pipelines.</li>
 </ul>
 
-<iframe src="egpkg-html/gitlab-ci.yml.html">
+<iframe src="egpkg-html/gitlab-ci.yml.html" style="height:450px">
 
 </iframe>
 
@@ -908,7 +919,12 @@ bmi(6.1, 300)
 </article></slide><slide class=""><hgroup><h2>Suggestions</h2></hgroup><article  id="suggestions">
 
 <ol>
-<li><p>Use CV, even it is just you. (Check EOA for and be careful about where you keep your data)</p></li>
+<li><p>Use CV, even it is just you.</p>
+
+<ul>
+<li>Can be completely local or used in tandem with repository hosts.</li>
+<li>Check EOA for and be careful about where you keep your data.</li>
+</ul></li>
 <li><p>Control who can contribute changes with or without human interaction:</p>
 
 <ul>
@@ -918,7 +934,7 @@ bmi(6.1, 300)
 <li><p>Use CI. Customizable for any project.</p></li>
 </ol>
 
-<p><strong>These suggests are for any project.</strong></p>
+<p><strong>These suggestions are for any project. Not just R packages.</strong></p>
 
 </article></slide><slide class=""><hgroup><h2>Suggestions</h2></hgroup><article  id="suggestions-1">
 
@@ -930,7 +946,7 @@ bmi(6.1, 300)
 <li><p>It is okay to build multiple packages.</p></li>
 <li><p>It is okay to break one package into multiple packages.</p></li>
 </ul></li>
-<li><p>Use makefiles. The build process can be customized. To insure that all developers, regardless of IDE, have the same build process, use (a) makefile(s).</p></li>
+<li><p>Use makefiles. The build process can be customized. To insure that all developers, regardless of IDE and OS, have the same build process, use (a) makefile(s).</p></li>
 <li><p>Window users will need Cygwin and/or Rtools installed.</p></li>
 </ul>
 

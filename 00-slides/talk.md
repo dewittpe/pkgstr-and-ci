@@ -1,10 +1,9 @@
 ---
 title: "Using R Packages, Version Control, and Continous Integration to Build Reproducible Reports"
-subtitle: "Don't do this because it's best practice, do this because it protects
-you from taking the blame for other peoples errors."
+subtitle: "Improving Product Quality and Developer Accountability"
 author:
   "Peter E. DeWitt, Ph.D.<br><pdewitt@neptuneinc.org>"
-date: January 2018
+date: February 2018
 output:
   ioslides_presentation:
     keep_md: true
@@ -21,19 +20,18 @@ output:
 ## Adopt these tools because ...
 
 <p>
-  <img src="me.jpeg" width=120 height=120 style="float:left">
+  <img src="me.jpeg" width=200 height=200 style="float:left">
   Me: The following tools will facilitate high quality reproducible reports...
 </p>
 
+<br>
 <p>
 &nbsp;
 </p>
-<p>
-&nbsp;
-</p>
+<br>
 
 <p>
-  <img src="eyeroll.gif" width=120 height=120 align="top" style="float:left">
+  <img src="eyeroll.gif" width=200 height=200 align="top" style="float:left">
   Audience: ... I do just fine.  I make reproducible reports.  This [expletive]
   just wants to complicate things...
 </p>
@@ -43,17 +41,22 @@ output:
 * "Do this, it is good for you."  ... that is as effective as telling my toddler
   to each vegetables.
 
-* Instead, I'm going to revisit some of the less pleasant experiences in my
-  career and show how R packages, version control, and CI would have prevented
-  these events from ever taking place.
+* Instead:
 
-<br> <br> <br> <br>
+    * Show that sending a generic R script **is not** going to generate
+      reproducible results.
+
+    * Revisit some of the less pleasant experiences in my career and show how R
+      packages, version control, and CI would have prevented these events from
+      ever taking place.
+
+<br> <br>
 <p style="text-align:right"> *"Learn from the mistakes of others.* <br>
 *You can't live long enough to make them all yourself."* </p>
 <p style="text-align:right"> *-- Eleanor Roosevelt* </p>
 
-
-# 01: Do not rely on scripts
+<!-- ....................................................................... -->
+# Do not rely on scripts
 
 ## Consider the following
 
@@ -61,7 +64,7 @@ output:
 
 * Your colleague will run the script.
 
-* Your supervisor, the one that *thinks* they are a data analyst will run your
+* A supervisor, the one who *thinks* they are a data analyst, will run your
   script.
 
 * You work is part of a federally funded project and is subject to Freedom Of
@@ -115,8 +118,7 @@ output:
 
 * Maybe the differences are minor?
 
-* Let's look at the output and then the differences between the "expected" and
-  the output for users 02, 03, 04, and 05.
+* Let's look at the differences in the outputs.
 
 ## Expected Output
 <iframe src="important-script.Rout.html"> </iframe>
@@ -144,12 +146,12 @@ output:
 
 ## Why?!?!
 
-* Why, then, are the outputs different for the five users when
+* Why are the outputs different for the five users when
   `important-script.R` is evaluated?
 
   * Each user has their own `.Rprofile` (see next slide) in the working directory (or home directory)
 
-  * Read `help(".First")`
+  * Read `help("Startup")`
 
 * Questions for you:
 
@@ -157,7 +159,7 @@ output:
     * On Linux? OSX? Windows?  Command line?  GUI? RStudio Desktop? RStudio Server?
       NppToR? Emacs Speaks Statistics (ESS)? (neo)Vim? Nvim-R?
 
-  * Do the people you work with and for know how to evaluate in `R --vanilla`?
+  * Can you reasonably expect others to evaluate the script via `R --vanilla`?
 
 ## The .Rprofile files
 <iframe src="rprofiles.html"> </iframe>
@@ -171,14 +173,16 @@ output:
 
 * What if someone moves a data file?
 
-* What if some careless Winblows dev forgets that real operating systems are
-  case sensitive?
+* What if a Windows dev forgets that other operating systems are case sensitive?
 
 * What if someone fat fingers the file and changes something, saves the file,
   and breaks it?
 
 * What if your script requires dplyr 0.7.0 or newer and the end user
   has version 0.5.0 installed?
+
+    - To this point I had a collaborative project work with dplyr 0.4.3 but fail
+      with 0.5.0.
 
 # The simplest R Package
 
@@ -202,7 +206,7 @@ DESCRIPTION
 <br>
 <iframe src="ispkg-DESCRIPTION.html" style="height:200px"></iframe>
 <br>
-Vignette
+vignettes/important-script.Rmd
 <br>
 <iframe src="ispkg-important-script.Rmd.html" style="height:240px"></iframe>
 </div> <!-- end id="rightcol"-->
@@ -225,6 +229,7 @@ The MD5 sums are different because the `DESCRIPTION` files are different.
 ## Other Users
 <iframe src="ispkg-md5-diff.html" style="height:240px"></iframe>
 <iframe src="ispkg-built-description.html" style="height:240px"></iframe>
+Time stamp for when the package was built is different from build to build.
 
 ## The Vignette
 <iframe src="ispkg-vignette.html"></iframe>
@@ -234,22 +239,20 @@ The MD5 sums are different because the `DESCRIPTION` files are different.
 * The source file (`.tar.gz`) is the standard (best) method for sending
   code and results.
 
-* The `<pkgname>_<version>.tar.gz` is the result.  The result form the script is
-  the result the end user generates.
-
 * All users were able to build the same package with the same command.
+
+* The `<pkgname>_<version>.tar.gz` is the target reproducible result.
 
 * When building with `--md5` you provide a tool to let others know that they
   have received the correct file, and/or (re)built the package correctly.
 
 * Re-evaluating the vignette, after installing the package:
 
-  * `system.file` eliminates (most) issues with end user moving files.
+    * `system.file` eliminates (most) issues with end user moving files.
 
-  * In an interactive session, the `.Rprofile` or other workspace issues
-    can/will affect the results.  However, if you are generating a report, the
-    reproduction **is not** for interactive evaluation of the vignette,
-    reproduction **is** `R CMD build`.
+    * In an interactive session, the `.Rprofile` or other workspace issues
+      can/will affect the results.
+
 
 # Story 1: Why version control
 Version control shows who made changes and when those changes were made.
@@ -283,7 +286,7 @@ The value in question was a default value used to reproduce and extend the work
 of a published paper.
 
 I had structured my work as an R package.  Vignettes for the documentation and
-writing an analysis script.  The project that I was contributing too was housed
+writing an analysis script.  The project that I was contributing to was housed
 in a subversion repository.
 
 ## Check the log
@@ -355,6 +358,15 @@ Index: R/published.R
  }
 ```
 
+## (Step Back to R Packages)
+
+* Updated code, but the report document was not updated.
+
+* Primary report was not a vignette.
+
+    * If it had been, the possibility of the discrepancy between code and report
+      would have been mitigated.
+
 ## Version Control
 
 * Issue: reported value was different from the value someone would get if
@@ -362,8 +374,9 @@ Index: R/published.R
 
 * Initial person responsible for resolving issue: Me
 
-* Person responsible for discrepancy: Colleague 2   <- This is only known thanks
-  to version control.
+* Person responsible for discrepancy: Colleague 2
+
+    * This is only known thanks to version control.
 
 * What if there was no VC?
 
@@ -488,13 +501,11 @@ Thanks,
 -[Supervisor]
 </p>
 
-## Four Notes (1 & 2 of 4)
+## Four Notes:
 
 * "If you can't do this, I need to know."
 
     - Translation: Do me a favor and resign so I don't have to fire you.
-
-<br>
 
 * "We are not writing software, we are doing research."
 
@@ -505,29 +516,12 @@ Thanks,
     - We are writing software.  An R script is a set of instructions for the
       computer to turn data into a report.
 
-## Four Notes (3 of 4)
-
 * "Write simpler, longer code. Break things into pieces. Do not nest functions
   for any project with me."
 
     - These are contradictory instructions.
 
-    - Don't use functions like `mapply`, `Map`, or `Reduce`.
-
-        - These function are in the `base` package
-
-        - [Supervisor] had never seen them before.
-
-        - **write using only the vocabulary of supervisor**
-
-    - Note: Showed that one `mapply` call, 7 lines, 23 "words", would need to be
-      replaced by more than 100 lines of code (no nesting) and, more
-      importantly, a change to a funcitonal argument my way: one edit, other
-      way, multiple edits.
-
-       - Stored this example as a gist/snippet for reference latter.
-
-## Four Notes (4 of 4)
+## Four Notes:
 
 * "The comments are not helpful or consistently accurate. ... I just tried to
    run [workhorse function] according to the comment immediately above it, and
@@ -539,9 +533,10 @@ Thanks,
     - The documentation is not helpful, not accurate, and the examples don't
       run.
 
-* **There are automated testes for all of these issues built into the `R CMD
-  build` and the `R CMD check`.  This email, and the issues spurring the email
-  could have been prevent.**
+* **There are automated tests for all of these issues built into the `R CMD
+  build` and the `R CMD check`.**
+
+* This email, and the issues spurring the email could have been prevent.
 
 ## What Happened?
 
@@ -655,7 +650,7 @@ DESCRIPTION
 <iframe src="egpkg-html/DESCRIPTION-00.html" style="height:150px"></iframe>
 
 R/bmi.R
-<iframe src="egpkg-html/bmi.R-00.html" style="height:250px"></iframe>
+<iframe src="egpkg-html/bmi.R-00.html" style="height:275px"></iframe>
 </div> <!-- end id="rightcol"-->
 </div> <!-- end table-row -->
 </div>
@@ -697,7 +692,7 @@ Status: OK
 ```
 
 ## The Example Package: Update the bmi documentation
-<iframe src="egpkg-html/bmi-man-02.html"></iframe>
+<iframe src="egpkg-html/bmi-man-02.html" style="height:400px"></iframe>
 
 
 
@@ -771,7 +766,7 @@ bmi(6.1, 300)
 <div style="width: 100%; display: table;">
 <div style="display: table-row">
 <div id="leftcol" style="width: 40%; display: table-cell; vertical-align: top;">
-<iframe src="egpkg-html/tree-testthat.html"></iframe>
+<iframe src="egpkg-html/tree-testthat.html" style="height:300px"></iframe>
 </div> <!-- end id="leftcol" -->
 <div id="rightcol" style="display: table-cell; vertical-align: top;">
 `test_bmi.R`
@@ -847,12 +842,12 @@ critically important.
 
     - Read http://r-pkgs.had.co.nz/check.html#travis
 
-<iframe src="egpkg-html/travis.yml.html"> </iframe>
+<iframe src="egpkg-html/travis.yml.html" style="height:300px"> </iframe>
 
 ## Adding CI to Your Package:
 * gitlab: has docker and several tools set up for pipelines.
 
-<iframe src="egpkg-html/gitlab-ci.yml.html"> </iframe>
+<iframe src="egpkg-html/gitlab-ci.yml.html" style="height:450px"> </iframe>
 
 
 
@@ -861,11 +856,13 @@ critically important.
 
 ## Suggestions
 
-1. Use CV, even it is just you.  (Check EOA for and be careful about where you
-   keep your data)
+1. Use CV, even it is just you.
+
+     - Can be completely local or used in tandem with repository hosts.
+     - Check EOA for and be careful about where you keep your data.
 
 2. Control who can contribute changes with or without human interaction:
-   
+
      - Git: Limit the number of people who have push access to the master
        branch.  Fork and merge requests for/from others.
 
@@ -875,22 +872,22 @@ critically important.
 3. Use CI.  Customizable for any project.
 
 
-**These suggests are for any project.**
+**These suggestions are for any project.  Not just R packages.**
 
 ## Suggestions
 
 * Simple analysis, major research project, or even a thesis/dissertation: Build
   R packages!
 
-    - Data packages: great way to curate collected and/or generated data.  
+    - Data packages: great way to curate collected and/or generated data.
 
-    - It is okay to build multiple packages.  
+    - It is okay to build multiple packages.
 
     - It is okay to break one package into multiple packages.
 
 
 * Use makefiles.  The build process can be customized.  To insure that all developers,
-  regardless of IDE, have the same build process, use (a) makefile(s).
+  regardless of IDE and OS, have the same build process, use (a) makefile(s).
 
 * Window users will need Cygwin and/or Rtools installed.
 
