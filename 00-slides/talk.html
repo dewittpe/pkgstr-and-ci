@@ -292,7 +292,55 @@
 </ul></li>
 </ul>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>The simplest R Package</h2></hgroup><article  id="the-simplest-r-package">
+</article></slide><slide class=""><hgroup><h2>If you are going to use a script</h2></hgroup><article  id="if-you-are-going-to-use-a-script">
+
+<ul>
+<li><p>use <code>packageVersion</code> to check for package versions if needed.</p></li>
+<li><p>Don&#39;t modify <code>options</code>, if you must do so</p></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>options()$stringsAsFactors
+## [1] TRUE
+old_opts &lt;- options()
+
+# set net options
+options(stringsAsFactors = FALSE)
+options()$stringsAsFactors
+## [1] FALSE
+
+# do work
+
+# reset options
+options(old_opts)
+options()$stringsAsFactors
+## [1] TRUE</pre>
+
+</article></slide><slide class=""><hgroup><h2>If you are going to use a script</h2></hgroup><article  id="if-you-are-going-to-use-a-script-1">
+
+<ul>
+<li>Explicity use namespaces, e.g.,</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># good
+mtcars %&gt;% dplyr::filter(.data$mpg &gt; 30)
+
+# bad
+mtcars %&gt;% filter(mpg &gt; 30)</pre>
+
+<ul>
+<li>From <code>vignette(&quot;programming&quot;, package = &quot;dplyr&quot;)</code>: dplyr code is ambiguous. Depending on what variables are defined where, filter(df, x == y) could be equivalent to any of:</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>df[df$x == df$y, ]
+df[df$x == y, ]
+df[x == df$y, ]
+df[x == y, ]</pre>
+
+<ul>
+<li>Do you know what will be in another user&#39;s workspace?</li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>The Simplest R Package</h2></hgroup><article  id="the-simplest-r-package">
 
 <p style="text-align:right">
 
@@ -392,7 +440,7 @@
 </ul></li>
 </ul>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Story 1: Why version control</h2></hgroup><article  id="story-1-why-version-control">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Why version control</h2></hgroup><article  id="why-version-control">
 
 <p>Version control shows who made changes and when those changes were made.</p>
 
@@ -531,7 +579,7 @@ Index: R/published.R
 </ul></li>
 </ul>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Story 2: resource-functions.R</h2></hgroup><article  id="story-2-resource-functions.r">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>resource-functions.R</h2></hgroup><article  id="resource-functions.r">
 
 <p>This story provides an example for why we should use R packages and VC and CI.</p>
 
@@ -587,9 +635,10 @@ I make the choice to not use roxygen style documentation.  Such documentation
 would be extremely helpful for package development, but, as only a script is
 permissible, and supervisor has no experience with roxygen I choose not to use
 that syntax.
--->
 
-<p>While it would improve this story, I don&#39;t believe it would be proper to show the file.</p>
+While it would improve this story, I don't believe it would be proper to show the
+file.
+-->
 
 <p>I committed and pushed the <code>resource-functions.R</code> script to the project repository.</p>
 
@@ -638,8 +687,7 @@ Peter- <br> The email earlier this afternoon should not have been sent, I apolog
 <li><p>&quot;The comments are not helpful or consistently accurate. &#8230; I just tried to run [workhorse function] according to the comment immediately above it, and it won&#39;t run.&quot;</p>
 
 <ul>
-<li><p>The example not running was the impetus for the email. All the other stuff was spill over form the frustration pot boiling over.</p></li>
-<li><p>The documentation is not helpful, not accurate, and the examples don&#39;t run.</p></li>
+<li>The example not running was the impetus for the email. All the other stuff was spill over form the frustration pot boiling over.</li>
 </ul></li>
 <li><p><strong>There are automated tests for all of these issues built into the <code>R CMD   build</code> and the <code>R CMD check</code>.</strong></p></li>
 <li><p>This email, and the issues spurring the email, could have been prevent.</p></li>
@@ -676,22 +724,32 @@ Peter- <br> The email earlier this afternoon should not have been sent, I apolog
 </article></slide><slide class=""><hgroup><h2>Other Issues</h2></hgroup><article  id="other-issues">
 
 <ul>
-<li><p>Running <code>setup.R</code> in an interactive session.</p></li>
-<li><p>My build process was to always run <code>setup.R</code> from a clean R session.</p></li>
-<li><p>Several times I would <code>fetch</code> changes that would not run. Primary reason, development work pollutes your workspace. Code might work in your current interactive session but not in a new session.</p></li>
+<li><p>Running <code>setup.R</code> in an interactive session.</p>
+
+<ul>
+<li>My build process was to always run <code>setup.R</code> from a clean R session.</li>
+</ul></li>
+<li><p>Several times I would <code>fetch</code> changes that would not run.</p>
+
+<ul>
+<li><p>development work pollutes your workspace.</p></li>
+<li><p>Code might work in your current interactive session but not in a new session.</p></li>
+</ul></li>
 </ul>
 
-<pre class = 'prettyprint lang-r'>x + 2
+<pre class = 'prettyprint lang-r'># What happens when these two lines are evaluated twice in one session?
+x + 2
 x &lt;- 2</pre>
 
 </article></slide><slide class=""><hgroup><h2>Quick Updates</h2></hgroup><article  id="quick-updates">
 
 <ul>
 <li><p>Tense, but constructive, discussion in person.</p></li>
-<li><p>Extended documentation further. Build several stand alone scripts for examples.</p>
+<li><p>Extended documentation further.</p>
 
 <ul>
-<li><strong>This still required manual checking of the examples when resource-functions.R was updated.</strong></li>
+<li><p>Built several stand alone scripts for examples.</p></li>
+<li><p><strong>This still required manual checking of the examples when resource-functions.R was updated.</strong></p></li>
 </ul></li>
 <li><p>This particular project did yield three publications, including a top tier journal.</p></li>
 <li><p>[Supervisor] along with my former department chair tried valiantly to hire me as lead data scientist for a new group they were co-heads of.</p></li>
@@ -717,11 +775,11 @@ x &lt;- 2</pre>
 <ul>
 <li><p>The automated build process would have shown that my initial commit</p>
 
-<ol>
+<ul>
 <li>built,</li>
 <li>examples would run to completion, and</li>
 <li>passed any specified tests.</li>
-</ol></li>
+</ul></li>
 <li><p>Automated tests will catch errors when</p>
 
 <ul>
@@ -814,7 +872,7 @@ x &lt;- 2</pre>
 
 </iframe>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Story 2: Testing</h2></hgroup><article  id="story-2-testing">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Testing</h2></hgroup><article  id="testing">
 
 </article></slide><slide class=""><hgroup><h2>The Story</h2></hgroup><article  id="the-story-2">
 
@@ -842,7 +900,7 @@ x &lt;- 2</pre>
 </article></slide><slide class=""><hgroup><h2>The Story</h2></hgroup><article  id="the-story-3">
 
 <ul>
-<li><p>I&#39;m sitting in the developer bullpen. Tester come running down form the testing office and, apparently, had some choice words for me Hindi, delivered loudly and very publicly.</p></li>
+<li><p>I&#39;m sitting in the developer bullpen. Tester comes running down form the testing office and had some choice words for me; delivered loudly and publicly.</p></li>
 <li><p>Translation: I&#39;m so incompetent that I can write a function to calculate BMI.</p></li>
 </ul>
 
@@ -850,11 +908,12 @@ x &lt;- 2</pre>
   weight / height ** 2 * 703
 }
 
-# Expected input
+# Expected input and output
 bmi(73, 300)
 ## [1] 39.57591
 
-# Tester&#39;s input  (tester had very little experience with English measurements)
+# Tester&#39;s input and output
+# (tester had little experience with non-metric units of measure)
 bmi(6.1, 300)
 ## [1] 5667.831</pre>
 
@@ -871,7 +930,7 @@ bmi(6.1, 300)
 <li><p>The tester was testing TWO things</p>
 
 <ol>
-<li>Does a 73 inch tall, 300 lbs person have a BMI of 39.6?</li>
+<li>When inputting 73 for height and 300 for weigth, does the function return a value of 39.6?</li>
 <li>Is the human inputting the data capable of translating between feet-and-inches to just inches?</li>
 </ol></li>
 <li>We can automate 1.</li>
@@ -900,7 +959,17 @@ bmi(6.1, 300)
 
 <p><!-- end table-row --></p></div>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Story 3</h2></hgroup><article  id="story-3">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>CI: Automated Builds and Testing</h2></hgroup><article  id="ci-automated-builds-and-testing">
+
+</article></slide><slide class=""><hgroup><h2>Why use CI</h2></hgroup><article  id="why-use-ci">
+
+<ul>
+<li><p>Perhaps not all team members are diligent with respect to running local tests.</p></li>
+<li><p>CI provides implicit documentation on the system dependencies for a project.</p></li>
+<li><p>Customizable</p></li>
+<li><p>gitlab: <a href='https://docs.gitlab.com/ce/ci/yaml/README.html' title=''>https://docs.gitlab.com/ce/ci/yaml/README.html</a></p></li>
+<li><p>github: see travis-ci <a href='https://docs.travis-ci.com/' title=''>https://docs.travis-ci.com/</a></p></li>
+</ul>
 
 </article></slide><slide class=""><hgroup><h2>The Story</h2></hgroup><article  id="the-story-4">
 
@@ -910,22 +979,61 @@ bmi(6.1, 300)
 <li><p>During my time as a Siebel developer.</p></li>
 <li><p>Monday morning: Arrive at the client site. Informed that there is a critical feature that must be built and pushed to production before start of business Tuesday.</p></li>
 <li><p>I&#39;m not the only dev with critical feature development to do.</p></li>
-<li><p>Supervisor drops by and asks for a &quot;nice-to-have&quot; feature added. I tell him &quot;No, not now. I need to take for this critical feature. That&#39;s a nice-to-have, I&#39;ll look at it Wednesday.&quot; Supervisor walks away.</p></li>
-<li><p>I build the critical feature. <strong>There will be no system test. Local test only. System test will be done in production.</strong></p></li>
+<li><p>Supervisor drops by and asks for a &quot;nice-to-have&quot; feature. I tell him &quot;No, not now. I need to take for this critical feature. That&#39;s a nice-to-have, I&#39;ll look at it Wednesday.&quot; Supervisor walks away.</p></li>
+<li><p>I build the critical feature.</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>The Story &#8230;</h2></hgroup><article  id="the-story-...">
+
+<p><strong>There will be no system test. Local test only. System test will be done in production.</strong></p>
+
+<ul>
 <li><p>I gather my immediate supervisor, the development lead, the project manager, and general manager to witness my local tests and verify the system is working.</p></li>
 <li><p>I push my changes to production per management (&quot;I was just following orders&quot;)</p></li>
 <li><p>Other devs push their changes.</p></li>
 <li><p><strong>System goes down</strong> The customer management system for the entire nation goes down.</p></li>
-<li><p>Developers and tests work to find the offending code. It was found in the Inventory Business Object &#8211; My subsystem.</p></li>
-<li><p>I&#39;m now tasked with fixing this error.</p></li>
-<li><p>Problem: the nice-to-have feature my supervisor wanted was in production. It had a critical error that caused the system to fail. I didn&#39;t build it. My supervisor built it and pushed to production after okaying the work I had done.</p></li>
-<li><p>There was no meaningful version control. No way to show who had made the error, nor to revert the system. (Backups were available for catastrophic errors.)</p></li>
-<li><p>There was no system test.</p></li>
-<li><p>There was no CI/build test: such a test could have prevented the change from going into production.</p></li>
-<li><p>I was held responsible for someone else&#39;s error. This event was cited as the primary reason for not receiving a change in title, associate- to full-consultant. This promotion came with no salary or benefit increase, just a title. But would delay the possibility of salary/benefit increase for at least two-years.</p></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Adding CI to Your Package:</h2></hgroup><article  id="adding-ci-to-your-package">
+</article></slide><slide class=""><hgroup><h2>The Story &#8230;</h2></hgroup><article  id="the-story-...-1">
+
+<ul>
+<li><p>Developers and testers work to find the offending code. It was found in the Inventory Business Object &#8211; My subsystem.</p></li>
+<li><p>I&#39;m now tasked with fixing this error.</p></li>
+<li><p>Problem: the nice-to-have feature my supervisor wanted was in production. It had a critical error that caused the system to fail. I didn&#39;t build it. My supervisor built it and pushed to production after okaying the work I had done.</p></li>
+<li><p>There was no meaningful version control. No way to show who had made the error, nor to revert the system.</p>
+
+<ul>
+<li>Daily snapshots were available for catastrophic errors.</li>
+</ul></li>
+<li><p>I fixed the errors and the nice-to-have feature persisted.</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>The Story &#8230;</h2></hgroup><article  id="the-story-...-2">
+
+<ul>
+<li><p>There was no system test.</p></li>
+<li><p>There was no CI/build test: such a test could have prevented the change from going into production.</p></li>
+<li><p>I was held responsible for someone else&#39;s error.</p></li>
+<li><p>This event was cited as the primary reason for not being promoted during my annual review two months later.</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Adding CI to Your Project</h2></hgroup><article  id="adding-ci-to-your-project">
+
+<ul>
+<li><p>github.com:</p>
+
+<ul>
+<li>link your public repo to travis-ci.org (.com for private)</li>
+<li>add a <code>.travis.yaml</code> file to the root of your project working directory.</li>
+</ul></li>
+<li><p>gitlab:</p>
+
+<ul>
+<li>add a <code>.gitlab-ci.yml</code> file to the root of your repository</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Adding CI to Your Project</h2></hgroup><article  id="adding-ci-to-your-project-1">
 
 <ul>
 <li><p>github: look at travisci and use <code>devtools::use_travis()</code></p>
@@ -939,7 +1047,7 @@ bmi(6.1, 300)
 
 </iframe>
 
-</article></slide><slide class=""><hgroup><h2>Adding CI to Your Package:</h2></hgroup><article  id="adding-ci-to-your-package-1">
+</article></slide><slide class=""><hgroup><h2>Adding CI to Your Package:</h2></hgroup><article  id="adding-ci-to-your-package">
 
 <ul>
 <li>gitlab: has docker and several tools set up for pipelines.</li>
@@ -1047,7 +1155,11 @@ bmi(6.1, 300)
 <ul>
 <li>Development version on <a href='https://github.com/dewittpe/qwraps2' title=''>https://github.com/dewittpe/qwraps2</a></li>
 </ul></li>
-</ul></article></slide>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
+
+<p><img src="THAT'SALLGIFS.gif"></p></article></slide>
 
 
   <slide class="backdrop"></slide>

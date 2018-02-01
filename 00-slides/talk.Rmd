@@ -186,7 +186,51 @@ knitr::opts_chunk$set(collapse = TRUE)
     - To this point I had a collaborative project work with dplyr 0.4.3 but fail
       with 0.5.0.
 
-# The simplest R Package
+## If you are going to use a script
+
+* use `packageVersion` to check for package versions if needed.
+
+* Don't modify `options`, if you must do so
+
+```{r, eval = TRUE}
+options()$stringsAsFactors
+old_opts <- options()
+
+# set net options
+options(stringsAsFactors = FALSE)
+options()$stringsAsFactors
+
+# do work
+
+# reset options
+options(old_opts)
+options()$stringsAsFactors
+```
+
+## If you are going to use a script
+
+* Explicity use namespaces, e.g.,
+```{r, eval = FALSE}
+# good
+mtcars %>% dplyr::filter(.data$mpg > 30)
+
+# bad
+mtcars %>% filter(mpg > 30)
+```
+
+* From `vignette("programming", package = "dplyr")`: dplyr code is ambiguous.
+  Depending on what variables are defined where, filter(df, x == y) could be
+  equivalent to any of:
+
+```{r, eval = FALSE}
+df[df$x == df$y, ]
+df[df$x == y, ]
+df[x == df$y, ]
+df[x == y, ]
+```
+* Do you know what will be in another user's workspace?
+
+# The Simplest R Package
 
 <p style="text-align:right">
 *"We love the R build process.<br>
@@ -271,7 +315,7 @@ Time stamp for when the package was built is different from build to build.
       can/will affect the results.
 
 
-# Story 1: Why version control
+# Why version control
 Version control shows who made changes and when those changes were made.
 
 ## Why use version control?
@@ -305,13 +349,13 @@ example for why version control is important.
   work of a published paper.
 
 * I had structured my work as an R package.  Vignettes for the documentation and
-  writing an analysis script.  
-  
+  writing an analysis script.
+
 * The report, however, was a standalone document.
-  
+
     * Report: 1.67
     * `source("R/published.R")`: 1.92
-  
+
 * The project that I was contributing to was housed in a subversion repository.
 
 ## Check the log
@@ -411,7 +455,7 @@ Index: R/published.R
 
     - Who would held responsible for resolving the issue?
 
-# Story 2: resource-functions.R
+# resource-functions.R
 
 This story provides an example for why we should use R packages and VC and CI.
 
@@ -482,10 +526,10 @@ I make the choice to not use roxygen style documentation.  Such documentation
 would be extremely helpful for package development, but, as only a script is
 permissible, and supervisor has no experience with roxygen I choose not to use
 that syntax.
--->
 
 While it would improve this story, I don't believe it would be proper to show the
 file.
+-->
 
 I committed and pushed the `resource-functions.R` script to the project
 repository.
@@ -554,9 +598,6 @@ Thanks,
     - The example not running was the impetus for the email.  All the other
       stuff was spill over form the frustration pot boiling over.
 
-    - The documentation is not helpful, not accurate, and the examples don't
-      run.
-
 * **There are automated tests for all of these issues built into the `R CMD
   build` and the `R CMD check`.**
 
@@ -592,13 +633,16 @@ Thanks,
 ## Other Issues
 * Running `setup.R` in an interactive session.
 
-  * My build process was to always run `setup.R` from a clean R session.
+    * My build process was to always run `setup.R` from a clean R session.
 
-  * Several times I would `fetch` changes that would not run. Primary reason,
-    development work pollutes your workspace.  Code might work in your current
-    interactive session but not in a new session.
+* Several times I would `fetch` changes that would not run.
+
+    * development work pollutes your workspace.
+
+    * Code might work in your current interactive session but not in a new session.
 
 ```{r, eval = FALSE}
+# What happens when these two lines are evaluated twice in one session?
 x + 2
 x <- 2
 ```
@@ -607,9 +651,10 @@ x <- 2
 
 * Tense, but constructive, discussion in person.
 
-* Extended documentation further.  Build several stand alone scripts for
-  examples.  
-  
+* Extended documentation further.
+
+    - Built several stand alone scripts for examples.
+
     - **This still required manual checking of the examples when resource-functions.R was updated.**
 
 * This particular project did yield three publications, including a top tier
@@ -636,11 +681,11 @@ x <- 2
 
 * Why is CI important:
 
-    - The automated build process would have shown that my initial commit 
-      
-        1. built,
-        2. examples would run to completion, and
-        3. passed any specified tests.
+    - The automated build process would have shown that my initial commit
+
+        - built,
+        - examples would run to completion, and
+        - passed any specified tests.
 
     - Automated tests will catch errors when
 
@@ -721,7 +766,7 @@ Status: OK
 
 
 
-# Story 2: Testing
+# Testing
 
 ## The Story
 This story took place about ten years ago. I am working as a Siebel CRM software
@@ -743,9 +788,8 @@ One thing I built was the client vital statistics input page.
 
 ## The Story
 
-* I'm sitting in the developer bullpen.  Tester come running down form the
-  testing office and, apparently, had some choice words for me Hindi, delivered
-  loudly and very publicly.
+* I'm sitting in the developer bullpen.  Tester comes running down form the
+  testing office and had some choice words for me; delivered loudly and publicly.
 
 * Translation: I'm so incompetent that I can write a function to calculate BMI.
 
@@ -754,10 +798,11 @@ bmi <- function(height, weight) {
   weight / height ** 2 * 703
 }
 
-# Expected input
+# Expected input and output
 bmi(73, 300)
 
-# Tester's input  (tester had very little experience with English measurements)
+# Tester's input and output
+# (tester had little experience with non-metric units of measure)
 bmi(6.1, 300)
 ```
 
@@ -774,7 +819,8 @@ bmi(6.1, 300)
 
 * The tester was testing TWO things
 
-    1. Does a 73 inch tall, 300 lbs person have a BMI of 39.6?
+    1. When inputting 73 for height and 300 for weigth, does the function return
+       a value of 39.6?
     2. Is the human inputting the data capable of translating between
        feet-and-inches to just inches?
 
@@ -799,7 +845,19 @@ Check
 </div> <!-- end table-row -->
 </div>
 
-# Story 3
+# CI: Automated Builds and Testing
+
+## Why use CI
+
+* Perhaps not all team members are diligent with respect to running local tests.
+
+* CI provides implicit documentation on the system dependencies for a project.
+
+* Customizable
+
+* gitlab: https://docs.gitlab.com/ce/ci/yaml/README.html
+
+* github: see travis-ci https://docs.travis-ci.com/
 
 ## The Story
 
@@ -815,12 +873,15 @@ critically important.
 
 * I'm not the only dev with critical feature development to do.
 
-* Supervisor drops by and asks for a "nice-to-have" feature added.  I tell him
+* Supervisor drops by and asks for a "nice-to-have" feature.  I tell him
   "No, not now.  I need to take for this critical feature.  That's a
   nice-to-have, I'll look at it Wednesday."  Supervisor walks away.
 
-* I build the critical feature.  **There will be no system test. Local test
-  only.  System test will be done in production.**
+* I build the critical feature.
+  
+## The Story ...
+
+**There will be no system test. Local test only.  System test will be done in production.**
 
 * I gather my immediate supervisor, the development lead, the project manager,
   and general manager to witness my local tests and verify the system is
@@ -833,7 +894,9 @@ critically important.
 * **System goes down**  The customer management system for the entire nation
   goes down.
 
-* Developers and tests work to find the offending code.  It was found in the
+## The Story ...
+
+* Developers and testers work to find the offending code.  It was found in the
   Inventory Business Object  -- My subsystem.
 
 * I'm now tasked with fixing this error.
@@ -844,21 +907,36 @@ critically important.
   done.
 
 * There was no meaningful version control.  No way to show who had made the
-  error, nor to revert the system.  (Backups were available for catastrophic
-  errors.)
+  error, nor to revert the system.  
+  
+    - Daily snapshots were available for catastrophic errors.
+
+* I fixed the errors and the nice-to-have feature persisted.
+
+## The Story ...
 
 * There was no system test.
 
 * There was no CI/build test: such a test could have prevented the change from
   going into production.
 
-* I was held responsible for someone else's error.  This event was cited as the
-  primary reason for not receiving a change in title, associate- to
-  full-consultant.  This promotion came with no salary or benefit increase, just
-  a title.  But would delay the possibility of salary/benefit increase for
-  at least two-years.
+* I was held responsible for someone else's error.  
+  
+* This event was cited as the primary reason for not being promoted during my
+  annual review two months later.
 
-## Adding CI to Your Package:
+## Adding CI to Your Project
+
+* github.com:
+
+    - link your public repo to travis-ci.org (.com for private)
+    - add a `.travis.yaml` file to the root of your project working directory.
+
+* gitlab:
+
+    - add a `.gitlab-ci.yml` file to the root of your repository
+
+## Adding CI to Your Project
 
 * github: look at travisci and use `devtools::use_travis()`
 
@@ -967,3 +1045,7 @@ critically important.
   prefer.
 
     - Development version on https://github.com/dewittpe/qwraps2
+
+##
+
+<img src="THAT'SALLGIFS.gif">
